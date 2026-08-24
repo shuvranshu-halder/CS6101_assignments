@@ -1,0 +1,20 @@
+# Core retrieval stack
+pyserini>=0.36.0
+ir_datasets>=0.5.9
+ir_measures>=0.3.3
+
+# Part 4b (HyDE) — talks to the local vLLM server via its OpenAI-compatible API
+vllm>=0.6.3
+openai>=1.40.0
+
+# Part 5 (SPLADE) — HuggingFace checkpoint inference
+torch>=2.3.0
+transformers>=4.44.0
+
+# ---------------------------------------------------------------------------
+# NOT pip-installable, needed separately:
+# - Java 21 JDK (Pyserini/Lucene requirement) — e.g. `apt install openjdk-21-jdk`
+#   or `conda install -c conda-forge openjdk=21`, then make sure JAVA_HOME is set.
+# - NVIDIA drivers + CUDA toolkit matching your torch build, for GPU use in
+#   Part 4b (vLLM) and Part 5 (SPLADE encoding).
+# ---------------------------------------------------------------------------

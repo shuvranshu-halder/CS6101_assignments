@@ -1,0 +1,97 @@
+2026-08-24 18:23:10,760 [scifact] [Part1] dumping corpus for scifact...
+2026-08-24 18:23:10,983 [scifact] [Part1] dumping qrels/queries...
+2026-08-24 18:23:10,995 [scifact] [Part1] building Lucene index over 5183 docs...
+2026-08-24 18:23:16,019 [scifact] [Part1] done. build_time=5.0s size=10.1MB
+2026-08-24 18:23:16,450 [scifact] [Part2] grid search over k1=[0.6, 0.9, 1.2, 1.5, 1.8] b=[0.3, 0.4, 0.6, 0.8]
+2026-08-24 18:23:32,513 [scifact]   k1=0.6 b=0.3 -> nDCG@10=0.6776
+2026-08-24 18:23:47,506 [scifact]   k1=0.6 b=0.4 -> nDCG@10=0.6773
+2026-08-24 18:24:02,011 [scifact]   k1=0.6 b=0.6 -> nDCG@10=0.6800
+2026-08-24 18:24:16,602 [scifact]   k1=0.6 b=0.8 -> nDCG@10=0.6823
+2026-08-24 18:24:31,227 [scifact]   k1=0.9 b=0.3 -> nDCG@10=0.6786
+2026-08-24 18:24:45,505 [scifact]   k1=0.9 b=0.4 -> nDCG@10=0.6789
+2026-08-24 18:24:59,687 [scifact]   k1=0.9 b=0.6 -> nDCG@10=0.6814
+2026-08-24 18:25:14,015 [scifact]   k1=0.9 b=0.8 -> nDCG@10=0.6841
+2026-08-24 18:25:28,926 [scifact]   k1=1.2 b=0.3 -> nDCG@10=0.6802
+2026-08-24 18:25:43,403 [scifact]   k1=1.2 b=0.4 -> nDCG@10=0.6803
+2026-08-24 18:25:57,531 [scifact]   k1=1.2 b=0.6 -> nDCG@10=0.6810
+2026-08-24 18:26:11,816 [scifact]   k1=1.2 b=0.8 -> nDCG@10=0.6833
+2026-08-24 18:26:26,670 [scifact]   k1=1.5 b=0.3 -> nDCG@10=0.6821
+2026-08-24 18:26:41,909 [scifact]   k1=1.5 b=0.4 -> nDCG@10=0.6822
+2026-08-24 18:26:56,592 [scifact]   k1=1.5 b=0.6 -> nDCG@10=0.6844
+2026-08-24 18:27:11,264 [scifact]   k1=1.5 b=0.8 -> nDCG@10=0.6889
+2026-08-24 18:27:25,879 [scifact]   k1=1.8 b=0.3 -> nDCG@10=0.6835
+2026-08-24 18:27:40,247 [scifact]   k1=1.8 b=0.4 -> nDCG@10=0.6857
+2026-08-24 18:27:54,938 [scifact]   k1=1.8 b=0.6 -> nDCG@10=0.6842
+2026-08-24 18:28:09,280 [scifact]   k1=1.8 b=0.8 -> nDCG@10=0.6903
+2026-08-24 18:28:09,288 [scifact] [Part2] winner: k1=1.8 b=0.8 (saved to bm25_params.json)
+2026-08-24 18:28:39,265 [scifact] [Part2] could not set ClassicSimilarity automatically ('io.anserini.search.SimpleSearcher' object has no attribute 'set_similarity'); set TF-IDF similarity manually for your Pyserini version before this line.
+2026-08-24 18:28:53,848 [scifact] [Part2] done.
+2026-08-24 18:28:54,294 [scifact] [Part3] done. success_avg=0.0497 fail_avg=0.0303
+2026-08-24 18:29:54,133 [scifact] [Part4a] N=10 k=10 done
+2026-08-24 18:30:56,028 [scifact] [Part4a] N=10 k=20 done
+2026-08-24 18:32:24,306 [scifact] [Part4a] N=20 k=10 done
+2026-08-24 18:33:53,933 [scifact] [Part4a] N=20 k=20 done
+2026-08-24 18:33:53,936 [scifact] [Part4a] done.
+2026-08-24 18:34:24,056 [scifact] [Part4b] Starting FRESH generation with Qwen/Qwen2.5-7B-Instruct...
+2026-08-24 18:34:33,275 [scifact] [Part4b] Generating for all 300 queries from scratch...
+2026-08-24 18:35:10,295 [scifact] [Part4b] Progress: 5/300 queries completed.
+2026-08-24 18:35:45,728 [scifact] [Part4b] Progress: 10/300 queries completed.
+2026-08-24 18:36:29,073 [scifact] [Part4b] Progress: 15/300 queries completed.
+2026-08-24 18:37:04,506 [scifact] [Part4b] Progress: 20/300 queries completed.
+2026-08-24 18:37:44,006 [scifact] [Part4b] Progress: 25/300 queries completed.
+2026-08-24 18:38:20,434 [scifact] [Part4b] Progress: 30/300 queries completed.
+2026-08-24 18:39:01,092 [scifact] [Part4b] Progress: 35/300 queries completed.
+2026-08-24 18:39:36,957 [scifact] [Part4b] Progress: 40/300 queries completed.
+2026-08-24 18:40:07,321 [scifact] [Part4b] Progress: 45/300 queries completed.
+2026-08-24 18:40:45,929 [scifact] [Part4b] Progress: 50/300 queries completed.
+2026-08-24 18:41:20,286 [scifact] [Part4b] Progress: 55/300 queries completed.
+2026-08-24 18:41:54,643 [scifact] [Part4b] Progress: 60/300 queries completed.
+2026-08-24 18:42:29,762 [scifact] [Part4b] Progress: 65/300 queries completed.
+2026-08-24 18:43:03,984 [scifact] [Part4b] Progress: 70/300 queries completed.
+2026-08-24 18:43:37,206 [scifact] [Part4b] Progress: 75/300 queries completed.
+2026-08-24 18:44:13,960 [scifact] [Part4b] Progress: 80/300 queries completed.
+2026-08-24 18:44:53,340 [scifact] [Part4b] Progress: 85/300 queries completed.
+2026-08-24 18:45:30,828 [scifact] [Part4b] Progress: 90/300 queries completed.
+2026-08-24 18:46:06,763 [scifact] [Part4b] Progress: 95/300 queries completed.
+2026-08-24 18:46:42,643 [scifact] [Part4b] Progress: 100/300 queries completed.
+2026-08-24 18:47:17,690 [scifact] [Part4b] Progress: 105/300 queries completed.
+2026-08-24 18:47:53,362 [scifact] [Part4b] Progress: 110/300 queries completed.
+2026-08-24 18:48:31,362 [scifact] [Part4b] Progress: 115/300 queries completed.
+2026-08-24 18:49:08,375 [scifact] [Part4b] Progress: 120/300 queries completed.
+2026-08-24 18:49:43,919 [scifact] [Part4b] Progress: 125/300 queries completed.
+2026-08-24 18:50:14,275 [scifact] [Part4b] Progress: 130/300 queries completed.
+2026-08-24 18:50:49,735 [scifact] [Part4b] Progress: 135/300 queries completed.
+2026-08-24 18:51:25,059 [scifact] [Part4b] Progress: 140/300 queries completed.
+2026-08-24 18:51:59,771 [scifact] [Part4b] Progress: 145/300 queries completed.
+2026-08-24 18:52:30,746 [scifact] [Part4b] Progress: 150/300 queries completed.
+2026-08-24 18:53:06,924 [scifact] [Part4b] Progress: 155/300 queries completed.
+2026-08-24 18:53:42,980 [scifact] [Part4b] Progress: 160/300 queries completed.
+2026-08-24 18:54:15,737 [scifact] [Part4b] Progress: 165/300 queries completed.
+2026-08-24 18:54:51,669 [scifact] [Part4b] Progress: 170/300 queries completed.
+2026-08-24 18:55:27,925 [scifact] [Part4b] Progress: 175/300 queries completed.
+2026-08-24 18:56:01,308 [scifact] [Part4b] Progress: 180/300 queries completed.
+2026-08-24 18:56:38,151 [scifact] [Part4b] Progress: 185/300 queries completed.
+2026-08-24 18:57:12,698 [scifact] [Part4b] Progress: 190/300 queries completed.
+2026-08-24 18:57:50,264 [scifact] [Part4b] Progress: 195/300 queries completed.
+2026-08-24 18:58:21,229 [scifact] [Part4b] Progress: 200/300 queries completed.
+2026-08-24 18:58:53,492 [scifact] [Part4b] Progress: 205/300 queries completed.
+2026-08-24 18:59:31,059 [scifact] [Part4b] Progress: 210/300 queries completed.
+2026-08-24 19:00:10,733 [scifact] [Part4b] Progress: 215/300 queries completed.
+2026-08-24 19:00:48,229 [scifact] [Part4b] Progress: 220/300 queries completed.
+2026-08-24 19:01:22,953 [scifact] [Part4b] Progress: 225/300 queries completed.
+2026-08-24 19:01:58,759 [scifact] [Part4b] Progress: 230/300 queries completed.
+2026-08-24 19:02:37,626 [scifact] [Part4b] Progress: 235/300 queries completed.
+2026-08-24 19:03:11,786 [scifact] [Part4b] Progress: 240/300 queries completed.
+2026-08-24 19:03:45,210 [scifact] [Part4b] Progress: 245/300 queries completed.
+2026-08-24 19:04:14,134 [scifact] [Part4b] Progress: 250/300 queries completed.
+2026-08-24 19:04:46,659 [scifact] [Part4b] Progress: 255/300 queries completed.
+2026-08-24 19:05:18,463 [scifact] [Part4b] Progress: 260/300 queries completed.
+2026-08-24 19:05:53,801 [scifact] [Part4b] Progress: 265/300 queries completed.
+2026-08-24 19:06:27,550 [scifact] [Part4b] Progress: 270/300 queries completed.
+2026-08-24 19:07:00,352 [scifact] [Part4b] Progress: 275/300 queries completed.
+2026-08-24 19:07:33,631 [scifact] [Part4b] Progress: 280/300 queries completed.
+2026-08-24 19:08:07,258 [scifact] [Part4b] Progress: 285/300 queries completed.
+2026-08-24 19:08:42,856 [scifact] [Part4b] Progress: 290/300 queries completed.
+2026-08-24 19:09:12,952 [scifact] [Part4b] Progress: 295/300 queries completed.
+2026-08-24 19:09:46,985 [scifact] [Part4b] Progress: 300/300 queries completed.
+2026-08-24 19:09:46,986 [scifact] [Part4b] complete! Wrote HyDE generations to /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/runs/scifact/hyde_generations.jsonl

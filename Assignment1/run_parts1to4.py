@@ -1,0 +1,493 @@
+"""
+Runs Part 1 (index), Part 2 (BM25 tune + baselines), Part 3 (vocab mismatch),
+Part 4a (Rocchio/RM3), Part 4b (HyDE) for ONE dataset.
+
+Usage:
+    python run_parts1to4.py --dataset scifact                  # runs everything, in order
+    python run_parts1to4.py --dataset scifact --stage part2    # runs just one stage
+    python run_parts1to4.py --dataset scifact --stage part1 part2 part3
+
+Stages: part1, part2, part3, part4a, part4b_generate, part4b_run (default: all, in order)
+"""
+import argparse
+import itertools
+import json
+import time
+from pathlib import Path
+
+import ir_datasets
+from pyserini.search.lucene import LuceneSearcher
+from pyserini.index.lucene import LuceneIndexReader
+from pyserini.search.lucene import querybuilder
+import common
+import torch
+
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+DF_CUTOFF_FRACTION = 0.10  # Part 4a: drop terms appearing in >10% of corpus
+
+
+# =============================================================================
+# PART 1 — Build Lucene index
+# =============================================================================
+def part1_build_index(dataset: str, threads: int = 8):
+    log = common.get_logger(dataset)
+    p = common.get_paths(dataset)
+    entry = common.DATASETS[dataset]
+
+    jsonl_dir = p.index_dir.parent / "corpus_jsonl"
+    jsonl_dir.mkdir(parents=True, exist_ok=True)
+    jsonl_path = jsonl_dir / "corpus.jsonl"
+
+    log.info(f"[Part1] dumping corpus for {dataset}...")
+    corpus_ds = ir_datasets.load(entry["corpus_ir_datasets_id"])
+    n_docs = 0
+    with open(jsonl_path, "w") as f:
+        for doc in corpus_ds.docs_iter():
+            text = getattr(doc, "text", "") or ""
+            title = getattr(doc, "title", "") or ""
+            f.write(json.dumps({"id": doc.doc_id, "contents": f"{title}\n{text}".strip()}) + "\n")
+            n_docs += 1
+
+    log.info(f"[Part1] dumping qrels/queries...")
+    query_ds = ir_datasets.load(entry["ir_datasets_id"])
+    with open(p.qrels_path, "w") as f:
+        for qrel in query_ds.qrels_iter():
+            f.write(f"{qrel.query_id} 0 {qrel.doc_id} {qrel.relevance}\n")
+    n_queries = sum(1 for _ in query_ds.queries_iter())
+
+    log.info(f"[Part1] building Lucene index over {n_docs} docs...")
+    import subprocess
+    t0 = time.time()
+    subprocess.run([
+        "python", "-m", "pyserini.index.lucene",
+        "--collection", "JsonCollection",
+        "--input", str(jsonl_dir),
+        "--index", str(p.index_dir),
+        "--generator", "DefaultLuceneDocumentGenerator",
+        "--threads", str(threads),
+        "--storePositions", "--storeDocvectors", "--storeRaw",
+    ], check=True)
+    build_time_s = time.time() - t0
+    index_size_mb = sum(f.stat().st_size for f in p.index_dir.rglob("*") if f.is_file()) / (1024 ** 2)
+
+    common.init_results_file(dataset, n_docs, n_queries)
+    common.append_section(
+        dataset, "Part 1 — Index Build", rows=None,
+        notes=f"Build time: {build_time_s:.1f}s | Index size: {index_size_mb:.1f} MB "
+              f"| Corpus docs: {n_docs} | Queries: {n_queries}",
+    )
+    log.info(f"[Part1] done. build_time={build_time_s:.1f}s size={index_size_mb:.1f}MB")
+
+
+# =============================================================================
+# PART 2 — BM25 grid tune + default/tuned/TF-IDF baselines
+# =============================================================================
+def _load_queries(dataset):
+    entry = common.DATASETS[dataset]
+    ds = ir_datasets.load(entry["ir_datasets_id"])
+    return [(q.query_id, q.text) for q in ds.queries_iter()]
+
+
+def _run_searcher_to_trec(searcher, queries, run_path, tag, top_k=1000):
+    with open(run_path, "w") as f:
+        for qid, qtext in queries:
+            hits = searcher.search(qtext, k=top_k)
+            for rank, hit in enumerate(hits, start=1):
+                f.write(f"{qid} Q0 {hit.docid} {rank} {hit.score:.6f} {tag}\n")
+
+
+def part2_bm25_baselines(dataset: str):
+    log = common.get_logger(dataset)
+    p = common.get_paths(dataset)
+    queries = _load_queries(dataset)
+    searcher = LuceneSearcher(str(p.index_dir))
+
+    # --- grid search: tries EVERY (k1, b) combo, saves all of them ---
+    log.info(f"[Part2] grid search over k1={common.BM25_GRID['k1']} b={common.BM25_GRID['b']}")
+    grid_rows = []
+    for k1, b in itertools.product(common.BM25_GRID["k1"], common.BM25_GRID["b"]):
+        searcher.set_bm25(k1, b)
+        run_path = p.runs_dir / f"_grid_k1{k1}_b{b}.trec"
+        _run_searcher_to_trec(searcher, queries, run_path, f"grid_k1{k1}_b{b}")
+        metrics = common.evaluate_run(p.qrels_path, run_path)
+        log.info(f"  k1={k1} b={b} -> nDCG@10={metrics['nDCG@10']:.4f}")
+        grid_rows.append({"k1": k1, "b": b, **metrics})
+
+    best = common.save_grid_results(dataset, grid_rows)  # writes CSV + full table + returns winner
+    common.save_tuned_bm25(dataset, best["k1"], best["b"])
+    log.info(f"[Part2] winner: k1={best['k1']} b={best['b']} (saved to bm25_params.json)")
+
+    # --- final comparison table: default BM25 vs tuned BM25 vs TF-IDF ---
+    results = {}
+
+    searcher.set_bm25(common.BM25_DEFAULT["k1"], common.BM25_DEFAULT["b"])
+    run_path = p.runs_dir / "bm25_default.trec"
+    _run_searcher_to_trec(searcher, queries, run_path, "bm25_default")
+    results[f"BM25 (default k1={common.BM25_DEFAULT['k1']} b={common.BM25_DEFAULT['b']})"] = \
+        common.evaluate_run(p.qrels_path, run_path)
+
+    searcher.set_bm25(best["k1"], best["b"])
+    run_path = p.runs_dir / "bm25_tuned.trec"
+    _run_searcher_to_trec(searcher, queries, run_path, "bm25_tuned")
+    results[f"BM25 (tuned k1={best['k1']} b={best['b']})"] = common.evaluate_run(p.qrels_path, run_path)
+
+    # TF-IDF: check your Pyserini version's API for classic similarity.
+    try:
+        from pyserini.pyclass import autoclass
+        JClassicSimilarity = autoclass("org.apache.lucene.search.similarities.ClassicSimilarity")
+        searcher.object.set_similarity(JClassicSimilarity())
+    except Exception as e:
+        log.warning(f"[Part2] could not set ClassicSimilarity automatically ({e}); "
+                    f"set TF-IDF similarity manually for your Pyserini version before this line.")
+    run_path = p.runs_dir / "tfidf.trec"
+    _run_searcher_to_trec(searcher, queries, run_path, "tfidf")
+    results["TF-IDF"] = common.evaluate_run(p.qrels_path, run_path)
+
+    common.append_section(
+        dataset, "Part 2 — BM25 vs TF-IDF (final comparison)", results,
+        notes="k1/b grid shared across datasets; winner chosen per-dataset by highest nDCG@10 "
+              "(see grid table above). TF-IDF used Lucene's ClassicSimilarity.",
+    )
+    log.info(f"[Part2] done.")
+
+
+# =============================================================================
+# PART 3 — Vocabulary mismatch analysis
+# =============================================================================
+def _jaccard(a: set, b: set) -> float:
+    if not a and not b:
+        return 0.0
+    return len(a & b) / len(a | b)
+
+
+def _tokenize(text: str) -> set:
+    return set(text.lower().split())  # TODO: swap for a real tokenizer + stopword removal
+
+
+def part3_vocab_mismatch(dataset: str, top_k: int = 10):
+    log = common.get_logger(dataset)
+    p = common.get_paths(dataset)
+    entry = common.DATASETS[dataset]
+    tuned = common.load_tuned_bm25(dataset)
+    if tuned is None:
+        raise RuntimeError("Run part2 first (need tuned k1/b).")
+
+    searcher = LuceneSearcher(str(p.index_dir))
+    searcher.set_bm25(tuned["k1"], tuned["b"])
+
+    query_ds = ir_datasets.load(entry["ir_datasets_id"])
+    docstore = ir_datasets.load(entry["corpus_ir_datasets_id"]).docs_store()
+    qrels = {}
+    for qrel in query_ds.qrels_iter():
+        qrels.setdefault(qrel.query_id, []).append(qrel.doc_id)
+
+    successes, failures = [], []
+    for q in query_ds.queries_iter():
+        gold_ids = qrels.get(q.query_id, [])
+        if not gold_ids:
+            continue
+        hits = searcher.search(q.text, k=top_k)
+        retrieved_ids = {h.docid for h in hits}
+        for gold_id in gold_ids:
+            gold_doc = docstore.get(gold_id)
+            gold_text = f"{getattr(gold_doc, 'title', '')} {getattr(gold_doc, 'text', '')}"
+            overlap = _jaccard(_tokenize(q.text), _tokenize(gold_text))
+            record = {"query_id": q.query_id, "query": q.text, "gold_id": gold_id, "jaccard": overlap}
+            (successes if gold_id in retrieved_ids else failures).append(record)
+
+    succ_avg = sum(r["jaccard"] for r in successes) / len(successes) if successes else 0.0
+    fail_avg = sum(r["jaccard"] for r in failures) / len(failures) if failures else 0.0
+
+    out_path = p.runs_dir / "part3_failures.json"
+    out_path.write_text(json.dumps({"successes": successes, "failures": failures}, indent=2))
+
+    common.append_section(
+        dataset, "Part 3 — Vocabulary Mismatch", rows=None,
+        notes=(f"n_success={len(successes)} avg_jaccard={succ_avg:.4f} | "
+               f"n_failure={len(failures)} avg_jaccard={fail_avg:.4f}\n\n"
+               f"Full per-query records: `{out_path}`\n\n"
+               f"TODO: categorize failures (synonymy / paraphrase / abbrev-expansion / other), "
+               f"pick 2-3 examples per category, write the overlap-vs-failure verdict."),
+    )
+    log.info(f"[Part3] done. success_avg={succ_avg:.4f} fail_avg={fail_avg:.4f}")
+
+
+# =============================================================================
+# PART 4a — Rocchio & RM3
+# =============================================================================
+def _get_feedback_term_weights(index_reader, feedback_doc_ids, num_docs_total,
+                                alpha=1.0, beta=0.75, query_terms=None, k=10):
+    """Rocchio: w_t = alpha*f(q)[t] + (beta/N) * sum_{d in feedback} f~(d)[t]"""
+    query_terms = query_terms or {}
+    N = len(feedback_doc_ids) or 1
+    term_scores = {}
+    for docid in feedback_doc_ids:
+        tf_vector = index_reader.get_document_vector(docid)
+        if not tf_vector:
+            continue
+        doc_len = sum(tf_vector.values())
+        for term, tf in tf_vector.items():
+            df, _ = index_reader.get_term_counts(term, analyzer=None)
+            if not df or df / num_docs_total > DF_CUTOFF_FRACTION:
+                continue
+            term_scores[term] = term_scores.get(term, 0.0) + (beta / N) * (tf / doc_len if doc_len else 0)
+    for term, qtf in query_terms.items():
+        term_scores[term] = term_scores.get(term, 0.0) + alpha * qtf
+    return dict(sorted(term_scores.items(), key=lambda x: -x[1])[:k])
+
+
+def build_boosted_query(original_query_text: str, expansion_terms: dict):
+    """Query Builder API — required instead of string concatenation.
+    Skips any term the Lucene analyzer reduces to nothing (stopwords, bare
+    punctuation, etc.) — get_term_query() throws IndexError on those.
+    IMPORTANT: qb.add(...) return value must be captured/reassigned —
+    Anserini's builder does not reliably mutate in place."""
+    from pyserini.analysis import Analyzer, get_lucene_analyzer
+    analyzer = Analyzer(get_lucene_analyzer())  # <-- must wrap in Python Analyzer, not use raw JAnalyzer
+
+    def analyzes_to_something(term):
+        try:
+            return len(analyzer.analyze(term)) > 0
+        except Exception:
+            return False
+
+    should = querybuilder.JBooleanClauseOccur["should"].value
+    qb = querybuilder.get_boolean_query_builder()
+
+    added = 0
+    for term in original_query_text.lower().split():
+        if not analyzes_to_something(term):
+            continue
+        qb = qb.add(querybuilder.get_term_query(term), should)
+        added += 1
+    for term, weight in expansion_terms.items():
+        if not analyzes_to_something(term):
+            continue
+        qb = qb.add(querybuilder.get_boost_query(querybuilder.get_term_query(term), float(weight)), should)
+        added += 1
+
+    if added == 0:
+        raise ValueError(f"No usable terms in query '{original_query_text}' + {list(expansion_terms)}")
+
+    return qb.build()
+
+def _run_rocchio(dataset, N, k, alpha=1.0, beta=0.75):
+    p = common.get_paths(dataset)
+    tuned = common.load_tuned_bm25(dataset)
+    searcher = LuceneSearcher(str(p.index_dir))
+    searcher.set_bm25(tuned["k1"], tuned["b"])
+    index_reader = LuceneIndexReader(str(p.index_dir))
+    num_docs_total = index_reader.stats()["documents"]
+
+    entry = common.DATASETS[dataset]
+    ds = ir_datasets.load(entry["ir_datasets_id"])
+    run_path = p.runs_dir / f"rocchio_N{N}_k{k}.trec"
+    drift_log = []
+
+    with open(run_path, "w") as f:
+        for q in ds.queries_iter():
+            feedback_doc_ids = [h.docid for h in searcher.search(q.text, k=N)]
+            query_terms = {t: q.text.lower().split().count(t) for t in set(q.text.lower().split())}
+            expansion_terms = _get_feedback_term_weights(
+                index_reader, feedback_doc_ids, num_docs_total,
+                alpha=alpha, beta=beta, query_terms=query_terms, k=k,
+            )
+            boosted_query = build_boosted_query(q.text, expansion_terms)
+            for rank, hit in enumerate(searcher.search(boosted_query, k=1000), start=1):
+                f.write(f"{q.query_id} Q0 {hit.docid} {rank} {hit.score:.6f} rocchio_N{N}_k{k}\n")
+            new_terms = set(expansion_terms) - set(query_terms)
+            if new_terms:
+                drift_log.append({"query_id": q.query_id, "query": q.text, "added_terms": list(new_terms)})
+
+    return common.evaluate_run(p.qrels_path, run_path), drift_log
+
+def _run_rm3(dataset, N, k):
+    p = common.get_paths(dataset)
+    tuned = common.load_tuned_bm25(dataset)
+    searcher = LuceneSearcher(str(p.index_dir))
+    searcher.set_bm25(tuned["k1"], tuned["b"])
+    searcher.set_rm3(fb_docs=N, fb_terms=k, original_query_weight=0.5)
+
+    entry = common.DATASETS[dataset]
+    ds = ir_datasets.load(entry["ir_datasets_id"])
+    run_path = p.runs_dir / f"rm3_N{N}_k{k}.trec"
+    with open(run_path, "w") as f:
+        for q in ds.queries_iter():
+            for rank, hit in enumerate(searcher.search(q.text, k=1000), start=1):
+                f.write(f"{q.query_id} Q0 {hit.docid} {rank} {hit.score:.6f} rm3_N{N}_k{k}\n")
+    return common.evaluate_run(p.qrels_path, run_path)
+
+
+def part4a_rocchio_rm3(dataset: str, N_values=(10, 20), k_values=(10, 20)):
+    log = common.get_logger(dataset)
+    results, all_drift = {}, []
+    for N, k in itertools.product(N_values, k_values):
+        rocchio_metrics, drift = _run_rocchio(dataset, N, k)
+        results[f"Rocchio (N={N}, k={k})"] = rocchio_metrics
+        all_drift.extend(drift)
+        results[f"RM3 (N={N}, k={k})"] = _run_rm3(dataset, N, k)
+        log.info(f"[Part4a] N={N} k={k} done")
+
+    notes = "Query-drift candidates (pick 2 concrete examples for the report):\n"
+    for d in all_drift[:5]:
+        notes += f"- q='{d['query']}' added_terms={d['added_terms']}\n"
+    common.append_section(dataset, "Part 4a — Rocchio & RM3", results, notes=notes)
+    log.info("[Part4a] done.")
+
+
+# =============================================================================
+# PART 4b — HyDE (reuses part4a's build_boosted_query unchanged)
+# =============================================================================
+def part4b_generate_hyde_docs(dataset: str, n_samples: int = 4,
+                               model_name: str = "Qwen/Qwen2.5-7B-Instruct",
+                               device: str = "cuda"):
+    """Generates HyDE hypothetical documents from scratch (fresh start)."""
+    log = common.get_logger(dataset)
+    p = common.get_paths(dataset)
+
+    log.info(f"[Part4b] Starting FRESH generation with {model_name}...")
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    if tokenizer.pad_token_id is None:
+        tokenizer.pad_token_id = tokenizer.eos_token_id
+
+    model = AutoModelForCausalLM.from_pretrained(
+        model_name,
+        torch_dtype="auto",
+        device_map="auto"
+    ).eval()
+
+    entry = common.DATASETS[dataset]
+    ds = ir_datasets.load(entry["ir_datasets_id"])
+    queries_list = list(ds.queries_iter())
+    total_queries = len(queries_list)
+
+    prompt_tmpl = ("Write a short passage that answers the following question. "
+                   "Write as if it is a factual excerpt from a document.\n\nQuestion: {q}\n\nPassage:")
+
+    p.hyde_jsonl.parent.mkdir(parents=True, exist_ok=True)
+    log.info(f"[Part4b] Generating for all {total_queries} queries from scratch...")
+
+    with open(p.hyde_jsonl, "w") as f:
+        for idx, q in enumerate(queries_list, 1):
+            messages = [{"role": "user", "content": prompt_tmpl.format(q=q.text)}]
+            
+            inputs = tokenizer.apply_chat_template(
+                messages,
+                add_generation_prompt=True,
+                return_tensors="pt"
+            )
+
+            # Safely extract input_ids tensor to prevent KeyError: 'shape'
+            if isinstance(inputs, dict) or hasattr(inputs, "input_ids"):
+                input_ids = inputs["input_ids"].to(model.device)
+            else:
+                input_ids = inputs.to(model.device)
+
+            with torch.no_grad():
+                outputs = model.generate(
+                    input_ids=input_ids,
+                    max_new_tokens=200,
+                    do_sample=True,
+                    temperature=0.7,
+                    num_return_sequences=n_samples,
+                    pad_token_id=tokenizer.eos_token_id,
+                )
+
+            docs = [
+                tokenizer.decode(out[input_ids.shape[1]:], skip_special_tokens=True).strip()
+                for out in outputs
+            ]
+            
+            f.write(json.dumps({"query_id": q.query_id, "query": q.text, "hyde_docs": docs}) + "\n")
+            f.flush()
+
+            if idx % 5 == 0 or idx == total_queries:
+                log.info(f"[Part4b] Progress: {idx}/{total_queries} queries completed.")
+
+    log.info(f"[Part4b] complete! Wrote HyDE generations to {p.hyde_jsonl}")
+
+
+
+def part4b_run_hyde(dataset: str, N_compare: int = 20, k: int = 20):
+    log = common.get_logger(dataset)
+    p = common.get_paths(dataset)
+    tuned = common.load_tuned_bm25(dataset)
+
+    hyde_records = {}
+    with open(p.hyde_jsonl) as f:
+        for line in f:
+            rec = json.loads(line)
+            hyde_records[rec["query_id"]] = rec
+
+    results = {}
+
+    # (1) naive concatenation
+    searcher = LuceneSearcher(str(p.index_dir))
+    searcher.set_bm25(tuned["k1"], tuned["b"])
+    run_path = p.runs_dir / "hyde_naive_concat.trec"
+    with open(run_path, "w") as f:
+        for qid, rec in hyde_records.items():
+            expanded = rec["query"] + " " + " ".join(rec["hyde_docs"])
+            for rank, hit in enumerate(searcher.search(expanded, k=1000), start=1):
+                f.write(f"{qid} Q0 {hit.docid} {rank} {hit.score:.6f} hyde_naive\n")
+    results["HyDE (naive concat)"] = common.evaluate_run(p.qrels_path, run_path)
+
+    # (2) Rocchio-weighted HyDE — reuses build_boosted_query() from Part 4a unchanged
+    run_path = p.runs_dir / "hyde_rocchio_weighted.trec"
+    with open(run_path, "w") as f:
+        for qid, rec in hyde_records.items():
+            term_counts = {}
+            for doc in rec["hyde_docs"]:
+                for t in doc.lower().split():
+                    term_counts[t] = term_counts.get(t, 0) + 1
+            top_terms = dict(sorted(term_counts.items(), key=lambda x: -x[1])[:k])
+            boosted_query = build_boosted_query(rec["query"], top_terms)
+            for rank, hit in enumerate(searcher.search(boosted_query, k=1000), start=1):
+                f.write(f"{qid} Q0 {hit.docid} {rank} {hit.score:.6f} hyde_rocchio\n")
+    results["HyDE (Rocchio-weighted)"] = common.evaluate_run(p.qrels_path, run_path)
+
+    # (3) 4a's corpus PRF, for direct comparison
+    # corpus_prf_metrics, _ = _run_rocchio(dataset, N_compare, k)
+    # results[f"4a Corpus PRF (Rocchio N={N_compare}, k={k})"] = corpus_prf_metrics
+
+    # common.append_section(
+    #     dataset, "Part 4b — HyDE", results,
+    #     notes="TODO: grounded verdict — naive vs Rocchio-weighted (isolates combination "
+    #           "method) vs 4a corpus PRF (isolates feedback source) — which matters more?",
+    # )
+    # log.info("[Part4b] done.")
+    # (3) 4a's corpus PRF, for direct comparison (read existing run instead of re-running)
+    rocchio_trec = p.runs_dir / f"rocchio_N{N_compare}_k{k}.trec"
+    if rocchio_trec.exists():
+        results[f"4a Corpus PRF (Rocchio N={N_compare}, k={k})"] = common.evaluate_run(p.qrels_path, rocchio_trec)
+    else:
+        corpus_prf_metrics, _ = _run_rocchio(dataset, N_compare, k)
+        results[f"4a Corpus PRF (Rocchio N={N_compare}, k={k})"] = corpus_prf_metrics
+
+
+# =============================================================================
+# CLI
+# =============================================================================
+STAGES = {
+    "part1": lambda ds, args: part1_build_index(ds),
+    "part2": lambda ds, args: part2_bm25_baselines(ds),
+    "part3": lambda ds, args: part3_vocab_mismatch(ds),
+    "part4a": lambda ds, args: part4a_rocchio_rm3(ds, N_values=args.N, k_values=args.k),
+    "part4b_generate": lambda ds, args: part4b_generate_hyde_docs(ds, n_samples=args.hyde_samples, model_name=args.hyde_model),
+    "part4b_run": lambda ds, args: part4b_run_hyde(ds),
+}
+DEFAULT_ORDER = ["part1", "part2", "part3", "part4a", "part4b_generate", "part4b_run"]
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dataset", required=True, choices=list(common.DATASETS))
+    parser.add_argument("--stage", nargs="+", default=DEFAULT_ORDER, choices=list(STAGES))
+    parser.add_argument("--N", type=int, nargs="+", default=[10, 20], help="Part 4a: feedback doc counts")
+    parser.add_argument("--k", type=int, nargs="+", default=[10, 20], help="Part 4a: expansion term counts")
+    parser.add_argument("--hyde_samples", type=int, default=4, help="Part 4b: hypothetical docs per query")
+    parser.add_argument("--hyde_model", default="Qwen/Qwen2.5-7B-Instruct")
+    args = parser.parse_args()
+
+    for stage in args.stage:
+        STAGES[stage](args.dataset, args)
