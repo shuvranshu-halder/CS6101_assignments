@@ -497,27 +497,65 @@ def part4b_generate_hyde_docs(dataset: str, n_samples: int = 4,
 
 
 
+def _run_naive_hyde_concat(dataset: str, hyde_full_records: dict, run_path):
+    """Variant 1: query + concatenated HyDE doc text, searched as one long string query."""
+    p = common.get_paths(dataset)
+    tuned = common.load_tuned_bm25(dataset)
+    searcher = LuceneSearcher(str(p.index_dir))
+    searcher.set_bm25(tuned["k1"], tuned["b"])
+
+    with open(run_path, "w") as f:
+        for qid, rec in hyde_full_records.items():
+            expanded_text = rec["query"] + " " + " ".join(rec["hyde_docs"])
+            for rank, hit in enumerate(searcher.search(expanded_text, k=1000), start=1):
+                f.write(f"{qid} Q0 {hit.docid} {rank} {hit.score:.6f} hyde_naive\n")
+
+
+def _run_rocchio_on_hyde(dataset: str, hyde_full_records: dict, run_path, N: int = 4, k: int = 10):
+    """Variant 2: reuses Part 4a's build_boosted_query() unchanged — term weights come
+    from HyDE doc word frequencies instead of an IndexReader lookup over corpus docs."""
+    p = common.get_paths(dataset)
+    tuned = common.load_tuned_bm25(dataset)
+    searcher = LuceneSearcher(str(p.index_dir))
+    searcher.set_bm25(tuned["k1"], tuned["b"])
+
+    with open(run_path, "w") as f:
+        for qid, rec in hyde_full_records.items():
+            term_counts = {}
+            for doc in rec["hyde_docs"]:
+                for t in doc.lower().split():
+                    term_counts[t] = term_counts.get(t, 0) + 1
+            top_terms = dict(sorted(term_counts.items(), key=lambda x: -x[1])[:k])
+            boosted_query = build_boosted_query(rec["query"], top_terms)
+            for rank, hit in enumerate(searcher.search(boosted_query, k=1000), start=1):
+                f.write(f"{qid} Q0 {hit.docid} {rank} {hit.score:.6f} hyde_rocchio\n")
+
+
 def part4b_run_hyde(dataset: str, N: int = 4, k: int = 10):
     log = common.get_logger(dataset)
     p = common.get_paths(dataset)
     results = {}
 
-    # 1. Load generated HyDE documents
-    hyde_path = p.runs_dir / "hyde_docs.json"
+    # 1. Load generated HyDE documents — keep the FULL record (query + hyde_docs),
+    # not just hyde_docs, since both helpers below need the original query text.
+    hyde_path = p.runs_dir / "hyde_generations.jsonl"
     if not hyde_path.exists():
         raise FileNotFoundError(f"HyDE docs not found at {hyde_path}. Run --stage part4b_generate first.")
-    
+
+    hyde_records = {}
     with open(hyde_path) as f:
-        hyde_data = json.load(f) # Map of {query_id: [hypothetical_doc1, ...]}
+        for line in f:
+            rec = json.loads(line)
+            hyde_records[rec["query_id"]] = rec  # keep full record: {"query_id","query","hyde_docs"}
 
     # 2. Variant 1: Naive Concatenation (Query + Concatenated HyDE Documents)
     naive_run_path = p.runs_dir / "hyde_naive_concat.trec"
-    _run_naive_hyde_concat(dataset, hyde_data, naive_run_path)
+    _run_naive_hyde_concat(dataset, hyde_records, naive_run_path)
     results["1. Naive Concatenation (Query + HyDE)"] = common.evaluate_run(p.qrels_path, naive_run_path)
 
     # 3. Variant 2: Rocchio/RM3-Weighted HyDE (HyDE as feedback docs)
     weighted_run_path = p.runs_dir / "hyde_rocchio_weighted.trec"
-    _run_rocchio_on_hyde(dataset, hyde_data, weighted_run_path, N=N, k=k)
+    _run_rocchio_on_hyde(dataset, hyde_records, weighted_run_path, N=N, k=k)
     results[f"2. HyDE + Rocchio (N={N}, k={k})"] = common.evaluate_run(p.qrels_path, weighted_run_path)
 
     # 4. Variant 3: 4a Corpus PRF Baseline (Best Rocchio from Part 4a)
@@ -529,13 +567,17 @@ def part4b_run_hyde(dataset: str, N: int = 4, k: int = 10):
 
     # 5. Append results table to results log
     common.append_section(
-        dataset, 
-        "Part 4b — HyDE vs Corpus PRF Comparison", 
+        dataset,
+        "Part 4b — HyDE vs Corpus PRF Comparison",
         results,
         notes="Comparison across Naive Concatenation, Rocchio-Weighted HyDE, and Corpus PRF."
     )
     log.info(f"[Part4b] Evaluation complete for {dataset}.")
 
+
+def _part4b_run_with_best_rocchio(ds, args):
+    N, k = common.get_best_rocchio_setting(ds)
+    part4b_run_hyde(ds, N=N, k=k)
 # =============================================================================
 # CLI
 # =============================================================================
@@ -545,7 +587,7 @@ STAGES = {
     "part3": lambda ds, args: part3_vocab_mismatch(ds),
     "part4a": lambda ds, args: part4a_rocchio_rm3(ds, N_values=args.N, k_values=args.k),
     "part4b_generate": lambda ds, args: part4b_generate_hyde_docs(ds, n_samples=args.hyde_samples, model_name=args.hyde_model),
-    "part4b_run": lambda ds, args: part4b_run_hyde(ds),
+    "part4b_run":  _part4b_run_with_best_rocchio,
 }
 DEFAULT_ORDER = ["part1", "part2", "part3", "part4a", "part4b_generate", "part4b_run"]
 

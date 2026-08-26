@@ -177,7 +177,6 @@ def part5_compare_expansion_terms(dataset: str, n_queries: int = 10, top_terms: 
                 rec = json.loads(line)
                 hyde_records[rec["query_id"]] = rec
 
-    # Rocchio setup — reuses Part 4a's exact feedback-weighting function unchanged
     tuned = common.load_tuned_bm25(dataset)
     if tuned is None:
         raise RuntimeError("Run Part 2 (run_parts1to4.py) first — need tuned BM25 k1/b.")
@@ -189,12 +188,22 @@ def part5_compare_expansion_terms(dataset: str, n_queries: int = 10, top_terms: 
     ds = ir_datasets.load(entry["ir_datasets_id"])
     queries = list(itertools.islice(ds.queries_iter(), n_queries))
 
+    STOPWORDS = {
+        "a", "an", "the", "and", "or", "but", "is", "are", "was", "were", "be", "been", "being",
+        "to", "of", "in", "on", "at", "by", "for", "with", "as", "that", "this", "these", "those",
+        "it", "its", "from", "has", "have", "had", "will", "would", "can", "could", "may", "might",
+        "not", "no", "do", "does", "did", "so", "if", "than", "then", "there", "their", "which",
+        "who", "what", "when", "where", "how", "also", "such", "into", "about", "each", "some",
+    }
+
     rows = []
     for q in queries:
         query_word_set = set(q.text.lower().split())
 
         splade_vec = splade_query_terms.get(q.query_id, {})
-        splade_top = set(sorted(splade_vec, key=lambda t: -splade_vec[t])[:top_terms]) - query_word_set
+        splade_candidates = {t: w for t, w in splade_vec.items()
+                            if not t.startswith("##") and t not in STOPWORDS and t not in query_word_set}
+        splade_top = set(sorted(splade_candidates, key=lambda t: -splade_candidates[t])[:top_terms])
 
         hyde_rec = hyde_records.get(q.query_id)
         hyde_top = set()
@@ -202,11 +211,11 @@ def part5_compare_expansion_terms(dataset: str, n_queries: int = 10, top_terms: 
             term_counts = {}
             for doc in hyde_rec["hyde_docs"]:
                 for t in doc.lower().split():
-                    term_counts[t] = term_counts.get(t, 0) + 1
+                    t = t.strip(".,;:!?\"'()")
+                    if t and t not in STOPWORDS:
+                        term_counts[t] = term_counts.get(t, 0) + 1
             hyde_top = set(sorted(term_counts, key=lambda t: -term_counts[t])[:top_terms]) - query_word_set
 
-        # Rocchio — same feedback-weighting function as Part 4a, computed fresh per
-        # query here since 4a doesn't cache per-query term dicts to disk.
         feedback_doc_ids = [h.docid for h in searcher.search(q.text, k=rocchio_N)]
         query_terms = {t: q.text.lower().split().count(t) for t in query_word_set}
         expansion_terms = _get_feedback_term_weights(
@@ -240,8 +249,6 @@ def part5_compare_expansion_terms(dataset: str, n_queries: int = 10, top_terms: 
     common.append_section(dataset, "Part 5 — Expansion Term Comparison (SPLADE vs Rocchio/RM3 vs HyDE)",
                            rows=None, notes=notes)
     log.info(f"[Part5] expansion-term comparison written for {len(rows)} queries. avg_overlap={avg_overlap:.2f}")
-
-
 # =============================================================================
 # CLI
 # =============================================================================

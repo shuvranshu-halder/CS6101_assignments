@@ -173,3 +173,19 @@ def append_section(dataset: str, title: str, rows: dict = None, notes: str = "")
                 f.write(f"| {label} | " + " | ".join(f"{m[n]:.4f}" for n in METRIC_NAMES) + " |\n")
         if notes:
             f.write(f"\n{notes}\n")
+
+def get_best_rocchio_setting(dataset: str):
+    """Reads the Part 4a Rocchio results already written and returns the (N, k)
+    with the highest nDCG@10 (ties broken by MAP), for use as the Corpus-PRF
+    comparison baseline in Part 4b."""
+    import re
+    p = get_paths(dataset)
+    text = p.results_md.read_text()
+    section = text.split("Part 4a")[1].split("## Part")[0] if "Part 4a" in text else ""
+    rows = re.findall(
+        r"\| Rocchio \(N=(\d+), k=(\d+)\) \| ([\d.]+) \| [\d.]+ \| [\d.]+ \| ([\d.]+) \|", section
+    )
+    if not rows:
+        raise ValueError(f"No Rocchio rows found in {p.results_md} — run Part 4a first.")
+    best = max(rows, key=lambda r: (float(r[2]), float(r[3])))  # (nDCG@10, MAP) tiebreak
+    return int(best[0]), int(best[1])

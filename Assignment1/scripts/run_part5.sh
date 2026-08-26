@@ -21,7 +21,7 @@ fi
 # ---------------------------------------------------------------------------
 case "$DATASET" in
   scifact)
-    GPU_IDS=(5)
+    GPU_IDS=(2)
     BATCH_SIZE=128
     ;;
   fever|hotpotqa)

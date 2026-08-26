@@ -259,11 +259,43 @@
 2026-08-27 01:40:44,236 [scifact] [Part4b] Progress: 200/300 queries completed.
 2026-08-27 01:45:38,628 [scifact] [Part4b] Progress: 205/300 queries completed.
 2026-08-27 01:50:54,247 [scifact] [Part4b] Progress: 210/300 queries completed.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          2026-08-27 01:56:40,372 [scifact] [Part4b] Progress: 215/300 queries completed.
-                                                                                                                                                                                                              5183 doc vectors
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          2026-08-27 01:57:04,560 [scifact] [Part5][shard 0/1] encoded 5183 docs -> /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/scifact/splade/shard_0.jsonl
+2026-08-27 01:57:19,338 [scifact] [Part5] loading encoded corpus shards...
+2026-08-27 01:57:20,489 [scifact] [Part5] loaded 5183 doc vectors
 2026-08-27 01:57:58,990 [scifact] [Part5] retrieval done. nDCG@10=0.7096
 2026-08-27 02:02:15,363 [scifact] [Part4b] Progress: 220/300 queries completed.
 2026-08-27 02:07:10,322 [scifact] [Part4b] Progress: 225/300 queries completed.
 2026-08-27 02:14:10,482 [scifact] [Part4b] Progress: 230/300 queries completed.
 2026-08-27 02:21:56,302 [scifact] [Part4b] Progress: 235/300 queries completed.
 2026-08-27 02:27:29,576 [scifact] [Part4b] Progress: 240/300 queries completed.
+2026-08-27 02:32:09,505 [scifact] [Part4b] Progress: 245/300 queries completed.
+2026-08-27 02:37:44,692 [scifact] [Part4b] Progress: 250/300 queries completed.
+2026-08-27 02:44:01,437 [scifact] [Part4b] Progress: 255/300 queries completed.
+2026-08-27 02:49:05,850 [scifact] [Part4b] Progress: 260/300 queries completed.
+2026-08-27 02:54:12,191 [scifact] [Part4b] Progress: 265/300 queries completed.
+2026-08-27 02:59:00,121 [scifact] [Part4b] Progress: 270/300 queries completed.
+2026-08-27 03:03:57,984 [scifact] [Part4b] Progress: 275/300 queries completed.
+2026-08-27 03:08:30,051 [scifact] [Part4b] Progress: 280/300 queries completed.
+2026-08-27 03:13:39,836 [scifact] [Part4b] Progress: 285/300 queries completed.
+2026-08-27 03:18:27,631 [scifact] [Part4b] Progress: 290/300 queries completed.
+2026-08-27 03:23:12,726 [scifact] [Part4b] Progress: 295/300 queries completed.
+2026-08-27 03:28:21,195 [scifact] [Part4b] Progress: 300/300 queries completed.
+2026-08-27 03:28:21,198 [scifact] [Part4b] complete! Wrote HyDE generations to /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/runs/scifact/hyde_generations.jsonl
+2026-08-27 03:53:58,162 [scifact] [Part4b] Evaluation complete for scifact.
+2026-08-27 04:00:53,170 [scifact] [Part4b] Evaluation complete for scifact.
+2026-08-27 04:05:12,024 [scifact] [Part4b] Evaluation complete for scifact.
+2026-08-27 04:08:51,188 [scifact] [Part5][shard 0/1] encoded 5183 docs -> /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/scifact/splade/shard_0.jsonl
+2026-08-27 04:09:10,756 [scifact] [Part5] loading encoded corpus shards...
+2026-08-27 04:09:12,211 [scifact] [Part5] loaded 5183 doc vectors
+2026-08-27 04:09:55,755 [scifact] [Part5] retrieval done. nDCG@10=0.7096
+2026-08-27 04:09:58,780 [scifact] [Part5] expansion-term comparison written for 10 queries. avg_overlap=0.10
+2026-08-27 04:17:51,110 [scifact] [Part5][shard 0/1] encoded 5183 docs -> /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/scifact/splade/shard_0.jsonl
+2026-08-27 04:18:07,972 [scifact] [Part5] loading encoded corpus shards...
+2026-08-27 04:18:09,032 [scifact] [Part5] loaded 5183 doc vectors
+2026-08-27 04:18:51,560 [scifact] [Part5] retrieval done. nDCG@10=0.7096
+2026-08-27 04:18:52,093 [scifact] [Part5] expansion-term comparison written for 0 queries. avg_overlap=0.00
+2026-08-27 04:22:37,274 [scifact] [Part5][shard 0/1] encoded 5183 docs -> /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/scifact/splade/shard_0.jsonl
+2026-08-27 04:22:55,292 [scifact] [Part5] loading encoded corpus shards...
+2026-08-27 04:22:56,369 [scifact] [Part5] loaded 5183 doc vectors
+2026-08-27 04:23:39,443 [scifact] [Part5] retrieval done. nDCG@10=0.7096
+2026-08-27 04:23:42,573 [scifact] [Part5] expansion-term comparison written for 10 queries. avg_overlap=0.20
