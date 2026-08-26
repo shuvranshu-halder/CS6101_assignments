@@ -24,16 +24,22 @@ import common
 
 # so Part 4a's build_boosted_query / _run_rocchio are reused unchanged for the comparison
 from run_parts1to4 import build_boosted_query, _run_rocchio  # noqa: F401
+from pyserini.search.lucene import LuceneSearcher
+from pyserini.index.lucene import LuceneIndexReader
+from run_parts1to4 import build_boosted_query, _run_rocchio, _get_feedback_term_weights  # noqa: F401
 
-
+from dotenv import load_dotenv
+import os
+load_dotenv()  # reads .env in the current working directory into os.environ
+HF_TOKEN = os.getenv("HF_TOKEN")
 # =============================================================================
 # SPLADE encoder — supports sharding a corpus across multiple GPUs
 # (bash launcher spawns one process per GPU with --shard_id / --num_shards)
 # =============================================================================
 class SpladeEncoder:
     def __init__(self, checkpoint: str, device: str = "cuda"):
-        self.tokenizer = AutoTokenizer.from_pretrained(checkpoint)
-        self.model = AutoModelForMaskedLM.from_pretrained(checkpoint).to(device).eval()
+        self.tokenizer = AutoTokenizer.from_pretrained(checkpoint, token=HF_TOKEN)
+        self.model = AutoModelForMaskedLM.from_pretrained(checkpoint, token=HF_TOKEN).to(device).eval()
         self.device = device
 
     @torch.no_grad()
@@ -150,10 +156,14 @@ def part5_retrieve(dataset: str, checkpoint: str, top_k: int = 1000):
 # 3-way expansion-term comparison: SPLADE vs Rocchio/RM3 (4a) vs HyDE (4b)
 # for >=10 queries
 # =============================================================================
-def part5_compare_expansion_terms(dataset: str, n_queries: int = 10, top_terms: int = 15):
+def part5_compare_expansion_terms(dataset: str, n_queries: int = 10, top_terms: int = 15,
+                                   rocchio_N: int = 20, rocchio_k: int = None):
+    """rocchio_k defaults to top_terms so all three sources compare 'top-N expansion
+    terms' on equal footing. rocchio_N=20 matches one of Part 4a's grid settings."""
     log = common.get_logger(dataset)
     p = common.get_paths(dataset)
     entry = common.DATASETS[dataset]
+    rocchio_k = rocchio_k or top_terms
 
     splade_terms_path = p.runs_dir / "splade_query_terms.json"
     if not splade_terms_path.exists():
@@ -167,11 +177,19 @@ def part5_compare_expansion_terms(dataset: str, n_queries: int = 10, top_terms: 
                 rec = json.loads(line)
                 hyde_records[rec["query_id"]] = rec
 
+    # Rocchio setup — reuses Part 4a's exact feedback-weighting function unchanged
+    tuned = common.load_tuned_bm25(dataset)
+    if tuned is None:
+        raise RuntimeError("Run Part 2 (run_parts1to4.py) first — need tuned BM25 k1/b.")
+    searcher = LuceneSearcher(str(p.index_dir))
+    searcher.set_bm25(tuned["k1"], tuned["b"])
+    index_reader = LuceneIndexReader(str(p.index_dir))
+    num_docs_total = index_reader.stats()["documents"]
+
     ds = ir_datasets.load(entry["ir_datasets_id"])
     queries = list(itertools.islice(ds.queries_iter(), n_queries))
 
     rows = []
-    overlap_scores = []
     for q in queries:
         query_word_set = set(q.text.lower().split())
 
@@ -187,14 +205,17 @@ def part5_compare_expansion_terms(dataset: str, n_queries: int = 10, top_terms: 
                     term_counts[t] = term_counts.get(t, 0) + 1
             hyde_top = set(sorted(term_counts, key=lambda t: -term_counts[t])[:top_terms]) - query_word_set
 
-        # NOTE: for a real Rocchio term set per query, run part4a's
-        # _get_feedback_term_weights on this query and cache it there instead
-        # of recomputing per-query here; left as a TODO hook since it depends
-        # on your chosen (N, k) setting from Part 4a.
-        rocchio_top = set()  # TODO: populate from your Part 4a run for this query_id
+        # Rocchio — same feedback-weighting function as Part 4a, computed fresh per
+        # query here since 4a doesn't cache per-query term dicts to disk.
+        feedback_doc_ids = [h.docid for h in searcher.search(q.text, k=rocchio_N)]
+        query_terms = {t: q.text.lower().split().count(t) for t in query_word_set}
+        expansion_terms = _get_feedback_term_weights(
+            index_reader, feedback_doc_ids, num_docs_total,
+            query_terms=query_terms, k=rocchio_k,
+        )
+        rocchio_top = set(expansion_terms) - query_word_set
 
-        overlap = splade_top & hyde_top & rocchio_top if rocchio_top else splade_top & hyde_top
-        overlap_scores.append(len(overlap))
+        overlap = splade_top & hyde_top & rocchio_top
         rows.append({
             "query_id": q.query_id, "query": q.text,
             "splade_terms": sorted(splade_top), "hyde_terms": sorted(hyde_top),
@@ -204,24 +225,29 @@ def part5_compare_expansion_terms(dataset: str, n_queries: int = 10, top_terms: 
     out_path = p.runs_dir / "part5_expansion_term_comparison.json"
     out_path.write_text(json.dumps(rows, indent=2))
 
-    notes = f"Per-query term lists: `{out_path}`\n\n"
+    avg_overlap = sum(len(r["overlap"]) for r in rows) / len(rows) if rows else 0.0
+    notes = f"Per-query term lists: `{out_path}` | avg 3-way overlap: {avg_overlap:.2f} terms/query\n\n"
     notes += "| Query | SPLADE terms | HyDE terms | Rocchio terms | Overlap |\n|---|---|---|---|---|\n"
     for r in rows:
         notes += (f"| {r['query'][:40]} | {', '.join(r['splade_terms'][:5])} | "
                   f"{', '.join(r['hyde_terms'][:5])} | {', '.join(r['rocchio_terms'][:5])} | "
                   f"{', '.join(r['overlap'][:5])} |\n")
-    notes += ("\nTODO: fill in rocchio_terms (hook noted in code), then discuss 2-3 disagreement "
-              "cases where the three sources pick different expansion terms and why.")
+    notes += ("\nTODO: discuss 2-3 disagreement cases where the three sources pick different "
+              "expansion terms and why (e.g. SPLADE finding semantically related but "
+              "lexically distant terms vs. Rocchio/RM3's corpus-cooccurrence terms vs. "
+              "HyDE's LLM-hallucinated-but-plausible terms).")
 
     common.append_section(dataset, "Part 5 — Expansion Term Comparison (SPLADE vs Rocchio/RM3 vs HyDE)",
                            rows=None, notes=notes)
-    log.info(f"[Part5] expansion-term comparison written for {len(rows)} queries.")
+    log.info(f"[Part5] expansion-term comparison written for {len(rows)} queries. avg_overlap={avg_overlap:.2f}")
 
 
 # =============================================================================
 # CLI
 # =============================================================================
 if __name__ == "__main__":
+    print("[CHECKPOINT 1] script started, before argparse", flush=True)
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset", required=True, choices=list(common.DATASETS))
     parser.add_argument("--checkpoint", default="naver/splade-cocondenser-ensembledistil")
@@ -231,11 +257,27 @@ if __name__ == "__main__":
     parser.add_argument("--num_shards", type=int, default=1)
     parser.add_argument("--batch_size", type=int, default=64)
     parser.add_argument("--n_compare_queries", type=int, default=10)
+    parser.add_argument("--rocchio_N", type=int, default=20, help="feedback docs for Rocchio comparison terms")
+    parser.add_argument("--rocchio_k", type=int, default=None, help="defaults to --top_terms if unset")
     args = parser.parse_args()
 
+    print(f"[CHECKPOINT 2] args parsed: dataset={args.dataset} checkpoint={args.checkpoint} "
+          f"stage={args.stage} shard_id={args.shard_id} num_shards={args.num_shards}", flush=True)
+
     if "encode" in args.stage:
+        print("[CHECKPOINT 3] entering encode stage", flush=True)
         encode_corpus_shard(args.dataset, args.checkpoint, args.shard_id, args.num_shards, args.batch_size)
+        print("[CHECKPOINT 4] encode stage finished", flush=True)
+
     if "retrieve" in args.stage:
+        print("[CHECKPOINT 5] entering retrieve stage", flush=True)
         part5_retrieve(args.dataset, args.checkpoint)
+        print("[CHECKPOINT 6] retrieve stage finished", flush=True)
+
     if "compare" in args.stage:
-        part5_compare_expansion_terms(args.dataset, n_queries=args.n_compare_queries)
+        print("[CHECKPOINT 7] entering compare stage", flush=True)
+        part5_compare_expansion_terms(args.dataset, n_queries=args.n_compare_queries,
+                                       rocchio_N=args.rocchio_N, rocchio_k=args.rocchio_k)
+        print("[CHECKPOINT 8] compare stage finished", flush=True)
+
+    print("[CHECKPOINT 9] all requested stages complete", flush=True)

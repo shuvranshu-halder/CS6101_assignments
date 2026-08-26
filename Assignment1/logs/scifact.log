@@ -95,3 +95,175 @@
 2026-08-24 19:09:12,952 [scifact] [Part4b] Progress: 295/300 queries completed.
 2026-08-24 19:09:46,985 [scifact] [Part4b] Progress: 300/300 queries completed.
 2026-08-24 19:09:46,986 [scifact] [Part4b] complete! Wrote HyDE generations to /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/runs/scifact/hyde_generations.jsonl
+2026-08-24 22:51:28,755 [scifact] [Part2] grid search over k1=[0.6, 0.9, 1.2, 1.5, 1.8] b=[0.3, 0.4, 0.6, 0.8]
+2026-08-24 22:51:55,961 [scifact]   k1=0.6 b=0.3 -> nDCG@10=0.6776
+2026-08-24 22:52:20,874 [scifact]   k1=0.6 b=0.4 -> nDCG@10=0.6773
+2026-08-24 22:52:45,327 [scifact]   k1=0.6 b=0.6 -> nDCG@10=0.6800
+2026-08-24 22:53:09,907 [scifact]   k1=0.6 b=0.8 -> nDCG@10=0.6823
+2026-08-24 22:53:34,321 [scifact]   k1=0.9 b=0.3 -> nDCG@10=0.6786
+2026-08-24 22:53:57,429 [scifact]   k1=0.9 b=0.4 -> nDCG@10=0.6789
+2026-08-24 22:54:20,289 [scifact]   k1=0.9 b=0.6 -> nDCG@10=0.6814
+2026-08-24 22:54:41,183 [scifact]   k1=0.9 b=0.8 -> nDCG@10=0.6841
+2026-08-24 22:55:06,983 [scifact]   k1=1.2 b=0.3 -> nDCG@10=0.6802
+2026-08-24 22:55:33,590 [scifact]   k1=1.2 b=0.4 -> nDCG@10=0.6803
+2026-08-24 22:55:58,524 [scifact]   k1=1.2 b=0.6 -> nDCG@10=0.6810
+2026-08-24 22:56:21,531 [scifact]   k1=1.2 b=0.8 -> nDCG@10=0.6833
+2026-08-24 22:56:44,247 [scifact]   k1=1.5 b=0.3 -> nDCG@10=0.6821
+2026-08-24 22:57:03,108 [scifact]   k1=1.5 b=0.4 -> nDCG@10=0.6822
+2026-08-24 22:57:20,930 [scifact]   k1=1.5 b=0.6 -> nDCG@10=0.6844
+2026-08-24 22:57:40,229 [scifact]   k1=1.5 b=0.8 -> nDCG@10=0.6889
+2026-08-24 22:57:58,521 [scifact]   k1=1.8 b=0.3 -> nDCG@10=0.6835
+2026-08-24 22:58:17,044 [scifact]   k1=1.8 b=0.4 -> nDCG@10=0.6857
+2026-08-24 22:58:35,443 [scifact]   k1=1.8 b=0.6 -> nDCG@10=0.6842
+2026-08-24 22:58:53,952 [scifact]   k1=1.8 b=0.8 -> nDCG@10=0.6903
+2026-08-24 22:58:54,140 [scifact] [Part2] winner: k1=1.8 b=0.8 (saved to bm25_params.json)
+2026-08-24 22:59:30,749 [scifact] [Part2] could not set ClassicSimilarity automatically ('io.anserini.search.SimpleSearcher' object has no attribute 'set_similarity')
+2026-08-24 22:59:50,442 [scifact] [Part2] done.
+2026-08-24 23:00:44,404 [scifact] [Part2] grid search over k1=[0.6, 0.9, 1.2, 1.5, 1.8] b=[0.3, 0.4, 0.6, 0.8]
+2026-08-24 23:01:04,745 [scifact]   k1=0.6 b=0.3 -> nDCG@10=0.6776
+2026-08-24 23:01:24,346 [scifact]   k1=0.6 b=0.4 -> nDCG@10=0.6773
+2026-08-24 23:01:43,977 [scifact]   k1=0.6 b=0.6 -> nDCG@10=0.6800
+2026-08-24 23:02:01,973 [scifact]   k1=0.6 b=0.8 -> nDCG@10=0.6823
+2026-08-24 23:02:20,388 [scifact]   k1=0.9 b=0.3 -> nDCG@10=0.6786
+2026-08-24 23:02:37,767 [scifact]   k1=0.9 b=0.4 -> nDCG@10=0.6789
+2026-08-24 23:02:54,704 [scifact]   k1=0.9 b=0.6 -> nDCG@10=0.6814
+2026-08-24 23:03:12,121 [scifact]   k1=0.9 b=0.8 -> nDCG@10=0.6841
+2026-08-24 23:03:28,632 [scifact]   k1=1.2 b=0.3 -> nDCG@10=0.6802
+2026-08-24 23:03:45,267 [scifact]   k1=1.2 b=0.4 -> nDCG@10=0.6803
+2026-08-24 23:04:02,497 [scifact]   k1=1.2 b=0.6 -> nDCG@10=0.6810
+2026-08-24 23:04:20,299 [scifact]   k1=1.2 b=0.8 -> nDCG@10=0.6833
+2026-08-24 23:04:37,290 [scifact]   k1=1.5 b=0.3 -> nDCG@10=0.6821
+2026-08-24 23:04:55,441 [scifact]   k1=1.5 b=0.4 -> nDCG@10=0.6822
+2026-08-24 23:05:12,720 [scifact]   k1=1.5 b=0.6 -> nDCG@10=0.6844
+2026-08-24 23:05:29,463 [scifact]   k1=1.5 b=0.8 -> nDCG@10=0.6889
+2026-08-24 23:05:46,241 [scifact]   k1=1.8 b=0.3 -> nDCG@10=0.6835
+2026-08-24 23:06:03,234 [scifact]   k1=1.8 b=0.4 -> nDCG@10=0.6857
+2026-08-24 23:06:20,918 [scifact]   k1=1.8 b=0.6 -> nDCG@10=0.6842
+2026-08-24 23:06:37,828 [scifact]   k1=1.8 b=0.8 -> nDCG@10=0.6903
+2026-08-24 23:06:37,864 [scifact] [Part2] winner: k1=1.8 b=0.8 (saved to bm25_params.json)
+2026-08-24 23:07:10,317 [scifact] [Part2] could not set ClassicSimilarity automatically ('io.anserini.search.SimpleSearcher' object has no attribute 'set_similarity')
+2026-08-24 23:07:26,898 [scifact] [Part2] done.
+2026-08-26 21:35:25,249 [scifact] [Part2] grid search over k1=[0.6, 0.9, 1.2, 1.5, 1.8] b=[0.3, 0.4, 0.6, 0.8]
+2026-08-26 21:35:43,419 [scifact]   k1=0.6 b=0.3 -> nDCG@10=0.6776
+2026-08-26 21:36:00,814 [scifact]   k1=0.6 b=0.4 -> nDCG@10=0.6773
+2026-08-26 21:36:18,173 [scifact]   k1=0.6 b=0.6 -> nDCG@10=0.6800
+2026-08-26 21:36:35,125 [scifact]   k1=0.6 b=0.8 -> nDCG@10=0.6823
+2026-08-26 21:36:52,360 [scifact]   k1=0.9 b=0.3 -> nDCG@10=0.6786
+2026-08-26 21:37:09,864 [scifact]   k1=0.9 b=0.4 -> nDCG@10=0.6789
+2026-08-26 21:37:27,029 [scifact]   k1=0.9 b=0.6 -> nDCG@10=0.6814
+2026-08-26 21:37:43,813 [scifact]   k1=0.9 b=0.8 -> nDCG@10=0.6841
+2026-08-26 21:38:00,263 [scifact]   k1=1.2 b=0.3 -> nDCG@10=0.6802
+2026-08-26 21:38:16,440 [scifact]   k1=1.2 b=0.4 -> nDCG@10=0.6803
+2026-08-26 21:38:32,625 [scifact]   k1=1.2 b=0.6 -> nDCG@10=0.6810
+2026-08-26 21:38:49,307 [scifact]   k1=1.2 b=0.8 -> nDCG@10=0.6833
+2026-08-26 21:39:04,966 [scifact]   k1=1.5 b=0.3 -> nDCG@10=0.6821
+2026-08-26 21:39:21,148 [scifact]   k1=1.5 b=0.4 -> nDCG@10=0.6822
+2026-08-26 21:39:37,823 [scifact]   k1=1.5 b=0.6 -> nDCG@10=0.6844
+2026-08-26 21:39:53,747 [scifact]   k1=1.5 b=0.8 -> nDCG@10=0.6889
+2026-08-26 21:40:10,020 [scifact]   k1=1.8 b=0.3 -> nDCG@10=0.6835
+2026-08-26 21:40:25,739 [scifact]   k1=1.8 b=0.4 -> nDCG@10=0.6857
+2026-08-26 21:40:42,096 [scifact]   k1=1.8 b=0.6 -> nDCG@10=0.6842
+2026-08-26 21:40:57,669 [scifact]   k1=1.8 b=0.8 -> nDCG@10=0.6903
+2026-08-26 21:40:57,694 [scifact] [Part2] winner: k1=1.8 b=0.8 (saved to bm25_params.json)
+2026-08-26 21:41:46,401 [scifact] [Part2] done.
+2026-08-26 21:42:14,728 [scifact] [Part2] grid search over k1=[0.6, 0.9, 1.2, 1.5, 1.8] b=[0.3, 0.4, 0.6, 0.8]
+2026-08-26 21:42:32,839 [scifact]   k1=0.6 b=0.3 -> nDCG@10=0.6776
+2026-08-26 21:42:50,786 [scifact]   k1=0.6 b=0.4 -> nDCG@10=0.6773
+2026-08-26 21:43:08,638 [scifact]   k1=0.6 b=0.6 -> nDCG@10=0.6800
+2026-08-26 21:43:26,374 [scifact]   k1=0.6 b=0.8 -> nDCG@10=0.6823
+2026-08-26 21:43:44,062 [scifact]   k1=0.9 b=0.3 -> nDCG@10=0.6786
+2026-08-26 21:44:01,536 [scifact]   k1=0.9 b=0.4 -> nDCG@10=0.6789
+2026-08-26 21:44:19,285 [scifact]   k1=0.9 b=0.6 -> nDCG@10=0.6814
+2026-08-26 21:44:37,052 [scifact]   k1=0.9 b=0.8 -> nDCG@10=0.6841
+2026-08-26 21:44:53,776 [scifact]   k1=1.2 b=0.3 -> nDCG@10=0.6802
+2026-08-26 21:45:10,153 [scifact]   k1=1.2 b=0.4 -> nDCG@10=0.6803
+2026-08-26 21:45:26,430 [scifact]   k1=1.2 b=0.6 -> nDCG@10=0.6810
+2026-08-26 21:45:42,613 [scifact]   k1=1.2 b=0.8 -> nDCG@10=0.6833
+2026-08-26 21:45:59,008 [scifact]   k1=1.5 b=0.3 -> nDCG@10=0.6821
+2026-08-26 21:46:15,610 [scifact]   k1=1.5 b=0.4 -> nDCG@10=0.6822
+2026-08-26 21:46:31,679 [scifact]   k1=1.5 b=0.6 -> nDCG@10=0.6844
+2026-08-26 21:46:47,893 [scifact]   k1=1.5 b=0.8 -> nDCG@10=0.6889
+2026-08-26 21:47:04,277 [scifact]   k1=1.8 b=0.3 -> nDCG@10=0.6835
+2026-08-26 21:47:20,846 [scifact]   k1=1.8 b=0.4 -> nDCG@10=0.6857
+2026-08-26 21:47:37,706 [scifact]   k1=1.8 b=0.6 -> nDCG@10=0.6842
+2026-08-26 21:47:53,302 [scifact]   k1=1.8 b=0.8 -> nDCG@10=0.6903
+2026-08-26 21:47:53,309 [scifact] [Part2] winner: k1=1.8 b=0.8 (saved to bm25_params.json)
+2026-08-26 21:48:41,804 [scifact] [Part2] done.
+2026-08-26 21:59:37,535 [scifact] [Part3] done. success_avg=0.0497 fail_avg=0.0303
+2026-08-26 22:00:11,912 [scifact] [Part3] done. success_avg=0.0497 fail_avg=0.0303
+2026-08-26 22:09:05,929 [scifact] [Part3] done. success_avg=0.0497 fail_avg=0.0303
+2026-08-26 22:09:26,854 [scifact] [Part3] done. success_avg=0.0497 fail_avg=0.0303
+2026-08-26 22:11:44,458 [scifact] [Part3] done. success_avg=0.0497 fail_avg=0.0303
+2026-08-26 22:12:05,613 [scifact] [Part3] done. success_avg=0.0497 fail_avg=0.0303
+2026-08-26 22:30:56,377 [scifact] [Part4a] N=10 k=10 completed.
+2026-08-26 22:32:02,256 [scifact] [Part4a] N=10 k=20 completed.
+2026-08-26 22:33:35,514 [scifact] [Part4a] N=20 k=10 completed.
+2026-08-26 22:35:12,278 [scifact] [Part4a] N=20 k=20 completed.
+2026-08-26 22:35:12,281 [scifact] [Part4a] Done for dataset: scifact
+2026-08-26 22:36:55,719 [scifact] [Part4a] N=10 k=10 completed.
+2026-08-26 22:38:02,244 [scifact] [Part4a] N=10 k=20 completed.
+2026-08-26 22:39:36,839 [scifact] [Part4a] N=20 k=10 completed.
+2026-08-26 22:41:14,134 [scifact] [Part4a] N=20 k=20 completed.
+2026-08-26 22:41:14,137 [scifact] [Part4a] Done for dataset: scifact
+2026-08-26 22:47:19,878 [scifact] [Part4a] N=10 k=10 completed.
+2026-08-26 22:48:27,718 [scifact] [Part4a] N=10 k=20 completed.
+2026-08-26 22:49:55,753 [scifact] [Part4a] N=20 k=10 completed.
+2026-08-26 22:51:24,537 [scifact] [Part4a] N=20 k=20 completed.
+2026-08-26 22:51:24,540 [scifact] [Part4a] Done for dataset: scifact
+2026-08-26 22:56:06,041 [scifact] [Part4a] N=10 k=10 completed.
+2026-08-26 22:57:08,591 [scifact] [Part4a] N=10 k=20 completed.
+2026-08-26 22:58:37,390 [scifact] [Part4a] N=20 k=10 completed.
+2026-08-26 23:00:08,437 [scifact] [Part4a] N=20 k=20 completed.
+2026-08-26 23:00:08,439 [scifact] [Part4a] Done for dataset: scifact
+2026-08-26 23:07:10,468 [scifact] [Part4b] Starting FRESH generation with Qwen/Qwen2.5-7B-Instruct...
+2026-08-26 23:08:49,698 [scifact] [Part4b] Generating for all 300 queries from scratch...
+2026-08-26 23:11:39,864 [scifact] [Part4b] Progress: 5/300 queries completed.
+2026-08-26 23:14:26,637 [scifact] [Part4b] Progress: 10/300 queries completed.
+2026-08-26 23:17:45,479 [scifact] [Part4b] Progress: 15/300 queries completed.
+2026-08-26 23:20:30,180 [scifact] [Part4b] Progress: 20/300 queries completed.
+2026-08-26 23:23:07,499 [scifact] [Part4b] Progress: 25/300 queries completed.
+2026-08-26 23:26:11,551 [scifact] [Part4b] Progress: 30/300 queries completed.
+2026-08-26 23:29:40,294 [scifact] [Part4b] Progress: 35/300 queries completed.
+2026-08-26 23:33:18,182 [scifact] [Part4b] Progress: 40/300 queries completed.
+2026-08-26 23:37:50,505 [scifact] [Part4b] Progress: 45/300 queries completed.
+2026-08-26 23:41:03,312 [scifact] [Part4b] Progress: 50/300 queries completed.
+2026-08-26 23:45:02,674 [scifact] [Part4b] Progress: 55/300 queries completed.
+2026-08-26 23:49:13,439 [scifact] [Part4b] Progress: 60/300 queries completed.
+2026-08-26 23:52:00,042 [scifact] [Part4b] Progress: 65/300 queries completed.
+2026-08-26 23:56:33,990 [scifact] [Part4b] Progress: 70/300 queries completed.
+2026-08-27 00:00:25,772 [scifact] [Part4b] Progress: 75/300 queries completed.
+2026-08-27 00:03:40,608 [scifact] [Part4b] Progress: 80/300 queries completed.
+2026-08-27 00:06:54,301 [scifact] [Part4b] Progress: 85/300 queries completed.
+2026-08-27 00:10:39,739 [scifact] [Part4b] Progress: 90/300 queries completed.
+2026-08-27 00:13:42,629 [scifact] [Part4b] Progress: 95/300 queries completed.
+2026-08-27 00:16:29,794 [scifact] [Part4b] Progress: 100/300 queries completed.
+2026-08-27 00:19:52,480 [scifact] [Part4b] Progress: 105/300 queries completed.
+2026-08-27 00:23:48,714 [scifact] [Part4b] Progress: 110/300 queries completed.
+2026-08-27 00:27:46,735 [scifact] [Part4b] Progress: 115/300 queries completed.
+2026-08-27 00:33:09,794 [scifact] [Part4b] Progress: 120/300 queries completed.
+2026-08-27 00:38:19,796 [scifact] [Part4b] Progress: 125/300 queries completed.
+2026-08-27 00:41:15,102 [scifact] [Part4b] Progress: 130/300 queries completed.
+2026-08-27 00:44:31,279 [scifact] [Part4b] Progress: 135/300 queries completed.
+2026-08-27 00:48:12,753 [scifact] [Part4b] Progress: 140/300 queries completed.
+2026-08-27 00:52:48,876 [scifact] [Part4b] Progress: 145/300 queries completed.
+2026-08-27 00:57:11,582 [scifact] [Part4b] Progress: 150/300 queries completed.
+2026-08-27 00:59:59,866 [scifact] [Part4b] Progress: 155/300 queries completed.
+2026-08-27 01:02:21,157 [scifact] [Part4b] Progress: 160/300 queries completed.
+2026-08-27 01:05:07,976 [scifact] [Part4b] Progress: 165/300 queries completed.
+2026-08-27 01:08:17,181 [scifact] [Part4b] Progress: 170/300 queries completed.
+2026-08-27 01:11:53,927 [scifact] [Part4b] Progress: 175/300 queries completed.
+2026-08-27 01:14:50,531 [scifact] [Part4b] Progress: 180/300 queries completed.
+2026-08-27 01:20:49,558 [scifact] [Part4b] Progress: 185/300 queries completed.
+2026-08-27 01:27:14,612 [scifact] [Part4b] Progress: 190/300 queries completed.
+2026-08-27 01:34:43,994 [scifact] [Part4b] Progress: 195/300 queries completed.
+2026-08-27 01:40:44,236 [scifact] [Part4b] Progress: 200/300 queries completed.
+2026-08-27 01:45:38,628 [scifact] [Part4b] Progress: 205/300 queries completed.
+2026-08-27 01:50:54,247 [scifact] [Part4b] Progress: 210/300 queries completed.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          2026-08-27 01:56:40,372 [scifact] [Part4b] Progress: 215/300 queries completed.
+                                                                                                                                                                                                              5183 doc vectors
+2026-08-27 01:57:58,990 [scifact] [Part5] retrieval done. nDCG@10=0.7096
+2026-08-27 02:02:15,363 [scifact] [Part4b] Progress: 220/300 queries completed.
+2026-08-27 02:07:10,322 [scifact] [Part4b] Progress: 225/300 queries completed.
+2026-08-27 02:14:10,482 [scifact] [Part4b] Progress: 230/300 queries completed.
+2026-08-27 02:21:56,302 [scifact] [Part4b] Progress: 235/300 queries completed.
+2026-08-27 02:27:29,576 [scifact] [Part4b] Progress: 240/300 queries completed.

@@ -22,6 +22,8 @@ from pyserini.search.lucene import querybuilder
 import common
 import torch
 
+import numpy as np
+import matplotlib.pyplot as plt
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 DF_CUTOFF_FRACTION = 0.10  # Part 4a: drop terms appearing in >10% of corpus
@@ -121,25 +123,38 @@ def part2_bm25_baselines(dataset: str):
     # --- final comparison table: default BM25 vs tuned BM25 vs TF-IDF ---
     results = {}
 
-    searcher.set_bm25(common.BM25_DEFAULT["k1"], common.BM25_DEFAULT["b"])
+    # 1. Default BM25 (k1=1.2, b=0.75)
+    default_k1, default_b = 1.2, 0.75
+    searcher.set_bm25(default_k1, default_b)
     run_path = p.runs_dir / "bm25_default.trec"
     _run_searcher_to_trec(searcher, queries, run_path, "bm25_default")
-    results[f"BM25 (default k1={common.BM25_DEFAULT['k1']} b={common.BM25_DEFAULT['b']})"] = \
+    results[f"BM25 (default k1={default_k1} b={default_b})"] = \
         common.evaluate_run(p.qrels_path, run_path)
 
+    # 2. Tuned BM25
     searcher.set_bm25(best["k1"], best["b"])
     run_path = p.runs_dir / "bm25_tuned.trec"
     _run_searcher_to_trec(searcher, queries, run_path, "bm25_tuned")
     results[f"BM25 (tuned k1={best['k1']} b={best['b']})"] = common.evaluate_run(p.qrels_path, run_path)
 
-    # TF-IDF: check your Pyserini version's API for classic similarity.
+    # 3. TF-IDF (ClassicSimilarity)
     try:
-        from pyserini.pyclass import autoclass
-        JClassicSimilarity = autoclass("org.apache.lucene.search.similarities.ClassicSimilarity")
-        searcher.object.set_similarity(JClassicSimilarity())
+        if hasattr(searcher, "set_tfidf"):
+            searcher.set_tfidf()
+        else:
+            from pyserini.pyclass import autoclass
+            JClassicSimilarity = autoclass("org.apache.lucene.search.similarities.ClassicSimilarity")
+            # In newer Anserini versions, access similarity through searcher.object.searcher
+            if hasattr(searcher.object, "set_similarity"):
+                searcher.object.set_similarity(JClassicSimilarity())
+            elif hasattr(searcher.object, "searcher"):
+                searcher.object.searcher.setSimilarity(JClassicSimilarity())
+            else:
+                raise AttributeError("Could not find setSimilarity method on Java searcher object.")
     except Exception as e:
-        log.warning(f"[Part2] could not set ClassicSimilarity automatically ({e}); "
-                    f"set TF-IDF similarity manually for your Pyserini version before this line.")
+        log.error(f"[Part2] Failed to set TF-IDF similarity: {e}")
+        raise e  # Fail fast instead of silently copying BM25 metrics
+
     run_path = p.runs_dir / "tfidf.trec"
     _run_searcher_to_trec(searcher, queries, run_path, "tfidf")
     results["TF-IDF"] = common.evaluate_run(p.qrels_path, run_path)
@@ -150,7 +165,6 @@ def part2_bm25_baselines(dataset: str):
               "(see grid table above). TF-IDF used Lucene's ClassicSimilarity.",
     )
     log.info(f"[Part2] done.")
-
 
 # =============================================================================
 # PART 3 — Vocabulary mismatch analysis
@@ -163,6 +177,37 @@ def _jaccard(a: set, b: set) -> float:
 
 def _tokenize(text: str) -> set:
     return set(text.lower().split())  # TODO: swap for a real tokenizer + stopword removal
+
+
+def generate_part3_deliverables(dataset: str, succ_j: list, fail_j: list) -> dict:
+    p = common.get_paths(dataset)
+    
+    stats = {
+        "succ_mean": float(np.mean(succ_j)) if succ_j else 0.0,
+        "succ_median": float(np.median(succ_j)) if succ_j else 0.0,
+        "fail_mean": float(np.mean(fail_j)) if fail_j else 0.0,
+        "fail_median": float(np.median(fail_j)) if fail_j else 0.0,
+    }
+
+    # Plot Jaccard overlap distribution dynamically
+    plt.figure(figsize=(8, 5))
+    if succ_j:
+        plt.hist(succ_j, bins=20, alpha=0.6, label=f"BM25 Successes (N={len(succ_j)})", color="green", density=True)
+    if fail_j:
+        plt.hist(fail_j, bins=20, alpha=0.6, label=f"BM25 Failures (N={len(fail_j)})", color="red", density=True)
+        
+    plt.xlabel("Jaccard Overlap")
+    plt.ylabel("Density")
+    plt.title(f"[{dataset.upper()}] Jaccard Overlap Distribution: BM25 Success vs Failure")
+    plt.legend()
+    plt.grid(True, linestyle="--", alpha=0.5)
+
+    plot_path = p.runs_dir / f"{dataset}_jaccard_overlap_distribution.png"
+    plt.savefig(plot_path, dpi=300, bbox_inches="tight")
+    plt.close()
+
+    stats["plot_path"] = str(plot_path)
+    return stats
 
 
 def part3_vocab_mismatch(dataset: str, top_k: int = 10):
@@ -182,36 +227,58 @@ def part3_vocab_mismatch(dataset: str, top_k: int = 10):
     for qrel in query_ds.qrels_iter():
         qrels.setdefault(qrel.query_id, []).append(qrel.doc_id)
 
-    successes, failures = [], []
+    failures = []
+    succ_jaccards = []
+    fail_jaccards = []
+
     for q in query_ds.queries_iter():
         gold_ids = qrels.get(q.query_id, [])
         if not gold_ids:
             continue
         hits = searcher.search(q.text, k=top_k)
         retrieved_ids = {h.docid for h in hits}
+        
+        # Store retrieved documents info for failure analysis
+        retrieved_docs = []
+        for h in hits:
+            rdoc = docstore.get(h.docid)
+            rtext = f"{getattr(rdoc, 'title', '')} {getattr(rdoc, 'text', '')}".strip()
+            retrieved_docs.append({"docid": h.docid, "score": float(h.score), "text": rtext})
+
         for gold_id in gold_ids:
             gold_doc = docstore.get(gold_id)
-            gold_text = f"{getattr(gold_doc, 'title', '')} {getattr(gold_doc, 'text', '')}"
+            gold_text = f"{getattr(gold_doc, 'title', '')} {getattr(gold_doc, 'text', '')}".strip()
             overlap = _jaccard(_tokenize(q.text), _tokenize(gold_text))
-            record = {"query_id": q.query_id, "query": q.text, "gold_id": gold_id, "jaccard": overlap}
-            (successes if gold_id in retrieved_ids else failures).append(record)
+            
+            if gold_id in retrieved_ids:
+                succ_jaccards.append(overlap)
+            else:
+                fail_jaccards.append(overlap)
+                record = {
+                    "query_id": q.query_id,
+                    "query": q.text,
+                    "gold_id": gold_id,
+                    "gold_text": gold_text,
+                    "retrieved_docs": retrieved_docs,
+                    "jaccard": overlap
+                }
+                failures.append(record)
 
-    succ_avg = sum(r["jaccard"] for r in successes) / len(successes) if successes else 0.0
-    fail_avg = sum(r["jaccard"] for r in failures) / len(failures) if failures else 0.0
-
+    # 1. Save ONLY failures to JSON for manual inspection
     out_path = p.runs_dir / "part3_failures.json"
-    out_path.write_text(json.dumps({"successes": successes, "failures": failures}, indent=2))
+    out_path.write_text(json.dumps(failures, indent=2))
+
+    # 2. Generate stats & plot using in-memory Jaccard arrays
+    stats = generate_part3_deliverables(dataset, succ_jaccards, fail_jaccards)
 
     common.append_section(
         dataset, "Part 3 — Vocabulary Mismatch", rows=None,
-        notes=(f"n_success={len(successes)} avg_jaccard={succ_avg:.4f} | "
-               f"n_failure={len(failures)} avg_jaccard={fail_avg:.4f}\n\n"
-               f"Full per-query records: `{out_path}`\n\n"
-               f"TODO: categorize failures (synonymy / paraphrase / abbrev-expansion / other), "
-               f"pick 2-3 examples per category, write the overlap-vs-failure verdict."),
+        notes=(f"n_success={len(succ_jaccards)} avg_jaccard={stats['succ_mean']:.4f} | "
+               f"n_failure={len(failures)} avg_jaccard={stats['fail_mean']:.4f}\n"
+               f"Plot saved to: `{stats['plot_path']}`\n"
+               f"Failure cases saved to: `{out_path}`"),
     )
-    log.info(f"[Part3] done. success_avg={succ_avg:.4f} fail_avg={fail_avg:.4f}")
-
+    log.info(f"[Part3] done. success_avg={stats['succ_mean']:.4f} fail_avg={stats['fail_mean']:.4f}")
 
 # =============================================================================
 # PART 4a — Rocchio & RM3
@@ -321,19 +388,40 @@ def _run_rm3(dataset, N, k):
 
 def part4a_rocchio_rm3(dataset: str, N_values=(10, 20), k_values=(10, 20)):
     log = common.get_logger(dataset)
+    p = common.get_paths(dataset)
     results, all_drift = {}, []
+
+    # 1. Load dataset-specific tuned BM25 parameters
+    tuned = common.load_tuned_bm25(dataset)
+    if tuned is None:
+        raise RuntimeError(f"Run part2 first for dataset '{dataset}' to obtain tuned k1/b parameters.")
+
+    tuned_k1, tuned_b = tuned["k1"], tuned["b"]
+
+    # 2. Add Part 2 Baselines for comparison
+    default_run = p.runs_dir / "bm25_default.trec"
+    tuned_run = p.runs_dir / "bm25_tuned.trec"
+
+    if default_run.exists():
+        results["BM25 (Default k1=1.2, b=0.75)"] = common.evaluate_run(p.qrels_path, default_run)
+    if tuned_run.exists():
+        results[f"BM25 (Tuned k1={tuned_k1}, b={tuned_b})"] = common.evaluate_run(p.qrels_path, tuned_run)
+
+    # 3. Run Rocchio & RM3 grid
     for N, k in itertools.product(N_values, k_values):
         rocchio_metrics, drift = _run_rocchio(dataset, N, k)
         results[f"Rocchio (N={N}, k={k})"] = rocchio_metrics
-        all_drift.extend(drift)
         results[f"RM3 (N={N}, k={k})"] = _run_rm3(dataset, N, k)
-        log.info(f"[Part4a] N={N} k={k} done")
+        all_drift.extend(drift)
+        log.info(f"[Part4a] N={N} k={k} completed.")
 
-    notes = "Query-drift candidates (pick 2 concrete examples for the report):\n"
-    for d in all_drift[:5]:
-        notes += f"- q='{d['query']}' added_terms={d['added_terms']}\n"
-    common.append_section(dataset, "Part 4a — Rocchio & RM3", results, notes=notes)
-    log.info("[Part4a] done.")
+    # 4. Format query drift notes for report extraction
+    notes = "Query Drift Candidates (pick at least 2 concrete examples for report):\n"
+    for d in all_drift[:10]:
+        notes += f"- QID {d['query_id']}: '{d['query']}' | Added: {d['added_terms']}\n"
+
+    common.append_section(dataset, f"Part 4a — Rocchio & RM3 ({dataset})", results, notes=notes)
+    log.info(f"[Part4a] Done for dataset: {dataset}")
 
 
 # =============================================================================
@@ -409,62 +497,44 @@ def part4b_generate_hyde_docs(dataset: str, n_samples: int = 4,
 
 
 
-def part4b_run_hyde(dataset: str, N_compare: int = 20, k: int = 20):
+def part4b_run_hyde(dataset: str, N: int = 4, k: int = 10):
     log = common.get_logger(dataset)
     p = common.get_paths(dataset)
-    tuned = common.load_tuned_bm25(dataset)
-
-    hyde_records = {}
-    with open(p.hyde_jsonl) as f:
-        for line in f:
-            rec = json.loads(line)
-            hyde_records[rec["query_id"]] = rec
-
     results = {}
 
-    # (1) naive concatenation
-    searcher = LuceneSearcher(str(p.index_dir))
-    searcher.set_bm25(tuned["k1"], tuned["b"])
-    run_path = p.runs_dir / "hyde_naive_concat.trec"
-    with open(run_path, "w") as f:
-        for qid, rec in hyde_records.items():
-            expanded = rec["query"] + " " + " ".join(rec["hyde_docs"])
-            for rank, hit in enumerate(searcher.search(expanded, k=1000), start=1):
-                f.write(f"{qid} Q0 {hit.docid} {rank} {hit.score:.6f} hyde_naive\n")
-    results["HyDE (naive concat)"] = common.evaluate_run(p.qrels_path, run_path)
+    # 1. Load generated HyDE documents
+    hyde_path = p.runs_dir / "hyde_docs.json"
+    if not hyde_path.exists():
+        raise FileNotFoundError(f"HyDE docs not found at {hyde_path}. Run --stage part4b_generate first.")
+    
+    with open(hyde_path) as f:
+        hyde_data = json.load(f) # Map of {query_id: [hypothetical_doc1, ...]}
 
-    # (2) Rocchio-weighted HyDE — reuses build_boosted_query() from Part 4a unchanged
-    run_path = p.runs_dir / "hyde_rocchio_weighted.trec"
-    with open(run_path, "w") as f:
-        for qid, rec in hyde_records.items():
-            term_counts = {}
-            for doc in rec["hyde_docs"]:
-                for t in doc.lower().split():
-                    term_counts[t] = term_counts.get(t, 0) + 1
-            top_terms = dict(sorted(term_counts.items(), key=lambda x: -x[1])[:k])
-            boosted_query = build_boosted_query(rec["query"], top_terms)
-            for rank, hit in enumerate(searcher.search(boosted_query, k=1000), start=1):
-                f.write(f"{qid} Q0 {hit.docid} {rank} {hit.score:.6f} hyde_rocchio\n")
-    results["HyDE (Rocchio-weighted)"] = common.evaluate_run(p.qrels_path, run_path)
+    # 2. Variant 1: Naive Concatenation (Query + Concatenated HyDE Documents)
+    naive_run_path = p.runs_dir / "hyde_naive_concat.trec"
+    _run_naive_hyde_concat(dataset, hyde_data, naive_run_path)
+    results["1. Naive Concatenation (Query + HyDE)"] = common.evaluate_run(p.qrels_path, naive_run_path)
 
-    # (3) 4a's corpus PRF, for direct comparison
-    # corpus_prf_metrics, _ = _run_rocchio(dataset, N_compare, k)
-    # results[f"4a Corpus PRF (Rocchio N={N_compare}, k={k})"] = corpus_prf_metrics
+    # 3. Variant 2: Rocchio/RM3-Weighted HyDE (HyDE as feedback docs)
+    weighted_run_path = p.runs_dir / "hyde_rocchio_weighted.trec"
+    _run_rocchio_on_hyde(dataset, hyde_data, weighted_run_path, N=N, k=k)
+    results[f"2. HyDE + Rocchio (N={N}, k={k})"] = common.evaluate_run(p.qrels_path, weighted_run_path)
 
-    # common.append_section(
-    #     dataset, "Part 4b — HyDE", results,
-    #     notes="TODO: grounded verdict — naive vs Rocchio-weighted (isolates combination "
-    #           "method) vs 4a corpus PRF (isolates feedback source) — which matters more?",
-    # )
-    # log.info("[Part4b] done.")
-    # (3) 4a's corpus PRF, for direct comparison (read existing run instead of re-running)
-    rocchio_trec = p.runs_dir / f"rocchio_N{N_compare}_k{k}.trec"
-    if rocchio_trec.exists():
-        results[f"4a Corpus PRF (Rocchio N={N_compare}, k={k})"] = common.evaluate_run(p.qrels_path, rocchio_trec)
+    # 4. Variant 3: 4a Corpus PRF Baseline (Best Rocchio from Part 4a)
+    corpus_prf_path = p.runs_dir / f"rocchio_N{N}_k{k}.trec"
+    if corpus_prf_path.exists():
+        results[f"3. Part 4a Corpus PRF (N={N}, k={k})"] = common.evaluate_run(p.qrels_path, corpus_prf_path)
     else:
-        corpus_prf_metrics, _ = _run_rocchio(dataset, N_compare, k)
-        results[f"4a Corpus PRF (Rocchio N={N_compare}, k={k})"] = corpus_prf_metrics
+        log.warning("Part 4a TREC run not found. Run part4a first to include Corpus PRF.")
 
+    # 5. Append results table to results log
+    common.append_section(
+        dataset, 
+        "Part 4b — HyDE vs Corpus PRF Comparison", 
+        results,
+        notes="Comparison across Naive Concatenation, Rocchio-Weighted HyDE, and Corpus PRF."
+    )
+    log.info(f"[Part4b] Evaluation complete for {dataset}.")
 
 # =============================================================================
 # CLI

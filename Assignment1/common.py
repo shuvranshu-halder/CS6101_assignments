@@ -41,7 +41,7 @@ DATASETS = {
 }
 
 BM25_GRID = {"k1": [0.6, 0.9, 1.2, 1.5, 1.8], "b": [0.3, 0.4, 0.6, 0.8]}
-BM25_DEFAULT = {"k1": 0.9, "b": 0.4}
+BM25_DEFAULT = {"k1": 1.2, "b": 0.75}
 BM25_PARAMS_PATH = ROOT / "bm25_params.json"
 
 METRICS = [nDCG @ 10, R @ 100, RR @ 10, AP]

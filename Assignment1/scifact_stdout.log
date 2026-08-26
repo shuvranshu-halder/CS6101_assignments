@@ -1,340 +1,156 @@
 nohup: ignoring input
-=== [scifact] Parts 1-3 + 4a (no GPU needed) ===
-2026-08-24 18:23:10,760 [scifact] [Part1] dumping corpus for scifact...
+=== [scifact] Executing specified stage override with args: --stage part4b_generate part4b_run ===
+2026-08-26 23:07:10,468 [scifact] [Part4b] Starting FRESH generation with Qwen/Qwen2.5-7B-Instruct...
 
-2026-08-24 18:23:10,760 - scifact - INFO - [Part1] dumping corpus for scifact...
-[INFO] Opening /mnt/nas/shuvranshu/.ir_datasets/beir/scifact/docs.pklz4/bin with direct file access
-2026-08-24 18:23:10,983 [scifact] [Part1] dumping qrels/queries...
-
-2026-08-24 18:23:10,983 - scifact - INFO - [Part1] dumping qrels/queries...
-2026-08-24 18:23:10,995 [scifact] [Part1] building Lucene index over 5183 docs...
-
-2026-08-24 18:23:10,995 - scifact - INFO - [Part1] building Lucene index over 5183 docs...
-2026-08-24 18:23:12,795 INFO  [main] index.AbstractIndexer (AbstractIndexer.java:208) - Setting log level to INFO
-2026-08-24 18:23:12,798 INFO  [main] index.AbstractIndexer (AbstractIndexer.java:211) - ============ Loading Index Configuration ============
-2026-08-24 18:23:12,798 INFO  [main] index.AbstractIndexer (AbstractIndexer.java:212) - AbstractIndexer settings:
-2026-08-24 18:23:12,801 INFO  [main] index.AbstractIndexer (AbstractIndexer.java:213) -  + DocumentCollection path: /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/scifact/corpus_jsonl
-2026-08-24 18:23:12,801 INFO  [main] index.AbstractIndexer (AbstractIndexer.java:214) -  + CollectionClass: JsonCollection
-2026-08-24 18:23:12,802 INFO  [main] index.AbstractIndexer (AbstractIndexer.java:215) -  + Index path: /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/scifact/lucene
-2026-08-24 18:23:12,802 INFO  [main] index.AbstractIndexer (AbstractIndexer.java:216) -  + Threads: 8
-2026-08-24 18:23:12,802 INFO  [main] index.AbstractIndexer (AbstractIndexer.java:217) -  + Optimize (merge segments)? false
-2026-08-24 18:23:12,904 INFO  [main] index.IndexCollection (IndexCollection.java:240) - Using DefaultEnglishAnalyzer
-2026-08-24 18:23:12,905 INFO  [main] index.IndexCollection (IndexCollection.java:241) - Stemmer: porter
-2026-08-24 18:23:12,907 INFO  [main] index.IndexCollection (IndexCollection.java:242) - Keep stopwords? false
-2026-08-24 18:23:12,908 INFO  [main] index.IndexCollection (IndexCollection.java:243) - Stopwords file: null
-2026-08-24 18:23:13,132 INFO  [main] index.IndexCollection (IndexCollection.java:191) - IndexCollection settings:
-2026-08-24 18:23:13,133 INFO  [main] index.IndexCollection (IndexCollection.java:192) -  + Generator: DefaultLuceneDocumentGenerator
-2026-08-24 18:23:13,133 INFO  [main] index.IndexCollection (IndexCollection.java:193) -  + Language: en
-2026-08-24 18:23:13,134 INFO  [main] index.IndexCollection (IndexCollection.java:194) -  + Stemmer: porter
-2026-08-24 18:23:13,134 INFO  [main] index.IndexCollection (IndexCollection.java:195) -  + Keep stopwords? false
-2026-08-24 18:23:13,135 INFO  [main] index.IndexCollection (IndexCollection.java:196) -  + Stopwords: null
-2026-08-24 18:23:13,135 INFO  [main] index.IndexCollection (IndexCollection.java:197) -  + Store positions? true
-2026-08-24 18:23:13,135 INFO  [main] index.IndexCollection (IndexCollection.java:198) -  + Store docvectors? true
-2026-08-24 18:23:13,136 INFO  [main] index.IndexCollection (IndexCollection.java:199) -  + Store document "contents" field? false
-2026-08-24 18:23:13,136 INFO  [main] index.IndexCollection (IndexCollection.java:200) -  + Store document "raw" field? true
-2026-08-24 18:23:13,136 INFO  [main] index.IndexCollection (IndexCollection.java:201) -  + Additional fields to index: []
-2026-08-24 18:23:13,137 INFO  [main] index.IndexCollection (IndexCollection.java:202) -  + Whitelist: null
-2026-08-24 18:23:13,137 INFO  [main] index.IndexCollection (IndexCollection.java:203) -  + Pretokenized?: false
-2026-08-24 18:23:13,138 INFO  [main] index.IndexCollection (IndexCollection.java:204) -  + Codec: Lucene104
-2026-08-24 18:23:13,138 INFO  [main] index.AbstractIndexer (AbstractIndexer.java:241) - ============ Indexing Collection ============
-2026-08-24 18:23:13,140 INFO  [main] index.AbstractIndexer (AbstractIndexer.java:250) - Thread pool with 8 threads initialized.
-2026-08-24 18:23:13,140 INFO  [main] index.AbstractIndexer (AbstractIndexer.java:251) - 1 file found in /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/scifact/corpus_jsonl
-2026-08-24 18:23:13,141 INFO  [main] index.AbstractIndexer (AbstractIndexer.java:252) - Starting to index...
-2026-08-24 18:23:15,830 INFO  [main] index.AbstractIndexer (AbstractIndexer.java:292) - Indexing Complete! 5,183 documents indexed
-2026-08-24 18:23:15,830 INFO  [main] index.AbstractIndexer (AbstractIndexer.java:293) - ============ Final Counter Values ============
-2026-08-24 18:23:15,831 INFO  [main] index.AbstractIndexer (AbstractIndexer.java:294) - indexed:            5,183
-2026-08-24 18:23:15,831 INFO  [main] index.AbstractIndexer (AbstractIndexer.java:295) - unindexable:            0
-2026-08-24 18:23:15,832 INFO  [main] index.AbstractIndexer (AbstractIndexer.java:296) - empty:                  0
-2026-08-24 18:23:15,832 INFO  [main] index.AbstractIndexer (AbstractIndexer.java:297) - skipped:                0
-2026-08-24 18:23:15,833 INFO  [main] index.AbstractIndexer (AbstractIndexer.java:298) - errors:                 0
-2026-08-24 18:23:15,838 INFO  [main] index.AbstractIndexer (AbstractIndexer.java:301) - Total 5,183 documents indexed in 00:00:02
-2026-08-24 18:23:16,019 [scifact] [Part1] done. build_time=5.0s size=10.1MB
-
-2026-08-24 18:23:16,019 - scifact - INFO - [Part1] done. build_time=5.0s size=10.1MB
-2026-08-24 18:23:16,450 [scifact] [Part2] grid search over k1=[0.6, 0.9, 1.2, 1.5, 1.8] b=[0.3, 0.4, 0.6, 0.8]
-
-2026-08-24 18:23:16,450 - scifact - INFO - [Part2] grid search over k1=[0.6, 0.9, 1.2, 1.5, 1.8] b=[0.3, 0.4, 0.6, 0.8]
-2026-08-24 18:23:32,513 [scifact]   k1=0.6 b=0.3 -> nDCG@10=0.6776
-
-2026-08-24 18:23:32,513 - scifact - INFO -   k1=0.6 b=0.3 -> nDCG@10=0.6776
-2026-08-24 18:23:47,506 [scifact]   k1=0.6 b=0.4 -> nDCG@10=0.6773
-
-2026-08-24 18:23:47,506 - scifact - INFO -   k1=0.6 b=0.4 -> nDCG@10=0.6773
-2026-08-24 18:24:02,011 [scifact]   k1=0.6 b=0.6 -> nDCG@10=0.6800
-
-2026-08-24 18:24:02,011 - scifact - INFO -   k1=0.6 b=0.6 -> nDCG@10=0.6800
-2026-08-24 18:24:16,602 [scifact]   k1=0.6 b=0.8 -> nDCG@10=0.6823
-
-2026-08-24 18:24:16,602 - scifact - INFO -   k1=0.6 b=0.8 -> nDCG@10=0.6823
-2026-08-24 18:24:31,227 [scifact]   k1=0.9 b=0.3 -> nDCG@10=0.6786
-
-2026-08-24 18:24:31,227 - scifact - INFO -   k1=0.9 b=0.3 -> nDCG@10=0.6786
-2026-08-24 18:24:45,505 [scifact]   k1=0.9 b=0.4 -> nDCG@10=0.6789
-
-2026-08-24 18:24:45,505 - scifact - INFO -   k1=0.9 b=0.4 -> nDCG@10=0.6789
-2026-08-24 18:24:59,687 [scifact]   k1=0.9 b=0.6 -> nDCG@10=0.6814
-
-2026-08-24 18:24:59,687 - scifact - INFO -   k1=0.9 b=0.6 -> nDCG@10=0.6814
-2026-08-24 18:25:14,015 [scifact]   k1=0.9 b=0.8 -> nDCG@10=0.6841
-
-2026-08-24 18:25:14,015 - scifact - INFO -   k1=0.9 b=0.8 -> nDCG@10=0.6841
-2026-08-24 18:25:28,926 [scifact]   k1=1.2 b=0.3 -> nDCG@10=0.6802
-
-2026-08-24 18:25:28,926 - scifact - INFO -   k1=1.2 b=0.3 -> nDCG@10=0.6802
-2026-08-24 18:25:43,403 [scifact]   k1=1.2 b=0.4 -> nDCG@10=0.6803
-
-2026-08-24 18:25:43,403 - scifact - INFO -   k1=1.2 b=0.4 -> nDCG@10=0.6803
-2026-08-24 18:25:57,531 [scifact]   k1=1.2 b=0.6 -> nDCG@10=0.6810
-
-2026-08-24 18:25:57,531 - scifact - INFO -   k1=1.2 b=0.6 -> nDCG@10=0.6810
-2026-08-24 18:26:11,816 [scifact]   k1=1.2 b=0.8 -> nDCG@10=0.6833
-
-2026-08-24 18:26:11,816 - scifact - INFO -   k1=1.2 b=0.8 -> nDCG@10=0.6833
-2026-08-24 18:26:26,670 [scifact]   k1=1.5 b=0.3 -> nDCG@10=0.6821
-
-2026-08-24 18:26:26,670 - scifact - INFO -   k1=1.5 b=0.3 -> nDCG@10=0.6821
-2026-08-24 18:26:41,909 [scifact]   k1=1.5 b=0.4 -> nDCG@10=0.6822
-
-2026-08-24 18:26:41,909 - scifact - INFO -   k1=1.5 b=0.4 -> nDCG@10=0.6822
-2026-08-24 18:26:56,592 [scifact]   k1=1.5 b=0.6 -> nDCG@10=0.6844
-
-2026-08-24 18:26:56,592 - scifact - INFO -   k1=1.5 b=0.6 -> nDCG@10=0.6844
-2026-08-24 18:27:11,264 [scifact]   k1=1.5 b=0.8 -> nDCG@10=0.6889
-
-2026-08-24 18:27:11,264 - scifact - INFO -   k1=1.5 b=0.8 -> nDCG@10=0.6889
-2026-08-24 18:27:25,879 [scifact]   k1=1.8 b=0.3 -> nDCG@10=0.6835
-
-2026-08-24 18:27:25,879 - scifact - INFO -   k1=1.8 b=0.3 -> nDCG@10=0.6835
-2026-08-24 18:27:40,247 [scifact]   k1=1.8 b=0.4 -> nDCG@10=0.6857
-
-2026-08-24 18:27:40,247 - scifact - INFO -   k1=1.8 b=0.4 -> nDCG@10=0.6857
-2026-08-24 18:27:54,938 [scifact]   k1=1.8 b=0.6 -> nDCG@10=0.6842
-
-2026-08-24 18:27:54,938 - scifact - INFO -   k1=1.8 b=0.6 -> nDCG@10=0.6842
-2026-08-24 18:28:09,280 [scifact]   k1=1.8 b=0.8 -> nDCG@10=0.6903
-
-2026-08-24 18:28:09,280 - scifact - INFO -   k1=1.8 b=0.8 -> nDCG@10=0.6903
-2026-08-24 18:28:09,288 [scifact] [Part2] winner: k1=1.8 b=0.8 (saved to bm25_params.json)
-
-2026-08-24 18:28:09,288 - scifact - INFO - [Part2] winner: k1=1.8 b=0.8 (saved to bm25_params.json)
-2026-08-24 18:28:39,265 [scifact] [Part2] could not set ClassicSimilarity automatically ('io.anserini.search.SimpleSearcher' object has no attribute 'set_similarity'); set TF-IDF similarity manually for your Pyserini version before this line.
-
-2026-08-24 18:28:39,265 - scifact - WARNING - [Part2] could not set ClassicSimilarity automatically ('io.anserini.search.SimpleSearcher' object has no attribute 'set_similarity'); set TF-IDF similarity manually for your Pyserini version before this line.
-2026-08-24 18:28:53,848 [scifact] [Part2] done.
-
-2026-08-24 18:28:53,848 - scifact - INFO - [Part2] done.
-[INFO] Opening /mnt/nas/shuvranshu/.ir_datasets/beir/scifact/docs.pklz4/bin with direct file access
-2026-08-24 18:28:54,294 [scifact] [Part3] done. success_avg=0.0497 fail_avg=0.0303
-
-2026-08-24 18:28:54,294 - scifact - INFO - [Part3] done. success_avg=0.0497 fail_avg=0.0303
-2026-08-24 18:29:54,133 [scifact] [Part4a] N=10 k=10 done
-
-2026-08-24 18:29:54,133 - scifact - INFO - [Part4a] N=10 k=10 done
-2026-08-24 18:30:56,028 [scifact] [Part4a] N=10 k=20 done
-
-2026-08-24 18:30:56,028 - scifact - INFO - [Part4a] N=10 k=20 done
-2026-08-24 18:32:24,306 [scifact] [Part4a] N=20 k=10 done
-
-2026-08-24 18:32:24,306 - scifact - INFO - [Part4a] N=20 k=10 done
-2026-08-24 18:33:53,933 [scifact] [Part4a] N=20 k=20 done
-
-2026-08-24 18:33:53,933 - scifact - INFO - [Part4a] N=20 k=20 done
-2026-08-24 18:33:53,936 [scifact] [Part4a] done.
-
-2026-08-24 18:33:53,936 - scifact - INFO - [Part4a] done.
-=== [scifact] Part 4b (HyDE generation + retrieval, direct transformers, no server) ===
-2026-08-24 18:34:24,056 [scifact] [Part4b] Starting FRESH generation with Qwen/Qwen2.5-7B-Instruct...
-
-2026-08-24 18:34:24,056 - scifact - INFO - [Part4b] Starting FRESH generation with Qwen/Qwen2.5-7B-Instruct...
+2026-08-26 23:07:10,468 - scifact - INFO - [Part4b] Starting FRESH generation with Qwen/Qwen2.5-7B-Instruct...
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 
-2026-08-24 18:34:24,308 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   0%|          | 1/339 [00:00<04:26,  1.27it/s]Loading weights:   1%|          | 2/339 [00:01<03:37,  1.55it/s]Loading weights:   2%|▏         | 6/339 [00:01<00:58,  5.73it/s]Loading weights:   5%|▌         | 18/339 [00:01<00:15, 20.25it/s]Loading weights:   9%|▊         | 29/339 [00:01<00:09, 34.19it/s]Loading weights:  12%|█▏        | 40/339 [00:01<00:06, 43.98it/s]Loading weights:  15%|█▌        | 52/339 [00:01<00:04, 58.38it/s]Loading weights:  19%|█▉        | 64/339 [00:02<00:04, 67.33it/s]Loading weights:  22%|██▏       | 73/339 [00:02<00:03, 70.80it/s]Loading weights:  24%|██▍       | 82/339 [00:02<00:03, 69.90it/s]Loading weights:  27%|██▋       | 91/339 [00:02<00:03, 70.22it/s]Loading weights:  30%|██▉       | 101/339 [00:02<00:03, 76.33it/s]Loading weights:  33%|███▎      | 113/339 [00:02<00:02, 81.96it/s]Loading weights:  37%|███▋      | 124/339 [00:02<00:02, 88.77it/s]Loading weights:  40%|████      | 136/339 [00:02<00:02, 77.02it/s]Loading weights:  44%|████▍     | 149/339 [00:03<00:02, 82.15it/s]Loading weights:  47%|████▋     | 160/339 [00:03<00:02, 79.68it/s]Loading weights:  51%|█████     | 172/339 [00:03<00:01, 87.86it/s]Loading weights:  54%|█████▍    | 184/339 [00:03<00:01, 87.43it/s]Loading weights:  58%|█████▊    | 196/339 [00:03<00:01, 88.49it/s]Loading weights:  61%|██████▏   | 208/339 [00:03<00:01, 78.93it/s]Loading weights:  65%|██████▍   | 220/339 [00:03<00:01, 81.92it/s]Loading weights:  68%|██████▊   | 232/339 [00:04<00:01, 87.60it/s]Loading weights:  72%|███████▏  | 243/339 [00:04<00:01, 79.57it/s]Loading weights:  76%|███████▌  | 256/339 [00:04<00:00, 85.44it/s]Loading weights:  78%|███████▊  | 265/339 [00:04<00:00, 83.83it/s]Loading weights:  81%|████████  | 274/339 [00:04<00:00, 81.33it/s]Loading weights:  83%|████████▎ | 283/339 [00:04<00:00, 74.66it/s]Loading weights:  87%|████████▋ | 294/339 [00:04<00:00, 74.87it/s]Loading weights:  90%|████████▉ | 304/339 [00:05<00:00, 79.89it/s]Loading weights:  94%|█████████▎| 317/339 [00:05<00:00, 85.46it/s]Loading weights:  97%|█████████▋| 329/339 [00:05<00:00, 87.50it/s]Loading weights: 100%|██████████| 339/339 [00:05<00:00, 63.41it/s]
-2026-08-24 18:34:33,275 [scifact] [Part4b] Generating for all 300 queries from scratch...
+2026-08-26 23:07:11,638 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   0%|          | 1/339 [00:18<1:42:50, 18.26s/it]Loading weights:   5%|▍         | 16/339 [00:18<04:28,  1.20it/s] Loading weights:   6%|▋         | 22/339 [00:20<03:20,  1.58it/s]Loading weights:   9%|▉         | 30/339 [00:20<01:58,  2.60it/s]Loading weights:  11%|█         | 36/339 [00:20<01:25,  3.53it/s]Loading weights:  12%|█▏        | 42/339 [00:20<01:02,  4.74it/s]Loading weights:  15%|█▌        | 52/339 [00:21<00:43,  6.63it/s]Loading weights:  18%|█▊        | 62/339 [00:21<00:27, 10.06it/s]Loading weights:  20%|█▉        | 67/339 [00:21<00:23, 11.49it/s]Loading weights:  22%|██▏       | 74/339 [00:21<00:17, 15.20it/s]Loading weights:  23%|██▎       | 79/339 [00:25<00:53,  4.87it/s]Loading weights:  26%|██▌       | 88/339 [00:27<00:52,  4.78it/s]Loading weights:  29%|██▉       | 100/339 [00:27<00:32,  7.32it/s]Loading weights:  32%|███▏      | 108/339 [00:27<00:23,  9.84it/s]Loading weights:  34%|███▎      | 114/339 [00:27<00:18, 12.06it/s]Loading weights:  36%|███▌      | 121/339 [00:27<00:14, 15.48it/s]Loading weights:  37%|███▋      | 126/339 [00:31<00:47,  4.49it/s]Loading weights:  38%|███▊      | 130/339 [00:32<00:39,  5.27it/s]Loading weights:  39%|███▉      | 133/339 [00:32<00:36,  5.58it/s]Loading weights:  40%|████      | 136/339 [00:33<00:39,  5.09it/s]Loading weights:  41%|████      | 138/339 [00:35<01:09,  2.87it/s]Loading weights:  42%|████▏     | 142/339 [00:35<00:51,  3.82it/s]Loading weights:  42%|████▏     | 144/339 [00:36<00:49,  3.97it/s]Loading weights:  43%|████▎     | 146/339 [00:36<00:45,  4.27it/s]Loading weights:  44%|████▎     | 148/339 [00:38<01:06,  2.88it/s]Loading weights:  44%|████▍     | 149/339 [00:39<01:28,  2.14it/s]Loading weights:  44%|████▍     | 150/339 [00:40<01:57,  1.60it/s]Loading weights:  45%|████▌     | 154/339 [00:40<01:06,  2.77it/s]Loading weights:  46%|████▌     | 156/339 [00:41<00:51,  3.55it/s]Loading weights:  47%|████▋     | 159/339 [00:41<00:35,  5.04it/s]Loading weights:  47%|████▋     | 161/339 [00:43<01:21,  2.19it/s]Loading weights:  48%|████▊     | 162/339 [00:45<01:45,  1.67it/s]Loading weights:  49%|████▉     | 166/339 [00:45<01:08,  2.51it/s]Loading weights:  50%|█████     | 170/339 [00:45<00:42,  4.01it/s]Loading weights:  51%|█████     | 172/339 [00:47<00:59,  2.81it/s]Loading weights:  51%|█████▏    | 174/339 [00:49<01:34,  1.75it/s]Loading weights:  53%|█████▎    | 178/339 [00:50<01:03,  2.52it/s]Loading weights:  53%|█████▎    | 181/339 [00:50<00:46,  3.38it/s]Loading weights:  54%|█████▍    | 184/339 [00:52<00:54,  2.82it/s]Loading weights:  55%|█████▍    | 185/339 [00:54<01:40,  1.53it/s]Loading weights:  56%|█████▌    | 190/339 [00:55<00:55,  2.68it/s]Loading weights:  57%|█████▋    | 192/339 [00:55<00:47,  3.08it/s]Loading weights:  58%|█████▊    | 195/339 [00:55<00:33,  4.25it/s]Loading weights:  58%|█████▊    | 197/339 [00:58<01:11,  1.99it/s]Loading weights:  58%|█████▊    | 198/339 [00:59<01:24,  1.67it/s]Loading weights:  60%|█████▉    | 202/339 [00:59<00:51,  2.66it/s]Loading weights:  60%|█████▉    | 203/339 [01:00<00:48,  2.79it/s]Loading weights:  61%|██████    | 207/339 [01:01<00:49,  2.68it/s]Loading weights:  62%|██████▏   | 209/339 [01:03<01:00,  2.16it/s]Loading weights:  62%|██████▏   | 210/339 [01:03<01:06,  1.95it/s]Loading weights:  63%|██████▎   | 214/339 [01:04<00:39,  3.19it/s]Loading weights:  64%|██████▎   | 216/339 [01:04<00:32,  3.82it/s]Loading weights:  65%|██████▍   | 220/339 [01:05<00:29,  4.08it/s]Loading weights:  65%|██████▌   | 221/339 [01:06<00:45,  2.59it/s]Loading weights:  65%|██████▌   | 222/339 [01:07<00:57,  2.02it/s]Loading weights:  67%|██████▋   | 226/339 [01:08<00:33,  3.40it/s]Loading weights:  67%|██████▋   | 228/339 [01:08<00:28,  3.90it/s]Loading weights:  68%|██████▊   | 232/339 [01:09<00:33,  3.15it/s]Loading weights:  69%|██████▊   | 233/339 [01:11<00:45,  2.31it/s]Loading weights:  69%|██████▉   | 234/339 [01:12<00:58,  1.81it/s]Loading weights:  70%|███████   | 238/339 [01:12<00:33,  3.03it/s]Loading weights:  71%|███████   | 240/339 [01:12<00:25,  3.86it/s]Loading weights:  72%|███████▏  | 244/339 [01:13<00:19,  4.98it/s]Loading weights:  73%|███████▎  | 246/339 [01:13<00:18,  5.11it/s]Loading weights:  76%|███████▌  | 256/339 [01:13<00:07, 10.42it/s]Loading weights:  79%|███████▉  | 268/339 [01:15<00:07,  9.36it/s]Loading weights:  80%|███████▉  | 270/339 [01:15<00:08,  8.61it/s]Loading weights:  82%|████████▏ | 278/339 [01:15<00:04, 12.96it/s]Loading weights:  83%|████████▎ | 281/339 [01:18<00:11,  4.90it/s]Loading weights:  83%|████████▎ | 283/339 [01:20<00:16,  3.39it/s]Loading weights:  84%|████████▍ | 286/339 [01:20<00:13,  3.96it/s]Loading weights:  85%|████████▍ | 288/339 [01:20<00:12,  4.22it/s]Loading weights:  86%|████████▌ | 292/339 [01:22<00:12,  3.69it/s]Loading weights:  86%|████████▋ | 293/339 [01:23<00:19,  2.34it/s]Loading weights:  87%|████████▋ | 294/339 [01:25<00:25,  1.77it/s]Loading weights:  88%|████████▊ | 298/339 [01:25<00:14,  2.77it/s]Loading weights:  89%|████████▉ | 302/339 [01:25<00:08,  4.29it/s]Loading weights:  90%|████████▉ | 304/339 [01:27<00:11,  3.09it/s]Loading weights:  90%|█████████ | 306/339 [01:29<00:17,  1.84it/s]Loading weights:  91%|█████████▏| 310/339 [01:29<00:10,  2.82it/s]Loading weights:  92%|█████████▏| 312/339 [01:30<00:08,  3.27it/s]Loading weights:  93%|█████████▎| 316/339 [01:30<00:05,  4.49it/s]Loading weights:  94%|█████████▍| 318/339 [01:30<00:04,  4.51it/s]Loading weights:  97%|█████████▋| 328/339 [01:31<00:01, 10.74it/s]Loading weights: 100%|██████████| 339/339 [01:31<00:00,  3.72it/s]
+2026-08-26 23:08:49,698 [scifact] [Part4b] Generating for all 300 queries from scratch...
 
-2026-08-24 18:34:33,275 - scifact - INFO - [Part4b] Generating for all 300 queries from scratch...
-2026-08-24 18:35:10,295 [scifact] [Part4b] Progress: 5/300 queries completed.
+2026-08-26 23:08:49,698 - scifact - INFO - [Part4b] Generating for all 300 queries from scratch...
+2026-08-26 23:11:39,864 [scifact] [Part4b] Progress: 5/300 queries completed.
 
-2026-08-24 18:35:10,295 - scifact - INFO - [Part4b] Progress: 5/300 queries completed.
-2026-08-24 18:35:45,728 [scifact] [Part4b] Progress: 10/300 queries completed.
+2026-08-26 23:11:39,864 - scifact - INFO - [Part4b] Progress: 5/300 queries completed.
+2026-08-26 23:14:26,637 [scifact] [Part4b] Progress: 10/300 queries completed.
 
-2026-08-24 18:35:45,728 - scifact - INFO - [Part4b] Progress: 10/300 queries completed.
-2026-08-24 18:36:29,073 [scifact] [Part4b] Progress: 15/300 queries completed.
+2026-08-26 23:14:26,637 - scifact - INFO - [Part4b] Progress: 10/300 queries completed.
+2026-08-26 23:17:45,479 [scifact] [Part4b] Progress: 15/300 queries completed.
 
-2026-08-24 18:36:29,073 - scifact - INFO - [Part4b] Progress: 15/300 queries completed.
-2026-08-24 18:37:04,506 [scifact] [Part4b] Progress: 20/300 queries completed.
+2026-08-26 23:17:45,479 - scifact - INFO - [Part4b] Progress: 15/300 queries completed.
+2026-08-26 23:20:30,180 [scifact] [Part4b] Progress: 20/300 queries completed.
 
-2026-08-24 18:37:04,506 - scifact - INFO - [Part4b] Progress: 20/300 queries completed.
-2026-08-24 18:37:44,006 [scifact] [Part4b] Progress: 25/300 queries completed.
+2026-08-26 23:20:30,180 - scifact - INFO - [Part4b] Progress: 20/300 queries completed.
+2026-08-26 23:23:07,499 [scifact] [Part4b] Progress: 25/300 queries completed.
 
-2026-08-24 18:37:44,006 - scifact - INFO - [Part4b] Progress: 25/300 queries completed.
-2026-08-24 18:38:20,434 [scifact] [Part4b] Progress: 30/300 queries completed.
+2026-08-26 23:23:07,499 - scifact - INFO - [Part4b] Progress: 25/300 queries completed.
+2026-08-26 23:26:11,551 [scifact] [Part4b] Progress: 30/300 queries completed.
 
-2026-08-24 18:38:20,434 - scifact - INFO - [Part4b] Progress: 30/300 queries completed.
-2026-08-24 18:39:01,092 [scifact] [Part4b] Progress: 35/300 queries completed.
+2026-08-26 23:26:11,551 - scifact - INFO - [Part4b] Progress: 30/300 queries completed.
+2026-08-26 23:29:40,294 [scifact] [Part4b] Progress: 35/300 queries completed.
 
-2026-08-24 18:39:01,092 - scifact - INFO - [Part4b] Progress: 35/300 queries completed.
-2026-08-24 18:39:36,957 [scifact] [Part4b] Progress: 40/300 queries completed.
+2026-08-26 23:29:40,294 - scifact - INFO - [Part4b] Progress: 35/300 queries completed.
+2026-08-26 23:33:18,182 [scifact] [Part4b] Progress: 40/300 queries completed.
 
-2026-08-24 18:39:36,957 - scifact - INFO - [Part4b] Progress: 40/300 queries completed.
-2026-08-24 18:40:07,321 [scifact] [Part4b] Progress: 45/300 queries completed.
+2026-08-26 23:33:18,182 - scifact - INFO - [Part4b] Progress: 40/300 queries completed.
+2026-08-26 23:37:50,505 [scifact] [Part4b] Progress: 45/300 queries completed.
 
-2026-08-24 18:40:07,321 - scifact - INFO - [Part4b] Progress: 45/300 queries completed.
-2026-08-24 18:40:45,929 [scifact] [Part4b] Progress: 50/300 queries completed.
+2026-08-26 23:37:50,505 - scifact - INFO - [Part4b] Progress: 45/300 queries completed.
+2026-08-26 23:41:03,312 [scifact] [Part4b] Progress: 50/300 queries completed.
 
-2026-08-24 18:40:45,929 - scifact - INFO - [Part4b] Progress: 50/300 queries completed.
-2026-08-24 18:41:20,286 [scifact] [Part4b] Progress: 55/300 queries completed.
+2026-08-26 23:41:03,312 - scifact - INFO - [Part4b] Progress: 50/300 queries completed.
+2026-08-26 23:45:02,674 [scifact] [Part4b] Progress: 55/300 queries completed.
 
-2026-08-24 18:41:20,286 - scifact - INFO - [Part4b] Progress: 55/300 queries completed.
-2026-08-24 18:41:54,643 [scifact] [Part4b] Progress: 60/300 queries completed.
+2026-08-26 23:45:02,674 - scifact - INFO - [Part4b] Progress: 55/300 queries completed.
+2026-08-26 23:49:13,439 [scifact] [Part4b] Progress: 60/300 queries completed.
 
-2026-08-24 18:41:54,643 - scifact - INFO - [Part4b] Progress: 60/300 queries completed.
-2026-08-24 18:42:29,762 [scifact] [Part4b] Progress: 65/300 queries completed.
+2026-08-26 23:49:13,439 - scifact - INFO - [Part4b] Progress: 60/300 queries completed.
+2026-08-26 23:52:00,042 [scifact] [Part4b] Progress: 65/300 queries completed.
 
-2026-08-24 18:42:29,762 - scifact - INFO - [Part4b] Progress: 65/300 queries completed.
-2026-08-24 18:43:03,984 [scifact] [Part4b] Progress: 70/300 queries completed.
+2026-08-26 23:52:00,042 - scifact - INFO - [Part4b] Progress: 65/300 queries completed.
+2026-08-26 23:56:33,990 [scifact] [Part4b] Progress: 70/300 queries completed.
 
-2026-08-24 18:43:03,984 - scifact - INFO - [Part4b] Progress: 70/300 queries completed.
-2026-08-24 18:43:37,206 [scifact] [Part4b] Progress: 75/300 queries completed.
+2026-08-26 23:56:33,990 - scifact - INFO - [Part4b] Progress: 70/300 queries completed.
+2026-08-27 00:00:25,772 [scifact] [Part4b] Progress: 75/300 queries completed.
 
-2026-08-24 18:43:37,206 - scifact - INFO - [Part4b] Progress: 75/300 queries completed.
-2026-08-24 18:44:13,960 [scifact] [Part4b] Progress: 80/300 queries completed.
+2026-08-27 00:00:25,772 - scifact - INFO - [Part4b] Progress: 75/300 queries completed.
+2026-08-27 00:03:40,608 [scifact] [Part4b] Progress: 80/300 queries completed.
 
-2026-08-24 18:44:13,960 - scifact - INFO - [Part4b] Progress: 80/300 queries completed.
-2026-08-24 18:44:53,340 [scifact] [Part4b] Progress: 85/300 queries completed.
+2026-08-27 00:03:40,608 - scifact - INFO - [Part4b] Progress: 80/300 queries completed.
+2026-08-27 00:06:54,301 [scifact] [Part4b] Progress: 85/300 queries completed.
 
-2026-08-24 18:44:53,340 - scifact - INFO - [Part4b] Progress: 85/300 queries completed.
-2026-08-24 18:45:30,828 [scifact] [Part4b] Progress: 90/300 queries completed.
+2026-08-27 00:06:54,301 - scifact - INFO - [Part4b] Progress: 85/300 queries completed.
+2026-08-27 00:10:39,739 [scifact] [Part4b] Progress: 90/300 queries completed.
 
-2026-08-24 18:45:30,828 - scifact - INFO - [Part4b] Progress: 90/300 queries completed.
-2026-08-24 18:46:06,763 [scifact] [Part4b] Progress: 95/300 queries completed.
+2026-08-27 00:10:39,739 - scifact - INFO - [Part4b] Progress: 90/300 queries completed.
+2026-08-27 00:13:42,629 [scifact] [Part4b] Progress: 95/300 queries completed.
 
-2026-08-24 18:46:06,763 - scifact - INFO - [Part4b] Progress: 95/300 queries completed.
-2026-08-24 18:46:42,643 [scifact] [Part4b] Progress: 100/300 queries completed.
+2026-08-27 00:13:42,629 - scifact - INFO - [Part4b] Progress: 95/300 queries completed.
+2026-08-27 00:16:29,794 [scifact] [Part4b] Progress: 100/300 queries completed.
 
-2026-08-24 18:46:42,643 - scifact - INFO - [Part4b] Progress: 100/300 queries completed.
-2026-08-24 18:47:17,690 [scifact] [Part4b] Progress: 105/300 queries completed.
+2026-08-27 00:16:29,794 - scifact - INFO - [Part4b] Progress: 100/300 queries completed.
+2026-08-27 00:19:52,480 [scifact] [Part4b] Progress: 105/300 queries completed.
 
-2026-08-24 18:47:17,690 - scifact - INFO - [Part4b] Progress: 105/300 queries completed.
-2026-08-24 18:47:53,362 [scifact] [Part4b] Progress: 110/300 queries completed.
+2026-08-27 00:19:52,480 - scifact - INFO - [Part4b] Progress: 105/300 queries completed.
+2026-08-27 00:23:48,714 [scifact] [Part4b] Progress: 110/300 queries completed.
 
-2026-08-24 18:47:53,362 - scifact - INFO - [Part4b] Progress: 110/300 queries completed.
-2026-08-24 18:48:31,362 [scifact] [Part4b] Progress: 115/300 queries completed.
+2026-08-27 00:23:48,714 - scifact - INFO - [Part4b] Progress: 110/300 queries completed.
+2026-08-27 00:27:46,735 [scifact] [Part4b] Progress: 115/300 queries completed.
 
-2026-08-24 18:48:31,362 - scifact - INFO - [Part4b] Progress: 115/300 queries completed.
-2026-08-24 18:49:08,375 [scifact] [Part4b] Progress: 120/300 queries completed.
+2026-08-27 00:27:46,735 - scifact - INFO - [Part4b] Progress: 115/300 queries completed.
+2026-08-27 00:33:09,794 [scifact] [Part4b] Progress: 120/300 queries completed.
 
-2026-08-24 18:49:08,375 - scifact - INFO - [Part4b] Progress: 120/300 queries completed.
-2026-08-24 18:49:43,919 [scifact] [Part4b] Progress: 125/300 queries completed.
+2026-08-27 00:33:09,794 - scifact - INFO - [Part4b] Progress: 120/300 queries completed.
+2026-08-27 00:38:19,796 [scifact] [Part4b] Progress: 125/300 queries completed.
 
-2026-08-24 18:49:43,919 - scifact - INFO - [Part4b] Progress: 125/300 queries completed.
-2026-08-24 18:50:14,275 [scifact] [Part4b] Progress: 130/300 queries completed.
+2026-08-27 00:38:19,796 - scifact - INFO - [Part4b] Progress: 125/300 queries completed.
+2026-08-27 00:41:15,102 [scifact] [Part4b] Progress: 130/300 queries completed.
 
-2026-08-24 18:50:14,275 - scifact - INFO - [Part4b] Progress: 130/300 queries completed.
-2026-08-24 18:50:49,735 [scifact] [Part4b] Progress: 135/300 queries completed.
+2026-08-27 00:41:15,102 - scifact - INFO - [Part4b] Progress: 130/300 queries completed.
+2026-08-27 00:44:31,279 [scifact] [Part4b] Progress: 135/300 queries completed.
 
-2026-08-24 18:50:49,735 - scifact - INFO - [Part4b] Progress: 135/300 queries completed.
-2026-08-24 18:51:25,059 [scifact] [Part4b] Progress: 140/300 queries completed.
+2026-08-27 00:44:31,279 - scifact - INFO - [Part4b] Progress: 135/300 queries completed.
+2026-08-27 00:48:12,753 [scifact] [Part4b] Progress: 140/300 queries completed.
 
-2026-08-24 18:51:25,059 - scifact - INFO - [Part4b] Progress: 140/300 queries completed.
-2026-08-24 18:51:59,771 [scifact] [Part4b] Progress: 145/300 queries completed.
+2026-08-27 00:48:12,753 - scifact - INFO - [Part4b] Progress: 140/300 queries completed.
+2026-08-27 00:52:48,876 [scifact] [Part4b] Progress: 145/300 queries completed.
 
-2026-08-24 18:51:59,771 - scifact - INFO - [Part4b] Progress: 145/300 queries completed.
-2026-08-24 18:52:30,746 [scifact] [Part4b] Progress: 150/300 queries completed.
+2026-08-27 00:52:48,876 - scifact - INFO - [Part4b] Progress: 145/300 queries completed.
+2026-08-27 00:57:11,582 [scifact] [Part4b] Progress: 150/300 queries completed.
 
-2026-08-24 18:52:30,746 - scifact - INFO - [Part4b] Progress: 150/300 queries completed.
-2026-08-24 18:53:06,924 [scifact] [Part4b] Progress: 155/300 queries completed.
+2026-08-27 00:57:11,582 - scifact - INFO - [Part4b] Progress: 150/300 queries completed.
+2026-08-27 00:59:59,866 [scifact] [Part4b] Progress: 155/300 queries completed.
 
-2026-08-24 18:53:06,924 - scifact - INFO - [Part4b] Progress: 155/300 queries completed.
-2026-08-24 18:53:42,980 [scifact] [Part4b] Progress: 160/300 queries completed.
+2026-08-27 00:59:59,866 - scifact - INFO - [Part4b] Progress: 155/300 queries completed.
+2026-08-27 01:02:21,157 [scifact] [Part4b] Progress: 160/300 queries completed.
 
-2026-08-24 18:53:42,980 - scifact - INFO - [Part4b] Progress: 160/300 queries completed.
-2026-08-24 18:54:15,737 [scifact] [Part4b] Progress: 165/300 queries completed.
+2026-08-27 01:02:21,157 - scifact - INFO - [Part4b] Progress: 160/300 queries completed.
+2026-08-27 01:05:07,976 [scifact] [Part4b] Progress: 165/300 queries completed.
 
-2026-08-24 18:54:15,737 - scifact - INFO - [Part4b] Progress: 165/300 queries completed.
-2026-08-24 18:54:51,669 [scifact] [Part4b] Progress: 170/300 queries completed.
+2026-08-27 01:05:07,976 - scifact - INFO - [Part4b] Progress: 165/300 queries completed.
+2026-08-27 01:08:17,181 [scifact] [Part4b] Progress: 170/300 queries completed.
 
-2026-08-24 18:54:51,669 - scifact - INFO - [Part4b] Progress: 170/300 queries completed.
-2026-08-24 18:55:27,925 [scifact] [Part4b] Progress: 175/300 queries completed.
+2026-08-27 01:08:17,181 - scifact - INFO - [Part4b] Progress: 170/300 queries completed.
+2026-08-27 01:11:53,927 [scifact] [Part4b] Progress: 175/300 queries completed.
 
-2026-08-24 18:55:27,925 - scifact - INFO - [Part4b] Progress: 175/300 queries completed.
-2026-08-24 18:56:01,308 [scifact] [Part4b] Progress: 180/300 queries completed.
+2026-08-27 01:11:53,927 - scifact - INFO - [Part4b] Progress: 175/300 queries completed.
+2026-08-27 01:14:50,531 [scifact] [Part4b] Progress: 180/300 queries completed.
 
-2026-08-24 18:56:01,308 - scifact - INFO - [Part4b] Progress: 180/300 queries completed.
-2026-08-24 18:56:38,151 [scifact] [Part4b] Progress: 185/300 queries completed.
+2026-08-27 01:14:50,531 - scifact - INFO - [Part4b] Progress: 180/300 queries completed.
+2026-08-27 01:20:49,558 [scifact] [Part4b] Progress: 185/300 queries completed.
 
-2026-08-24 18:56:38,151 - scifact - INFO - [Part4b] Progress: 185/300 queries completed.
-2026-08-24 18:57:12,698 [scifact] [Part4b] Progress: 190/300 queries completed.
+2026-08-27 01:20:49,558 - scifact - INFO - [Part4b] Progress: 185/300 queries completed.
+2026-08-27 01:27:14,612 [scifact] [Part4b] Progress: 190/300 queries completed.
 
-2026-08-24 18:57:12,698 - scifact - INFO - [Part4b] Progress: 190/300 queries completed.
-2026-08-24 18:57:50,264 [scifact] [Part4b] Progress: 195/300 queries completed.
+2026-08-27 01:27:14,612 - scifact - INFO - [Part4b] Progress: 190/300 queries completed.
+2026-08-27 01:34:43,994 [scifact] [Part4b] Progress: 195/300 queries completed.
 
-2026-08-24 18:57:50,264 - scifact - INFO - [Part4b] Progress: 195/300 queries completed.
-2026-08-24 18:58:21,229 [scifact] [Part4b] Progress: 200/300 queries completed.
+2026-08-27 01:34:43,994 - scifact - INFO - [Part4b] Progress: 195/300 queries completed.
+2026-08-27 01:40:44,236 [scifact] [Part4b] Progress: 200/300 queries completed.
 
-2026-08-24 18:58:21,229 - scifact - INFO - [Part4b] Progress: 200/300 queries completed.
-2026-08-24 18:58:53,492 [scifact] [Part4b] Progress: 205/300 queries completed.
+2026-08-27 01:40:44,236 - scifact - INFO - [Part4b] Progress: 200/300 queries completed.
+2026-08-27 01:45:38,628 [scifact] [Part4b] Progress: 205/300 queries completed.
 
-2026-08-24 18:58:53,492 - scifact - INFO - [Part4b] Progress: 205/300 queries completed.
-2026-08-24 18:59:31,059 [scifact] [Part4b] Progress: 210/300 queries completed.
+2026-08-27 01:45:38,628 - scifact - INFO - [Part4b] Progress: 205/300 queries completed.
+2026-08-27 01:50:54,247 [scifact] [Part4b] Progress: 210/300 queries completed.
 
-2026-08-24 18:59:31,059 - scifact - INFO - [Part4b] Progress: 210/300 queries completed.
-2026-08-24 19:00:10,733 [scifact] [Part4b] Progress: 215/300 queries completed.
+2026-08-27 01:50:54,247 - scifact - INFO - [Part4b] Progress: 210/300 queries completed.
+2026-08-27 01:56:40,372 [scifact] [Part4b] Progress: 215/300 queries completed.
 
-2026-08-24 19:00:10,733 - scifact - INFO - [Part4b] Progress: 215/300 queries completed.
-2026-08-24 19:00:48,229 [scifact] [Part4b] Progress: 220/300 queries completed.
+2026-08-27 01:56:40,372 - scifact - INFO - [Part4b] Progress: 215/300 queries completed.
+2026-08-27 02:02:15,363 [scifact] [Part4b] Progress: 220/300 queries completed.
 
-2026-08-24 19:00:48,229 - scifact - INFO - [Part4b] Progress: 220/300 queries completed.
-2026-08-24 19:01:22,953 [scifact] [Part4b] Progress: 225/300 queries completed.
+2026-08-27 02:02:15,363 - scifact - INFO - [Part4b] Progress: 220/300 queries completed.
+2026-08-27 02:07:10,322 [scifact] [Part4b] Progress: 225/300 queries completed.
 
-2026-08-24 19:01:22,953 - scifact - INFO - [Part4b] Progress: 225/300 queries completed.
-2026-08-24 19:01:58,759 [scifact] [Part4b] Progress: 230/300 queries completed.
+2026-08-27 02:07:10,322 - scifact - INFO - [Part4b] Progress: 225/300 queries completed.
+2026-08-27 02:14:10,482 [scifact] [Part4b] Progress: 230/300 queries completed.
 
-2026-08-24 19:01:58,759 - scifact - INFO - [Part4b] Progress: 230/300 queries completed.
-2026-08-24 19:02:37,626 [scifact] [Part4b] Progress: 235/300 queries completed.
+2026-08-27 02:14:10,482 - scifact - INFO - [Part4b] Progress: 230/300 queries completed.
+2026-08-27 02:21:56,302 [scifact] [Part4b] Progress: 235/300 queries completed.
 
-2026-08-24 19:02:37,626 - scifact - INFO - [Part4b] Progress: 235/300 queries completed.
-2026-08-24 19:03:11,786 [scifact] [Part4b] Progress: 240/300 queries completed.
+2026-08-27 02:21:56,302 - scifact - INFO - [Part4b] Progress: 235/300 queries completed.
+2026-08-27 02:27:29,576 [scifact] [Part4b] Progress: 240/300 queries completed.
 
-2026-08-24 19:03:11,786 - scifact - INFO - [Part4b] Progress: 240/300 queries completed.
-2026-08-24 19:03:45,210 [scifact] [Part4b] Progress: 245/300 queries completed.
-
-2026-08-24 19:03:45,210 - scifact - INFO - [Part4b] Progress: 245/300 queries completed.
-2026-08-24 19:04:14,134 [scifact] [Part4b] Progress: 250/300 queries completed.
-
-2026-08-24 19:04:14,134 - scifact - INFO - [Part4b] Progress: 250/300 queries completed.
-2026-08-24 19:04:46,659 [scifact] [Part4b] Progress: 255/300 queries completed.
-
-2026-08-24 19:04:46,659 - scifact - INFO - [Part4b] Progress: 255/300 queries completed.
-2026-08-24 19:05:18,463 [scifact] [Part4b] Progress: 260/300 queries completed.
-
-2026-08-24 19:05:18,463 - scifact - INFO - [Part4b] Progress: 260/300 queries completed.
-2026-08-24 19:05:53,801 [scifact] [Part4b] Progress: 265/300 queries completed.
-
-2026-08-24 19:05:53,801 - scifact - INFO - [Part4b] Progress: 265/300 queries completed.
-2026-08-24 19:06:27,550 [scifact] [Part4b] Progress: 270/300 queries completed.
-
-2026-08-24 19:06:27,550 - scifact - INFO - [Part4b] Progress: 270/300 queries completed.
-2026-08-24 19:07:00,352 [scifact] [Part4b] Progress: 275/300 queries completed.
-
-2026-08-24 19:07:00,352 - scifact - INFO - [Part4b] Progress: 275/300 queries completed.
-2026-08-24 19:07:33,631 [scifact] [Part4b] Progress: 280/300 queries completed.
-
-2026-08-24 19:07:33,631 - scifact - INFO - [Part4b] Progress: 280/300 queries completed.
-2026-08-24 19:08:07,258 [scifact] [Part4b] Progress: 285/300 queries completed.
-
-2026-08-24 19:08:07,258 - scifact - INFO - [Part4b] Progress: 285/300 queries completed.
-2026-08-24 19:08:42,856 [scifact] [Part4b] Progress: 290/300 queries completed.
-
-2026-08-24 19:08:42,856 - scifact - INFO - [Part4b] Progress: 290/300 queries completed.
-2026-08-24 19:09:12,952 [scifact] [Part4b] Progress: 295/300 queries completed.
-
-2026-08-24 19:09:12,952 - scifact - INFO - [Part4b] Progress: 295/300 queries completed.
-2026-08-24 19:09:46,985 [scifact] [Part4b] Progress: 300/300 queries completed.
-
-2026-08-24 19:09:46,985 - scifact - INFO - [Part4b] Progress: 300/300 queries completed.
-2026-08-24 19:09:46,986 [scifact] [Part4b] complete! Wrote HyDE generations to /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/runs/scifact/hyde_generations.jsonl
-
-2026-08-24 19:09:46,986 - scifact - INFO - [Part4b] complete! Wrote HyDE generations to /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/runs/scifact/hyde_generations.jsonl
-=== [scifact] Part 4b (HyDE generation + retrieval) ===
-=== [scifact] Parts 1-4 complete. Results: results/results_scifact.md ===
+2026-08-27 02:27:29,576 - scifact - INFO - [Part4b] Progress: 240/300 queries completed.

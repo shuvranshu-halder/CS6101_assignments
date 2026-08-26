@@ -21,7 +21,7 @@ fi
 # ---------------------------------------------------------------------------
 case "$DATASET" in
   scifact)
-    GPU_IDS=(0)
+    GPU_IDS=(5)
     BATCH_SIZE=128
     ;;
   fever|hotpotqa)
@@ -38,7 +38,8 @@ case "$DATASET" in
     ;;
 esac
 
-CHECKPOINT="naver/splade-cocondenser-ensembledistil"
+export OPENAI_API_KEY="not-needed"
+CHECKPOINT="naver/splade-v3"
 NUM_SHARDS=${#GPU_IDS[@]}
 
 cd "$(dirname "$0")/.."
@@ -48,7 +49,7 @@ PIDS=()
 for shard_id in "${!GPU_IDS[@]}"; do
   gpu="${GPU_IDS[$shard_id]}"
   echo "  shard $shard_id -> GPU $gpu"
-  CUDA_VISIBLE_DEVICES="$gpu" python run_part5.py \
+  CUDA_VISIBLE_DEVICES="$gpu" python -u run_part5.py \
     --dataset "$DATASET" --checkpoint "$CHECKPOINT" \
     --stage encode --shard_id "$shard_id" --num_shards "$NUM_SHARDS" \
     --batch_size "$BATCH_SIZE" \
@@ -60,7 +61,7 @@ echo "=== waiting for all shards to finish encoding ==="
 for pid in "${PIDS[@]}"; do wait "$pid"; done
 
 echo "=== [$DATASET] retrieval + expansion-term comparison (single GPU 0) ==="
-CUDA_VISIBLE_DEVICES="${GPU_IDS[0]}" python run_part5.py \
+CUDA_VISIBLE_DEVICES="${GPU_IDS[0]}" python -u run_part5.py \
   --dataset "$DATASET" --checkpoint "$CHECKPOINT" --stage retrieve compare
 
 echo "=== [$DATASET] Part 5 complete. Results appended to results/results_${DATASET}.md ==="
