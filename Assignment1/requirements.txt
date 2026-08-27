@@ -4,7 +4,7 @@ ir_datasets>=0.5.9
 ir_measures>=0.3.3
 
 # Part 4b (HyDE) — talks to the local vLLM server via its OpenAI-compatible API
-vllm>=0.6.3
+#vllm>=0.6.3
 openai>=1.40.0
 
 # Part 5 (SPLADE) — HuggingFace checkpoint inference
