@@ -1,48 +1,26 @@
 nohup: ignoring input
-=== [scifact] encoding corpus across 1 GPU(s): 5 ===
-  shard 0 -> GPU 5
+=== [scifact] encoding corpus across 1 GPU(s): 2 ===
+  shard 0 -> GPU 2
 === waiting for all shards to finish encoding ===
 === [scifact] retrieval + expansion-term comparison (single GPU 0) ===
-WARNING: Using incubator modules: jdk.incubator.vector
 [CHECKPOINT 1] script started, before argparse
 [CHECKPOINT 2] args parsed: dataset=scifact checkpoint=naver/splade-v3 stage=['retrieve', 'compare'] shard_id=0 num_shards=1
 [CHECKPOINT 5] entering retrieve stage
-2026-08-27 01:57:19,338 [scifact] [Part5] loading encoded corpus shards...
+2026-08-27 04:22:55,292 [scifact] [Part5] loading encoded corpus shards...
 
-2026-08-27 01:57:19,338 - scifact - INFO - [Part5] loading encoded corpus shards...
-2026-08-27 01:57:20,489 [scifact] [Part5] loaded 5183 doc vectors
+2026-08-27 04:22:55,292 - scifact - INFO - [Part5] loading encoded corpus shards...
+2026-08-27 04:22:56,369 [scifact] [Part5] loaded 5183 doc vectors
 
-2026-08-27 01:57:20,489 - scifact - INFO - [Part5] loaded 5183 doc vectors
-Loading weights:   0%|          | 0/204 [00:00<?, ?it/s]Loading weights: 100%|██████████| 204/204 [00:00<00:00, 16338.95it/s]
-2026-08-27 01:57:58,990 [scifact] [Part5] retrieval done. nDCG@10=0.7096
+2026-08-27 04:22:56,369 - scifact - INFO - [Part5] loaded 5183 doc vectors
+Loading weights:   0%|          | 0/204 [00:00<?, ?it/s]Loading weights: 100%|██████████| 204/204 [00:00<00:00, 14967.08it/s]
+2026-08-27 04:23:39,443 [scifact] [Part5] retrieval done. nDCG@10=0.7096
 
-2026-08-27 01:57:58,990 - scifact - INFO - [Part5] retrieval done. nDCG@10=0.7096
+2026-08-27 04:23:39,443 - scifact - INFO - [Part5] retrieval done. nDCG@10=0.7096
 [CHECKPOINT 6] retrieve stage finished
 [CHECKPOINT 7] entering compare stage
-Aug 27, 2026 1:57:59 AM org.apache.lucene.store.MemorySegmentIndexInputProvider <init>
-INFO: Using MemorySegmentIndexInput with Java 21; to disable start with -Dorg.apache.lucene.store.MMapDirectory.enableMemorySegments=false
-Traceback (most recent call last):
-  File "/mnt/nas/shuvranshu/CS6101_assignments/Assignment1/run_part5.py", line 279, in <module>
-    part5_compare_expansion_terms(args.dataset, n_queries=args.n_compare_queries,
-  File "/mnt/nas/shuvranshu/CS6101_assignments/Assignment1/run_part5.py", line 184, in part5_compare_expansion_terms
-    searcher = LuceneSearcher(str(p.index_dir))
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/mnt/nas/shuvranshu/.conda/envs/cs6101_dog/lib/python3.11/site-packages/pyserini/search/lucene/_searcher.py", line 50, in __init__
-    self.object = JSimpleSearcher(index_dir)
-                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "jnius/jnius_export_class.pxi", line 285, in jnius.JavaClass.__init__
-  File "jnius/jnius_export_class.pxi", line 403, in jnius.JavaClass.call_constructor
-  File "jnius/jnius_utils.pxi", line 79, in jnius.check_exception
-jnius.JavaException: JVM exception occurred: java.lang.IllegalArgumentException: indexCreatedVersionMajor is in the future: 10
-java.lang.IllegalArgumentException: indexCreatedVersionMajor is in the future: 10
-	org.apache.lucene.index.SegmentInfos.<init>(SegmentInfos.java:180)
-	org.apache.lucene.index.SegmentInfos.readCommit(SegmentInfos.java:363)
-	org.apache.lucene.index.SegmentInfos.readCommit(SegmentInfos.java:304)
-	org.apache.lucene.index.StandardDirectoryReader$1.doBody(StandardDirectoryReader.java:88)
-	org.apache.lucene.index.StandardDirectoryReader$1.doBody(StandardDirectoryReader.java:77)
-	org.apache.lucene.index.SegmentInfos$FindSegmentsFile.run(SegmentInfos.java:820)
-	org.apache.lucene.index.StandardDirectoryReader.open(StandardDirectoryReader.java:109)
-	org.apache.lucene.index.StandardDirectoryReader.open(StandardDirectoryReader.java:67)
-	org.apache.lucene.index.DirectoryReader.open(DirectoryReader.java:60)
-	io.anserini.search.SimpleSearcher.<init>(SimpleSearcher.java:132)
-	io.anserini.search.SimpleSearcher.<init>(SimpleSearcher.java:114)
+2026-08-27 04:23:42,573 [scifact] [Part5] expansion-term comparison written for 10 queries. avg_overlap=0.20
+
+2026-08-27 04:23:42,573 - scifact - INFO - [Part5] expansion-term comparison written for 10 queries. avg_overlap=0.20
+[CHECKPOINT 8] compare stage finished
+[CHECKPOINT 9] all requested stages complete
+=== [scifact] Part 5 complete. Results appended to results/results_scifact.md ===

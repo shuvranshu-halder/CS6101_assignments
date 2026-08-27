@@ -1,0 +1,40 @@
+2026-08-27 02:46:20,442 [fever] [Part1] dumping corpus for fever...
+2026-08-27 03:11:41,285 [fever] [Part1] dumping corpus for fever...
+2026-08-27 03:14:44,232 [fever] [Part1] dumping qrels/queries...
+2026-08-27 03:14:45,866 [fever] [Part1] building Lucene index over 5416568 docs...
+2026-08-27 03:27:39,724 [fever] [Part1] done. build_time=773.9s size=4492.3MB
+2026-08-27 03:27:41,297 [fever] [Part2] grid search over k1=[0.6, 0.9, 1.2, 1.5, 1.8] b=[0.3, 0.4, 0.6, 0.8]
+2026-08-27 04:43:59,201 [fever] [Part1] dumping corpus for fever...
+2026-08-27 04:47:05,384 [fever] [Part1] dumping qrels/queries...
+2026-08-27 04:47:06,322 [fever] [Part1] building Lucene index over 5416568 docs...
+2026-08-27 04:59:55,251 [fever] [Part1] done. build_time=768.9s size=4492.3MB
+2026-08-27 04:59:57,167 [fever] [Part2] grid search over k1=[0.6, 0.9, 1.2, 1.5, 1.8] b=[0.3, 0.4, 0.6, 0.8]
+2026-08-27 05:08:35,519 [fever]   k1=0.6 b=0.3 -> nDCG@10=0.6693
+2026-08-27 05:16:27,771 [fever]   k1=0.6 b=0.4 -> nDCG@10=0.6531
+2026-08-27 05:24:11,020 [fever]   k1=0.6 b=0.6 -> nDCG@10=0.6106
+2026-08-27 05:32:02,970 [fever]   k1=0.6 b=0.8 -> nDCG@10=0.5541
+2026-08-27 05:40:05,044 [fever]   k1=0.9 b=0.3 -> nDCG@10=0.6716
+2026-08-27 05:48:11,558 [fever]   k1=0.9 b=0.4 -> nDCG@10=0.6513
+2026-08-27 05:56:19,628 [fever]   k1=0.9 b=0.6 -> nDCG@10=0.5957
+2026-08-27 06:04:16,406 [fever]   k1=0.9 b=0.8 -> nDCG@10=0.5264
+2026-08-27 06:12:30,558 [fever]   k1=1.2 b=0.3 -> nDCG@10=0.6681
+2026-08-27 06:20:50,093 [fever]   k1=1.2 b=0.4 -> nDCG@10=0.6433
+2026-08-27 06:28:51,789 [fever]   k1=1.2 b=0.6 -> nDCG@10=0.5800
+2026-08-27 06:36:50,297 [fever]   k1=1.2 b=0.8 -> nDCG@10=0.5005
+2026-08-27 06:45:03,061 [fever]   k1=1.5 b=0.3 -> nDCG@10=0.6598
+2026-08-27 06:53:21,782 [fever]   k1=1.5 b=0.4 -> nDCG@10=0.6340
+2026-08-27 07:01:26,627 [fever]   k1=1.5 b=0.6 -> nDCG@10=0.5635
+2026-08-27 07:09:31,859 [fever]   k1=1.5 b=0.8 -> nDCG@10=0.4754
+2026-08-27 07:17:55,575 [fever]   k1=1.8 b=0.3 -> nDCG@10=0.6497
+2026-08-27 07:26:21,397 [fever]   k1=1.8 b=0.4 -> nDCG@10=0.6220
+2026-08-27 07:34:25,812 [fever]   k1=1.8 b=0.6 -> nDCG@10=0.5485
+2026-08-27 07:42:41,111 [fever]   k1=1.8 b=0.8 -> nDCG@10=0.4529
+2026-08-27 07:42:41,126 [fever] [Part2] winner: k1=0.9 b=0.3 (saved to bm25_params.json)
+2026-08-27 08:07:55,765 [fever] [Part2] done.
+2026-08-27 08:09:08,099 [fever] [Part3] done. success_avg=0.0554 fail_avg=0.0350
+2026-08-27 08:41:44,627 [fever] [Part4a] N=10 k=10 completed.
+2026-08-27 09:17:33,701 [fever] [Part4a] N=10 k=20 completed.
+2026-08-27 09:57:23,160 [fever] [Part4a] N=20 k=10 completed.
+2026-08-27 19:33:56,775 [fever] [Part4a] N=10 k=10 completed.
+2026-08-27 20:04:45,294 [fever] [Part4a] N=10 k=20 completed.
+2026-08-27 20:41:10,558 [fever] [Part4a] N=20 k=10 completed.

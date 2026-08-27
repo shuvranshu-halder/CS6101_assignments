@@ -1,0 +1,25 @@
+nohup: ignoring input
+=== [fever] Executing specified stage override with args: --stage part4a part4b_generate part4b_run ===
+2026-08-27 19:33:56,775 [fever] [Part4a] N=10 k=10 completed.
+
+2026-08-27 19:33:56,775 - fever - INFO - [Part4a] N=10 k=10 completed.
+2026-08-27 20:04:45,294 [fever] [Part4a] N=10 k=20 completed.
+
+2026-08-27 20:04:45,294 - fever - INFO - [Part4a] N=10 k=20 completed.
+2026-08-27 20:41:10,558 [fever] [Part4a] N=20 k=10 completed.
+
+2026-08-27 20:41:10,558 - fever - INFO - [Part4a] N=20 k=10 completed.
+Traceback (most recent call last):
+  File "/mnt/nas/shuvranshu/CS6101_assignments/Assignment1/run_parts1to4.py", line 605, in <module>
+    STAGES[stage](args.dataset, args)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/nas/shuvranshu/CS6101_assignments/Assignment1/run_parts1to4.py", line 588, in <lambda>
+    "part4a": lambda ds, args: part4a_rocchio_rm3(ds, N_values=args.N, k_values=args.k),
+                               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/nas/shuvranshu/CS6101_assignments/Assignment1/run_parts1to4.py", line 414, in part4a_rocchio_rm3
+    results[f"RM3 (N={N}, k={k})"] = _run_rm3(dataset, N, k)
+                                     ~~~~~~~~^^^^^^^^^^^^^^^
+  File "/mnt/nas/shuvranshu/CS6101_assignments/Assignment1/run_parts1to4.py", line 385, in _run_rm3
+    f.write(f"{q.query_id} Q0 {hit.docid} {rank} {hit.score:.6f} rm3_N{N}_k{k}\n")
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 122] Disk quota exceeded

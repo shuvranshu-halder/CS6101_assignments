@@ -1,0 +1,9 @@
+gitignore
+__pycache__/
+indexes/
+runs/*
+!runs/scifact/part3_failures.json
+!runs/scifact/hyde_generations.jsonl
+1
+!runs/fever/part3_failures.json
+!runs/fever/hyde_generations.jsonl

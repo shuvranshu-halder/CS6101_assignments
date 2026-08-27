@@ -1,11 +1,10 @@
-WARNING: Using incubator modules: jdk.incubator.vector
 [CHECKPOINT 1] script started, before argparse
 [CHECKPOINT 2] args parsed: dataset=scifact checkpoint=naver/splade-v3 stage=['encode'] shard_id=0 num_shards=1
 [CHECKPOINT 3] entering encode stage
-Loading weights:   0%|          | 0/204 [00:00<?, ?it/s]Loading weights: 100%|██████████| 204/204 [00:00<00:00, 15542.92it/s]
+Loading weights:   0%|          | 0/204 [00:00<?, ?it/s]Loading weights: 100%|██████████| 204/204 [00:00<00:00, 10771.01it/s]
 [INFO] Opening /mnt/nas/shuvranshu/.ir_datasets/beir/scifact/docs.pklz4/bin with direct file access
-2026-08-27 01:57:04,560 [scifact] [Part5][shard 0/1] encoded 5183 docs -> /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/scifact/splade/shard_0.jsonl
+2026-08-27 04:22:37,274 [scifact] [Part5][shard 0/1] encoded 5183 docs -> /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/scifact/splade/shard_0.jsonl
 
-2026-08-27 01:57:04,560 - scifact - INFO - [Part5][shard 0/1] encoded 5183 docs -> /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/scifact/splade/shard_0.jsonl
+2026-08-27 04:22:37,274 - scifact - INFO - [Part5][shard 0/1] encoded 5183 docs -> /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/scifact/splade/shard_0.jsonl
 [CHECKPOINT 4] encode stage finished
 [CHECKPOINT 9] all requested stages complete
