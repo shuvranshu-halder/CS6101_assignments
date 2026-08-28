@@ -30,6 +30,85 @@ DF_CUTOFF_FRACTION = 0.10  # Part 4a: drop terms appearing in >10% of corpus
 
 
 # =============================================================================
+# Generic pre-download helper (works for any BEIR dataset, not just hotpotqa)
+# =============================================================================
+def ensure_beir_source_downloaded(ir_datasets_id: str, tries: int = 3, timeout: int = 30):
+    """
+    Some BEIR mirrors (e.g. the TU Darmstadt host) are flaky and ir_datasets'
+    own downloader has no retry cap, so a bad connection can hang forever.
+
+    This looks up the *real* download URL, expected md5, and target cache
+    path directly from ir_datasets' own registry for whichever dataset id is
+    passed in, then fetches it with `wget -c --tries=N` (bounded retries,
+    resumable) straight into the exact path ir_datasets expects. If the file
+    is already there (fully or partially downloaded), ir_datasets.load(...)
+    will just pick it up and skip downloading entirely.
+
+    No-ops for any dataset id that isn't under the 'beir/' namespace.
+    """
+    import subprocess
+    from ir_datasets.util import home_path
+    from ir_datasets.util.download import DownloadConfig, LocalDownload
+
+    parts = ir_datasets_id.split("/")
+    if len(parts) < 2 or parts[0] != "beir":
+        return  # not a BEIR dataset -- nothing to do here
+    namespace, subset = parts[0], parts[1]
+
+    dlc_ctxt = DownloadConfig.context(namespace, home_path() / namespace)
+    d = dlc_ctxt[subset]
+
+    # Where ir_datasets will ultimately look for/save the file
+    if d._cache_path is not None:
+        target_path = Path(d._cache_path)
+    else:
+        local_mirror = next((m for m in d.mirrors if isinstance(m, LocalDownload)), None)
+        if local_mirror is None:
+            return  # no stable local path to pre-populate; let ir_datasets handle it
+        target_path = Path(local_mirror._path)
+
+    if target_path.exists():
+        return  # already downloaded (fully or the resumable partial ir_datasets left behind)
+
+    remote_mirror = next((m for m in d.mirrors if hasattr(m, "url")), None)
+    if remote_mirror is None:
+        return  # e.g. instructions-only dataset; nothing to wget
+
+    target_path.parent.mkdir(parents=True, exist_ok=True)
+    tmp_path = target_path.with_suffix(target_path.suffix + ".part")
+
+    print(f"[predownload] fetching {remote_mirror.url} -> {tmp_path}", flush=True)
+    subprocess.run(
+        [
+            "wget", "-c",
+            f"--tries={tries}",
+            "--retry-connrefused",
+            f"--timeout={timeout}",
+            remote_mirror.url,
+            "-O", str(tmp_path),
+        ],
+        check=True,
+    )
+
+    if d.expected_md5:
+        import hashlib
+        h = hashlib.md5()
+        with open(tmp_path, "rb") as f:
+            for chunk in iter(lambda: f.read(8192), b""):
+                h.update(chunk)
+        if h.hexdigest() != d.expected_md5:
+            tmp_path.unlink(missing_ok=True)
+            raise RuntimeError(
+                f"[predownload] checksum mismatch for {remote_mirror.url}: "
+                f"expected {d.expected_md5}, got {h.hexdigest()} "
+                f"(download was likely interrupted/corrupted -- deleted, please retry)"
+            )
+        print(f"[predownload] checksum OK, moving into place", flush=True)
+
+    tmp_path.rename(target_path)
+
+
+# =============================================================================
 # PART 1 — Build Lucene index
 # =============================================================================
 def part1_build_index(dataset: str, threads: int = 8):
@@ -42,6 +121,7 @@ def part1_build_index(dataset: str, threads: int = 8):
     jsonl_path = jsonl_dir / "corpus.jsonl"
 
     log.info(f"[Part1] dumping corpus for {dataset}...")
+    ensure_beir_source_downloaded(entry["corpus_ir_datasets_id"])
     corpus_ds = ir_datasets.load(entry["corpus_ir_datasets_id"])
     n_docs = 0
     with open(jsonl_path, "w") as f:
@@ -52,6 +132,7 @@ def part1_build_index(dataset: str, threads: int = 8):
             n_docs += 1
 
     log.info(f"[Part1] dumping qrels/queries...")
+    ensure_beir_source_downloaded(entry["ir_datasets_id"])
     query_ds = ir_datasets.load(entry["ir_datasets_id"])
     with open(p.qrels_path, "w") as f:
         for qrel in query_ds.qrels_iter():
