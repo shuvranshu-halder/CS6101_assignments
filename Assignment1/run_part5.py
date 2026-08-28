@@ -15,6 +15,7 @@ import argparse
 import itertools
 import json
 import time
+import subprocess
 
 import ir_datasets
 import torch
@@ -123,33 +124,173 @@ def sparse_dot(vec_a: dict, vec_b: dict) -> float:
     return sum(w * vec_b[t] for t, w in vec_a.items() if t in vec_b)
 
 
-def part5_retrieve(dataset: str, checkpoint: str, top_k: int = 1000):
+def part5_retrieve(dataset: str, checkpoint: str, top_k: int = 1000,
+                   index_threads: int = 16, query_batch_size: int = 64):
+    """
+    Fast production-scale SPLADE retrieval using a Lucene impact index.
+
+    The already-computed SPLADE shard_*.jsonl files are reused. They are
+    converted to Pyserini JsonVectorCollection format once, indexed with
+    --impact --pretokenized, and then searched with LuceneImpactSearcher
+    semantics via the Pyserini CLI.
+
+    This avoids the old O(num_queries * 5.5M docs) Python brute-force loop.
+    """
     log = common.get_logger(dataset)
     p = common.get_paths(dataset)
     entry = common.DATASETS[dataset]
 
-    log.info("[Part5] loading encoded corpus shards...")
-    doc_vectors = load_shards(p.splade_index_dir)
-    log.info(f"[Part5] loaded {len(doc_vectors)} doc vectors")
+    # ------------------------------------------------------------------
+    # 1. Prepare Pyserini JsonVectorCollection input from existing shards.
+    # ------------------------------------------------------------------
+    vector_input_dir = p.splade_index_dir / "impact_input"
+    vector_input_dir.mkdir(parents=True, exist_ok=True)
 
-    encoder = SpladeEncoder(checkpoint)
+    existing_inputs = list(vector_input_dir.glob("*.jsonl"))
+    if not existing_inputs:
+        log.info("[Part5] preparing Pyserini impact-index input from existing shards...")
+
+        shard_paths = sorted(p.splade_index_dir.glob("shard_*.jsonl"))
+        if not shard_paths:
+            raise FileNotFoundError(
+                f"No SPLADE shard files found in {p.splade_index_dir}. "
+                "Run the encode stage first."
+            )
+
+        total = 0
+        for shard_path in shard_paths:
+            out_path = vector_input_dir / shard_path.name
+
+            with open(shard_path) as src_f, open(out_path, "w") as out_f:
+                for line in src_f:
+                    rec = json.loads(line)
+                    # Pyserini JsonVectorCollection accepts id + vector;
+                    # include empty contents for maximum format compatibility.
+                    out_f.write(json.dumps({
+                        "id": rec["id"],
+                        "contents": "",
+                        "vector": rec["vector"]
+                    }) + "\n")
+                    total += 1
+
+                    if total % 500000 == 0:
+                        log.info(
+                            f"[Part5] prepared {total:,} SPLADE vectors "
+                            "for impact indexing..."
+                        )
+
+        log.info(
+            f"[Part5] impact input ready: {total:,} vectors in {vector_input_dir}"
+        )
+    else:
+        log.info(
+            f"[Part5] reusing existing impact input: "
+            f"{len(existing_inputs)} shard files"
+        )
+
+    # ------------------------------------------------------------------
+    # 2. Build the Lucene impact index once.
+    # ------------------------------------------------------------------
+    impact_index_dir = p.splade_index_dir / "lucene_impact"
+
+    index_marker = impact_index_dir / "segments_1"
+    if not index_marker.exists():
+        impact_index_dir.mkdir(parents=True, exist_ok=True)
+
+        log.info("[Part5] building Lucene SPLADE impact index...")
+        cmd = [
+            "python", "-m", "pyserini.index.lucene",
+            "--collection", "JsonVectorCollection",
+            "--input", str(vector_input_dir),
+            "--index", str(impact_index_dir),
+            "--generator", "DefaultLuceneDocumentGenerator",
+            "--threads", str(index_threads),
+            "--impact",
+            "--pretokenized",
+        ]
+
+        log.info("[Part5] running: " + " ".join(cmd))
+        subprocess.run(cmd, check=True)
+        log.info(f"[Part5] impact index built at {impact_index_dir}")
+    else:
+        log.info(f"[Part5] reusing existing Lucene impact index: {impact_index_dir}")
+
+    # ------------------------------------------------------------------
+    # 3. Create the query TSV used by Pyserini.
+    # ------------------------------------------------------------------
     ds = ir_datasets.load(entry["ir_datasets_id"])
+    queries = list(ds.queries_iter())
+
+    topics_path = p.runs_dir / "splade_queries.tsv"
+    with open(topics_path, "w") as f:
+        for q in queries:
+            f.write(f"{q.query_id}\t{q.text.replace(chr(9), ' ')}\n")
+
     run_path = p.runs_dir / "splade.trec"
 
-    query_term_weights = {}  # saved for the expansion-term comparison table
-    with open(run_path, "w") as f:
-        for q in ds.queries_iter():
-            qvec = encoder.encode([q.text])[0]
-            query_term_weights[q.query_id] = qvec
-            scores = [(doc_id, sparse_dot(qvec, dvec)) for doc_id, dvec in doc_vectors.items()]
-            scores.sort(key=lambda x: -x[1])
-            for rank, (doc_id, score) in enumerate(scores[:top_k], start=1):
-                f.write(f"{q.query_id} Q0 {doc_id} {rank} {score:.6f} splade\n")
+    # ------------------------------------------------------------------
+    # 4. Run fast Lucene impact retrieval.
+    # ------------------------------------------------------------------
+    log.info(
+        f"[Part5] running Lucene impact retrieval for "
+        f"{len(queries):,} queries, top_k={top_k}..."
+    )
 
-    (p.runs_dir / "splade_query_terms.json").write_text(json.dumps(query_term_weights, indent=2))
+    cmd = [
+        "python", "-m", "pyserini.search.lucene",
+        "--index", str(impact_index_dir),
+        "--topics", str(topics_path),
+        "--output", str(run_path),
+        "--hits", str(top_k),
+        "--encoder", checkpoint,
+        "--remove-query",
+        "--output-format", "trec",
+        "--impact",
+        "--threads", str(index_threads),
+    ]
+
+    log.info("[Part5] running: " + " ".join(cmd))
+    subprocess.run(cmd, check=True)
+
+    # ------------------------------------------------------------------
+    # 5. Separately save SPLADE query term weights for Part 5 comparison.
+    #    This is only query encoding; document retrieval is handled by Lucene.
+    # ------------------------------------------------------------------
+    log.info(
+        f"[Part5] encoding {len(queries):,} queries in batches of "
+        f"{query_batch_size} for expansion-term comparison..."
+    )
+
+    encoder = SpladeEncoder(checkpoint)
+    query_term_weights = {}
+
+    for batch_start in range(0, len(queries), query_batch_size):
+        batch = queries[batch_start:batch_start + query_batch_size]
+        batch_texts = [q.text for q in batch]
+        batch_vectors = encoder.encode(batch_texts)
+
+        for q, qvec in zip(batch, batch_vectors):
+            query_term_weights[q.query_id] = qvec
+
+        done = min(batch_start + len(batch), len(queries))
+        log.info(
+            f"[Part5] query encoding progress: "
+            f"{done:,}/{len(queries):,}"
+        )
+
+    (p.runs_dir / "splade_query_terms.json").write_text(
+        json.dumps(query_term_weights, indent=2)
+    )
+
     metrics = common.evaluate_run(p.qrels_path, run_path)
-    common.append_section(dataset, "Part 5 — SPLADE", {f"SPLADE ({checkpoint})": metrics})
-    log.info(f"[Part5] retrieval done. nDCG@10={metrics['nDCG@10']:.4f}")
+    common.append_section(
+        dataset,
+        "Part 5 — SPLADE",
+        {f"SPLADE ({checkpoint})": metrics}
+    )
+    log.info(
+        f"[Part5] retrieval done. nDCG@10={metrics['nDCG@10']:.4f}"
+    )
 
 
 # =============================================================================
@@ -263,6 +404,10 @@ if __name__ == "__main__":
     parser.add_argument("--shard_id", type=int, default=0, help="set by bash launcher, one process per GPU")
     parser.add_argument("--num_shards", type=int, default=1)
     parser.add_argument("--batch_size", type=int, default=64)
+    parser.add_argument("--index_threads", type=int, default=16,
+                        help="Part 5: Lucene impact index/search threads")
+    parser.add_argument("--query_batch_size", type=int, default=64,
+                        help="Part 5: batch size for saving SPLADE query term weights")
     parser.add_argument("--n_compare_queries", type=int, default=10)
     parser.add_argument("--rocchio_N", type=int, default=20, help="feedback docs for Rocchio comparison terms")
     parser.add_argument("--rocchio_k", type=int, default=None, help="defaults to --top_terms if unset")
@@ -278,7 +423,12 @@ if __name__ == "__main__":
 
     if "retrieve" in args.stage:
         print("[CHECKPOINT 5] entering retrieve stage", flush=True)
-        part5_retrieve(args.dataset, args.checkpoint)
+        part5_retrieve(
+            args.dataset,
+            args.checkpoint,
+            index_threads=args.index_threads,
+            query_batch_size=args.query_batch_size
+        )
         print("[CHECKPOINT 6] retrieve stage finished", flush=True)
 
     if "compare" in args.stage:

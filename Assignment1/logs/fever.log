@@ -38,3 +38,1070 @@
 2026-08-27 19:33:56,775 [fever] [Part4a] N=10 k=10 completed.
 2026-08-27 20:04:45,294 [fever] [Part4a] N=10 k=20 completed.
 2026-08-27 20:41:10,558 [fever] [Part4a] N=20 k=10 completed.
+2026-08-28 01:19:56,391 [fever] [Part4a] N=10 k=10 completed.
+2026-08-28 01:51:09,521 [fever] [Part4a] N=10 k=20 completed.
+2026-08-28 02:27:43,026 [fever] [Part4a] N=20 k=10 completed.
+2026-08-28 03:08:17,622 [fever] [Part4a] N=20 k=20 completed.
+2026-08-28 03:08:17,630 [fever] [Part4a] Done for dataset: fever
+2026-08-28 03:08:17,653 [fever] [Part4b] Starting FRESH generation with Qwen/Qwen2.5-7B-Instruct...
+2026-08-28 03:08:49,640 [fever] [Part4b] Generating for all 6666 queries from scratch...
+2026-08-28 03:09:52,151 [fever] [Part4b] Progress: 5/6666 queries completed.
+2026-08-28 03:10:39,701 [fever] [Part4b] Progress: 10/6666 queries completed.
+2026-08-28 03:11:26,910 [fever] [Part4b] Progress: 15/6666 queries completed.
+2026-08-28 03:12:12,196 [fever] [Part4b] Progress: 20/6666 queries completed.
+2026-08-28 03:12:56,084 [fever] [Part4b] Progress: 25/6666 queries completed.
+2026-08-28 03:13:44,315 [fever] [Part4b] Progress: 30/6666 queries completed.
+2026-08-28 03:14:43,589 [fever] [Part4b] Progress: 35/6666 queries completed.
+2026-08-28 03:15:35,523 [fever] [Part4b] Progress: 40/6666 queries completed.
+2026-08-28 03:16:17,584 [fever] [Part4b] Progress: 45/6666 queries completed.
+2026-08-28 03:17:10,730 [fever] [Part4b] Progress: 50/6666 queries completed.
+2026-08-28 03:18:07,945 [fever] [Part4b] Progress: 55/6666 queries completed.
+2026-08-28 03:18:54,349 [fever] [Part4b] Progress: 60/6666 queries completed.
+2026-08-28 03:19:46,709 [fever] [Part4b] Progress: 65/6666 queries completed.
+2026-08-28 03:20:36,328 [fever] [Part4b] Progress: 70/6666 queries completed.
+2026-08-28 03:21:30,939 [fever] [Part4b] Progress: 75/6666 queries completed.
+2026-08-28 03:22:20,202 [fever] [Part4b] Progress: 80/6666 queries completed.
+2026-08-28 03:23:01,707 [fever] [Part4b] Progress: 85/6666 queries completed.
+2026-08-28 03:23:55,932 [fever] [Part4b] Progress: 90/6666 queries completed.
+2026-08-28 03:24:46,352 [fever] [Part4b] Progress: 95/6666 queries completed.
+2026-08-28 03:25:34,059 [fever] [Part4b] Progress: 100/6666 queries completed.
+2026-08-28 03:26:21,767 [fever] [Part4b] Progress: 105/6666 queries completed.
+2026-08-28 03:27:15,674 [fever] [Part4b] Progress: 110/6666 queries completed.
+2026-08-28 03:28:03,014 [fever] [Part4b] Progress: 115/6666 queries completed.
+2026-08-28 03:28:50,712 [fever] [Part4b] Progress: 120/6666 queries completed.
+2026-08-28 03:29:41,970 [fever] [Part4b] Progress: 125/6666 queries completed.
+2026-08-28 03:30:22,236 [fever] [Part4b] Progress: 130/6666 queries completed.
+2026-08-28 03:31:12,152 [fever] [Part4b] Progress: 135/6666 queries completed.
+2026-08-28 03:31:58,693 [fever] [Part4b] Progress: 140/6666 queries completed.
+2026-08-28 03:32:45,365 [fever] [Part4b] Progress: 145/6666 queries completed.
+2026-08-28 03:33:34,659 [fever] [Part4b] Progress: 150/6666 queries completed.
+2026-08-28 03:34:20,061 [fever] [Part4b] Progress: 155/6666 queries completed.
+2026-08-28 03:35:06,849 [fever] [Part4b] Progress: 160/6666 queries completed.
+2026-08-28 03:36:02,644 [fever] [Part4b] Progress: 165/6666 queries completed.
+2026-08-28 03:36:48,961 [fever] [Part4b] Progress: 170/6666 queries completed.
+2026-08-28 03:37:41,840 [fever] [Part4b] Progress: 175/6666 queries completed.
+2026-08-28 03:38:27,122 [fever] [Part4b] Progress: 180/6666 queries completed.
+2026-08-28 03:39:13,126 [fever] [Part4b] Progress: 185/6666 queries completed.
+2026-08-28 03:40:00,943 [fever] [Part4b] Progress: 190/6666 queries completed.
+2026-08-28 03:40:51,075 [fever] [Part4b] Progress: 195/6666 queries completed.
+2026-08-28 03:41:44,274 [fever] [Part4b] Progress: 200/6666 queries completed.
+2026-08-28 03:42:43,478 [fever] [Part4b] Progress: 205/6666 queries completed.
+2026-08-28 03:43:30,678 [fever] [Part4b] Progress: 210/6666 queries completed.
+2026-08-28 03:44:21,233 [fever] [Part4b] Progress: 215/6666 queries completed.
+2026-08-28 03:45:11,487 [fever] [Part4b] Progress: 220/6666 queries completed.
+2026-08-28 03:46:02,817 [fever] [Part4b] Progress: 225/6666 queries completed.
+2026-08-28 03:46:53,995 [fever] [Part4b] Progress: 230/6666 queries completed.
+2026-08-28 03:47:43,871 [fever] [Part4b] Progress: 235/6666 queries completed.
+2026-08-28 03:48:41,048 [fever] [Part4b] Progress: 240/6666 queries completed.
+2026-08-28 03:49:35,369 [fever] [Part4b] Progress: 245/6666 queries completed.
+2026-08-28 03:50:35,742 [fever] [Part4b] Progress: 250/6666 queries completed.
+2026-08-28 03:51:21,436 [fever] [Part4b] Progress: 255/6666 queries completed.
+2026-08-28 03:52:03,773 [fever] [Part4b] Progress: 260/6666 queries completed.
+2026-08-28 03:52:53,833 [fever] [Part4b] Progress: 265/6666 queries completed.
+2026-08-28 03:53:36,050 [fever] [Part4b] Progress: 270/6666 queries completed.
+2026-08-28 03:54:23,150 [fever] [Part4b] Progress: 275/6666 queries completed.
+2026-08-28 03:55:15,807 [fever] [Part4b] Progress: 280/6666 queries completed.
+2026-08-28 03:55:58,883 [fever] [Part4b] Progress: 285/6666 queries completed.
+2026-08-28 03:56:49,705 [fever] [Part4b] Progress: 290/6666 queries completed.
+2026-08-28 03:57:32,743 [fever] [Part4b] Progress: 295/6666 queries completed.
+2026-08-28 03:58:15,850 [fever] [Part4b] Progress: 300/6666 queries completed.
+2026-08-28 03:59:04,857 [fever] [Part4b] Progress: 305/6666 queries completed.
+2026-08-28 03:59:56,726 [fever] [Part4b] Progress: 310/6666 queries completed.
+2026-08-28 04:00:48,902 [fever] [Part4b] Progress: 315/6666 queries completed.
+2026-08-28 04:01:36,416 [fever] [Part4b] Progress: 320/6666 queries completed.
+2026-08-28 04:02:22,986 [fever] [Part4b] Progress: 325/6666 queries completed.
+2026-08-28 04:03:08,072 [fever] [Part4b] Progress: 330/6666 queries completed.
+2026-08-28 04:03:54,428 [fever] [Part4b] Progress: 335/6666 queries completed.
+2026-08-28 04:04:28,558 [fever] [Part4b] Progress: 340/6666 queries completed.
+2026-08-28 04:05:15,514 [fever] [Part4b] Progress: 345/6666 queries completed.
+2026-08-28 04:06:02,556 [fever] [Part4b] Progress: 350/6666 queries completed.
+2026-08-28 04:06:57,125 [fever] [Part4b] Progress: 355/6666 queries completed.
+2026-08-28 04:07:42,024 [fever] [Part4b] Progress: 360/6666 queries completed.
+2026-08-28 04:08:31,604 [fever] [Part4b] Progress: 365/6666 queries completed.
+2026-08-28 04:09:25,775 [fever] [Part4b] Progress: 370/6666 queries completed.
+2026-08-28 04:10:19,891 [fever] [Part4b] Progress: 375/6666 queries completed.
+2026-08-28 04:11:08,659 [fever] [Part4b] Progress: 380/6666 queries completed.
+2026-08-28 04:11:58,706 [fever] [Part4b] Progress: 385/6666 queries completed.
+2026-08-28 04:12:48,417 [fever] [Part4b] Progress: 390/6666 queries completed.
+2026-08-28 04:13:35,240 [fever] [Part4b] Progress: 395/6666 queries completed.
+2026-08-28 04:14:23,529 [fever] [Part4b] Progress: 400/6666 queries completed.
+2026-08-28 04:15:08,851 [fever] [Part4b] Progress: 405/6666 queries completed.
+2026-08-28 04:15:59,559 [fever] [Part4b] Progress: 410/6666 queries completed.
+2026-08-28 04:16:42,698 [fever] [Part4b] Progress: 415/6666 queries completed.
+2026-08-28 04:17:35,916 [fever] [Part4b] Progress: 420/6666 queries completed.
+2026-08-28 04:18:22,703 [fever] [Part4b] Progress: 425/6666 queries completed.
+2026-08-28 04:19:03,568 [fever] [Part4b] Progress: 430/6666 queries completed.
+2026-08-28 04:19:54,197 [fever] [Part4b] Progress: 435/6666 queries completed.
+2026-08-28 04:20:41,860 [fever] [Part4b] Progress: 440/6666 queries completed.
+2026-08-28 04:21:42,026 [fever] [Part4b] Progress: 445/6666 queries completed.
+2026-08-28 04:22:26,136 [fever] [Part4b] Progress: 450/6666 queries completed.
+2026-08-28 04:23:21,646 [fever] [Part4b] Progress: 455/6666 queries completed.
+2026-08-28 04:24:16,611 [fever] [Part4b] Progress: 460/6666 queries completed.
+2026-08-28 04:25:06,127 [fever] [Part4b] Progress: 465/6666 queries completed.
+2026-08-28 04:26:01,341 [fever] [Part4b] Progress: 470/6666 queries completed.
+2026-08-28 04:26:49,127 [fever] [Part4b] Progress: 475/6666 queries completed.
+2026-08-28 04:27:37,270 [fever] [Part4b] Progress: 480/6666 queries completed.
+2026-08-28 04:28:27,874 [fever] [Part4b] Progress: 485/6666 queries completed.
+2026-08-28 04:29:21,088 [fever] [Part4b] Progress: 490/6666 queries completed.
+2026-08-28 04:30:10,916 [fever] [Part4b] Progress: 495/6666 queries completed.
+2026-08-28 04:30:58,917 [fever] [Part4b] Progress: 500/6666 queries completed.
+2026-08-28 04:31:50,130 [fever] [Part4b] Progress: 505/6666 queries completed.
+2026-08-28 04:32:39,650 [fever] [Part4b] Progress: 510/6666 queries completed.
+2026-08-28 04:33:36,224 [fever] [Part4b] Progress: 515/6666 queries completed.
+2026-08-28 04:34:31,229 [fever] [Part4b] Progress: 520/6666 queries completed.
+2026-08-28 04:35:22,689 [fever] [Part4b] Progress: 525/6666 queries completed.
+2026-08-28 04:36:22,675 [fever] [Part4b] Progress: 530/6666 queries completed.
+2026-08-28 04:37:12,834 [fever] [Part4b] Progress: 535/6666 queries completed.
+2026-08-28 04:38:03,715 [fever] [Part4b] Progress: 540/6666 queries completed.
+2026-08-28 04:38:55,185 [fever] [Part4b] Progress: 545/6666 queries completed.
+2026-08-28 04:39:46,557 [fever] [Part4b] Progress: 550/6666 queries completed.
+2026-08-28 04:40:33,392 [fever] [Part4b] Progress: 555/6666 queries completed.
+2026-08-28 04:41:18,370 [fever] [Part4b] Progress: 560/6666 queries completed.
+2026-08-28 04:42:10,852 [fever] [Part4b] Progress: 565/6666 queries completed.
+2026-08-28 04:42:53,171 [fever] [Part4b] Progress: 570/6666 queries completed.
+2026-08-28 04:43:38,966 [fever] [Part4b] Progress: 575/6666 queries completed.
+2026-08-28 04:44:23,193 [fever] [Part4b] Progress: 580/6666 queries completed.
+2026-08-28 04:45:20,184 [fever] [Part4b] Progress: 585/6666 queries completed.
+2026-08-28 04:46:03,564 [fever] [Part4b] Progress: 590/6666 queries completed.
+2026-08-28 04:46:54,691 [fever] [Part4b] Progress: 595/6666 queries completed.
+2026-08-28 04:47:53,358 [fever] [Part4b] Progress: 600/6666 queries completed.
+2026-08-28 04:48:38,422 [fever] [Part4b] Progress: 605/6666 queries completed.
+2026-08-28 04:49:39,009 [fever] [Part4b] Progress: 610/6666 queries completed.
+2026-08-28 04:50:30,566 [fever] [Part4b] Progress: 615/6666 queries completed.
+2026-08-28 04:51:23,598 [fever] [Part4b] Progress: 620/6666 queries completed.
+2026-08-28 04:52:07,439 [fever] [Part4b] Progress: 625/6666 queries completed.
+2026-08-28 04:53:01,521 [fever] [Part4b] Progress: 630/6666 queries completed.
+2026-08-28 04:53:56,386 [fever] [Part4b] Progress: 635/6666 queries completed.
+2026-08-28 04:54:47,510 [fever] [Part4b] Progress: 640/6666 queries completed.
+2026-08-28 04:55:36,575 [fever] [Part4b] Progress: 645/6666 queries completed.
+2026-08-28 04:56:27,699 [fever] [Part4b] Progress: 650/6666 queries completed.
+2026-08-28 04:57:17,355 [fever] [Part4b] Progress: 655/6666 queries completed.
+2026-08-28 04:58:20,085 [fever] [Part4b] Progress: 660/6666 queries completed.
+2026-08-28 04:59:09,344 [fever] [Part4b] Progress: 665/6666 queries completed.
+2026-08-28 05:00:10,754 [fever] [Part4b] Progress: 670/6666 queries completed.
+2026-08-28 05:01:05,958 [fever] [Part4b] Progress: 675/6666 queries completed.
+2026-08-28 05:02:07,877 [fever] [Part4b] Progress: 680/6666 queries completed.
+2026-08-28 05:02:53,210 [fever] [Part4b] Progress: 685/6666 queries completed.
+2026-08-28 05:03:47,806 [fever] [Part4b] Progress: 690/6666 queries completed.
+2026-08-28 05:04:33,407 [fever] [Part4b] Progress: 695/6666 queries completed.
+2026-08-28 05:05:25,181 [fever] [Part4b] Progress: 700/6666 queries completed.
+2026-08-28 05:06:17,581 [fever] [Part4b] Progress: 705/6666 queries completed.
+2026-08-28 05:07:20,737 [fever] [Part4b] Progress: 710/6666 queries completed.
+2026-08-28 05:08:02,734 [fever] [Part4b] Progress: 715/6666 queries completed.
+2026-08-28 05:08:52,948 [fever] [Part4b] Progress: 720/6666 queries completed.
+2026-08-28 05:09:47,024 [fever] [Part4b] Progress: 725/6666 queries completed.
+2026-08-28 05:10:34,872 [fever] [Part4b] Progress: 730/6666 queries completed.
+2026-08-28 05:11:23,009 [fever] [Part4b] Progress: 735/6666 queries completed.
+2026-08-28 05:12:12,563 [fever] [Part4b] Progress: 740/6666 queries completed.
+2026-08-28 05:13:00,491 [fever] [Part4b] Progress: 745/6666 queries completed.
+2026-08-28 05:13:50,293 [fever] [Part4b] Progress: 750/6666 queries completed.
+2026-08-28 05:14:38,083 [fever] [Part4b] Progress: 755/6666 queries completed.
+2026-08-28 05:15:25,015 [fever] [Part4b] Progress: 760/6666 queries completed.
+2026-08-28 05:16:14,797 [fever] [Part4b] Progress: 765/6666 queries completed.
+2026-08-28 05:17:06,902 [fever] [Part4b] Progress: 770/6666 queries completed.
+2026-08-28 05:17:59,210 [fever] [Part4b] Progress: 775/6666 queries completed.
+2026-08-28 05:18:49,734 [fever] [Part4b] Progress: 780/6666 queries completed.
+2026-08-28 05:19:30,787 [fever] [Part4b] Progress: 785/6666 queries completed.
+2026-08-28 05:20:27,661 [fever] [Part4b] Progress: 790/6666 queries completed.
+2026-08-28 05:21:15,832 [fever] [Part4b] Progress: 795/6666 queries completed.
+2026-08-28 05:22:17,720 [fever] [Part4b] Progress: 800/6666 queries completed.
+2026-08-28 05:23:10,075 [fever] [Part4b] Progress: 805/6666 queries completed.
+2026-08-28 05:24:06,231 [fever] [Part4b] Progress: 810/6666 queries completed.
+2026-08-28 05:25:00,910 [fever] [Part4b] Progress: 815/6666 queries completed.
+2026-08-28 05:25:54,275 [fever] [Part4b] Progress: 820/6666 queries completed.
+2026-08-28 05:26:57,424 [fever] [Part4b] Progress: 825/6666 queries completed.
+2026-08-28 05:28:02,026 [fever] [Part4b] Progress: 830/6666 queries completed.
+2026-08-28 05:28:54,349 [fever] [Part4b] Progress: 835/6666 queries completed.
+2026-08-28 05:29:45,678 [fever] [Part4b] Progress: 840/6666 queries completed.
+2026-08-28 05:30:40,285 [fever] [Part4b] Progress: 845/6666 queries completed.
+2026-08-28 05:31:46,791 [fever] [Part4b] Progress: 850/6666 queries completed.
+2026-08-28 05:32:30,943 [fever] [Part4b] Progress: 855/6666 queries completed.
+2026-08-28 05:33:14,804 [fever] [Part4b] Progress: 860/6666 queries completed.
+2026-08-28 05:34:04,887 [fever] [Part4b] Progress: 865/6666 queries completed.
+2026-08-28 05:34:48,284 [fever] [Part4b] Progress: 870/6666 queries completed.
+2026-08-28 05:35:41,031 [fever] [Part4b] Progress: 875/6666 queries completed.
+2026-08-28 05:36:31,029 [fever] [Part4b] Progress: 880/6666 queries completed.
+2026-08-28 05:37:21,428 [fever] [Part4b] Progress: 885/6666 queries completed.
+2026-08-28 05:38:03,461 [fever] [Part4b] Progress: 890/6666 queries completed.
+2026-08-28 05:38:54,927 [fever] [Part4b] Progress: 895/6666 queries completed.
+2026-08-28 05:39:46,462 [fever] [Part4b] Progress: 900/6666 queries completed.
+2026-08-28 05:40:37,316 [fever] [Part4b] Progress: 905/6666 queries completed.
+2026-08-28 05:41:29,619 [fever] [Part4b] Progress: 910/6666 queries completed.
+2026-08-28 05:42:23,450 [fever] [Part4b] Progress: 915/6666 queries completed.
+2026-08-28 05:43:06,962 [fever] [Part4b] Progress: 920/6666 queries completed.
+2026-08-28 05:43:55,868 [fever] [Part4b] Progress: 925/6666 queries completed.
+2026-08-28 05:44:39,992 [fever] [Part4b] Progress: 930/6666 queries completed.
+2026-08-28 05:45:28,323 [fever] [Part4b] Progress: 935/6666 queries completed.
+2026-08-28 05:46:15,282 [fever] [Part4b] Progress: 940/6666 queries completed.
+2026-08-28 05:46:58,934 [fever] [Part4b] Progress: 945/6666 queries completed.
+2026-08-28 05:47:54,888 [fever] [Part4b] Progress: 950/6666 queries completed.
+2026-08-28 05:48:46,118 [fever] [Part4b] Progress: 955/6666 queries completed.
+2026-08-28 05:49:39,489 [fever] [Part4b] Progress: 960/6666 queries completed.
+2026-08-28 05:50:30,771 [fever] [Part4b] Progress: 965/6666 queries completed.
+2026-08-28 05:51:26,313 [fever] [Part4b] Progress: 970/6666 queries completed.
+2026-08-28 05:52:19,230 [fever] [Part4b] Progress: 975/6666 queries completed.
+2026-08-28 05:53:01,596 [fever] [Part4b] Progress: 980/6666 queries completed.
+2026-08-28 05:54:00,349 [fever] [Part4b] Progress: 985/6666 queries completed.
+2026-08-28 05:54:51,503 [fever] [Part4b] Progress: 990/6666 queries completed.
+2026-08-28 05:55:40,560 [fever] [Part4b] Progress: 995/6666 queries completed.
+2026-08-28 05:56:41,190 [fever] [Part4b] Progress: 1000/6666 queries completed.
+2026-08-28 05:57:34,995 [fever] [Part4b] Progress: 1005/6666 queries completed.
+2026-08-28 05:58:27,779 [fever] [Part4b] Progress: 1010/6666 queries completed.
+2026-08-28 05:59:22,198 [fever] [Part4b] Progress: 1015/6666 queries completed.
+2026-08-28 06:00:15,617 [fever] [Part4b] Progress: 1020/6666 queries completed.
+2026-08-28 06:01:11,586 [fever] [Part4b] Progress: 1025/6666 queries completed.
+2026-08-28 06:01:58,251 [fever] [Part4b] Progress: 1030/6666 queries completed.
+2026-08-28 06:02:54,876 [fever] [Part4b] Progress: 1035/6666 queries completed.
+2026-08-28 06:03:52,581 [fever] [Part4b] Progress: 1040/6666 queries completed.
+2026-08-28 06:04:48,899 [fever] [Part4b] Progress: 1045/6666 queries completed.
+2026-08-28 06:05:44,152 [fever] [Part4b] Progress: 1050/6666 queries completed.
+2026-08-28 06:06:35,244 [fever] [Part4b] Progress: 1055/6666 queries completed.
+2026-08-28 06:07:19,126 [fever] [Part4b] Progress: 1060/6666 queries completed.
+2026-08-28 06:08:03,568 [fever] [Part4b] Progress: 1065/6666 queries completed.
+2026-08-28 06:08:50,746 [fever] [Part4b] Progress: 1070/6666 queries completed.
+2026-08-28 06:09:35,719 [fever] [Part4b] Progress: 1075/6666 queries completed.
+2026-08-28 06:10:29,142 [fever] [Part4b] Progress: 1080/6666 queries completed.
+2026-08-28 06:11:21,537 [fever] [Part4b] Progress: 1085/6666 queries completed.
+2026-08-28 06:12:18,243 [fever] [Part4b] Progress: 1090/6666 queries completed.
+2026-08-28 06:13:11,431 [fever] [Part4b] Progress: 1095/6666 queries completed.
+2026-08-28 06:14:06,193 [fever] [Part4b] Progress: 1100/6666 queries completed.
+2026-08-28 06:15:07,366 [fever] [Part4b] Progress: 1105/6666 queries completed.
+2026-08-28 06:16:08,048 [fever] [Part4b] Progress: 1110/6666 queries completed.
+2026-08-28 06:16:54,479 [fever] [Part4b] Progress: 1115/6666 queries completed.
+2026-08-28 06:17:49,930 [fever] [Part4b] Progress: 1120/6666 queries completed.
+2026-08-28 06:18:45,917 [fever] [Part4b] Progress: 1125/6666 queries completed.
+2026-08-28 06:19:40,941 [fever] [Part4b] Progress: 1130/6666 queries completed.
+2026-08-28 06:20:30,032 [fever] [Part4b] Progress: 1135/6666 queries completed.
+2026-08-28 06:21:22,426 [fever] [Part4b] Progress: 1140/6666 queries completed.
+2026-08-28 06:22:18,509 [fever] [Part4b] Progress: 1145/6666 queries completed.
+2026-08-28 06:23:20,063 [fever] [Part4b] Progress: 1150/6666 queries completed.
+2026-08-28 06:24:12,340 [fever] [Part4b] Progress: 1155/6666 queries completed.
+2026-08-28 06:24:52,723 [fever] [Part4b] Progress: 1160/6666 queries completed.
+2026-08-28 06:25:46,645 [fever] [Part4b] Progress: 1165/6666 queries completed.
+2026-08-28 06:26:32,803 [fever] [Part4b] Progress: 1170/6666 queries completed.
+2026-08-28 06:27:15,088 [fever] [Part4b] Progress: 1175/6666 queries completed.
+2026-08-28 06:28:04,140 [fever] [Part4b] Progress: 1180/6666 queries completed.
+2026-08-28 06:28:57,643 [fever] [Part4b] Progress: 1185/6666 queries completed.
+2026-08-28 06:29:55,446 [fever] [Part4b] Progress: 1190/6666 queries completed.
+2026-08-28 06:30:42,295 [fever] [Part4b] Progress: 1195/6666 queries completed.
+2026-08-28 06:31:33,713 [fever] [Part4b] Progress: 1200/6666 queries completed.
+2026-08-28 06:32:21,451 [fever] [Part4b] Progress: 1205/6666 queries completed.
+2026-08-28 06:33:18,278 [fever] [Part4b] Progress: 1210/6666 queries completed.
+2026-08-28 06:34:12,717 [fever] [Part4b] Progress: 1215/6666 queries completed.
+2026-08-28 06:35:06,789 [fever] [Part4b] Progress: 1220/6666 queries completed.
+2026-08-28 06:36:01,958 [fever] [Part4b] Progress: 1225/6666 queries completed.
+2026-08-28 06:36:49,124 [fever] [Part4b] Progress: 1230/6666 queries completed.
+2026-08-28 06:37:32,962 [fever] [Part4b] Progress: 1235/6666 queries completed.
+2026-08-28 06:38:26,144 [fever] [Part4b] Progress: 1240/6666 queries completed.
+2026-08-28 06:39:24,461 [fever] [Part4b] Progress: 1245/6666 queries completed.
+2026-08-28 06:40:25,803 [fever] [Part4b] Progress: 1250/6666 queries completed.
+2026-08-28 06:41:19,037 [fever] [Part4b] Progress: 1255/6666 queries completed.
+2026-08-28 06:42:20,120 [fever] [Part4b] Progress: 1260/6666 queries completed.
+2026-08-28 06:43:15,501 [fever] [Part4b] Progress: 1265/6666 queries completed.
+2026-08-28 06:44:09,833 [fever] [Part4b] Progress: 1270/6666 queries completed.
+2026-08-28 06:45:04,717 [fever] [Part4b] Progress: 1275/6666 queries completed.
+2026-08-28 06:45:57,193 [fever] [Part4b] Progress: 1280/6666 queries completed.
+2026-08-28 06:46:46,760 [fever] [Part4b] Progress: 1285/6666 queries completed.
+2026-08-28 06:47:36,492 [fever] [Part4b] Progress: 1290/6666 queries completed.
+2026-08-28 06:48:26,683 [fever] [Part4b] Progress: 1295/6666 queries completed.
+2026-08-28 06:49:17,399 [fever] [Part4b] Progress: 1300/6666 queries completed.
+2026-08-28 06:50:04,375 [fever] [Part4b] Progress: 1305/6666 queries completed.
+2026-08-28 06:50:51,945 [fever] [Part4b] Progress: 1310/6666 queries completed.
+2026-08-28 06:51:45,581 [fever] [Part4b] Progress: 1315/6666 queries completed.
+2026-08-28 06:52:41,321 [fever] [Part4b] Progress: 1320/6666 queries completed.
+2026-08-28 06:53:40,348 [fever] [Part4b] Progress: 1325/6666 queries completed.
+2026-08-28 06:54:28,367 [fever] [Part4b] Progress: 1330/6666 queries completed.
+2026-08-28 06:55:16,565 [fever] [Part4b] Progress: 1335/6666 queries completed.
+2026-08-28 06:56:11,287 [fever] [Part4b] Progress: 1340/6666 queries completed.
+2026-08-28 06:57:01,627 [fever] [Part4b] Progress: 1345/6666 queries completed.
+2026-08-28 06:57:54,045 [fever] [Part4b] Progress: 1350/6666 queries completed.
+2026-08-28 06:58:47,321 [fever] [Part4b] Progress: 1355/6666 queries completed.
+2026-08-28 06:59:47,466 [fever] [Part4b] Progress: 1360/6666 queries completed.
+2026-08-28 07:00:34,465 [fever] [Part4b] Progress: 1365/6666 queries completed.
+2026-08-28 07:01:22,328 [fever] [Part4b] Progress: 1370/6666 queries completed.
+2026-08-28 07:02:11,284 [fever] [Part4b] Progress: 1375/6666 queries completed.
+2026-08-28 07:03:08,398 [fever] [Part4b] Progress: 1380/6666 queries completed.
+2026-08-28 07:04:12,252 [fever] [Part4b] Progress: 1385/6666 queries completed.
+2026-08-28 07:05:16,412 [fever] [Part4b] Progress: 1390/6666 queries completed.
+2026-08-28 07:06:11,973 [fever] [Part4b] Progress: 1395/6666 queries completed.
+2026-08-28 07:07:04,768 [fever] [Part4b] Progress: 1400/6666 queries completed.
+2026-08-28 07:07:52,997 [fever] [Part4b] Progress: 1405/6666 queries completed.
+2026-08-28 07:08:45,126 [fever] [Part4b] Progress: 1410/6666 queries completed.
+2026-08-28 07:09:33,880 [fever] [Part4b] Progress: 1415/6666 queries completed.
+2026-08-28 07:10:38,771 [fever] [Part4b] Progress: 1420/6666 queries completed.
+2026-08-28 07:11:38,996 [fever] [Part4b] Progress: 1425/6666 queries completed.
+2026-08-28 07:12:40,448 [fever] [Part4b] Progress: 1430/6666 queries completed.
+2026-08-28 07:13:40,030 [fever] [Part4b] Progress: 1435/6666 queries completed.
+2026-08-28 07:14:35,691 [fever] [Part4b] Progress: 1440/6666 queries completed.
+2026-08-28 07:15:32,578 [fever] [Part4b] Progress: 1445/6666 queries completed.
+2026-08-28 07:16:19,326 [fever] [Part4b] Progress: 1450/6666 queries completed.
+2026-08-28 07:17:08,478 [fever] [Part4b] Progress: 1455/6666 queries completed.
+2026-08-28 07:18:02,553 [fever] [Part4b] Progress: 1460/6666 queries completed.
+2026-08-28 07:18:53,799 [fever] [Part4b] Progress: 1465/6666 queries completed.
+2026-08-28 07:19:45,887 [fever] [Part4b] Progress: 1470/6666 queries completed.
+2026-08-28 07:20:36,411 [fever] [Part4b] Progress: 1475/6666 queries completed.
+2026-08-28 07:21:28,550 [fever] [Part4b] Progress: 1480/6666 queries completed.
+2026-08-28 07:22:20,217 [fever] [Part4b] Progress: 1485/6666 queries completed.
+2026-08-28 07:23:18,014 [fever] [Part4b] Progress: 1490/6666 queries completed.
+2026-08-28 07:24:05,821 [fever] [Part4b] Progress: 1495/6666 queries completed.
+2026-08-28 07:25:04,322 [fever] [Part4b] Progress: 1500/6666 queries completed.
+2026-08-28 07:25:53,041 [fever] [Part4b] Progress: 1505/6666 queries completed.
+2026-08-28 07:26:52,592 [fever] [Part4b] Progress: 1510/6666 queries completed.
+2026-08-28 07:27:43,809 [fever] [Part4b] Progress: 1515/6666 queries completed.
+2026-08-28 07:28:42,562 [fever] [Part4b] Progress: 1520/6666 queries completed.
+2026-08-28 07:29:30,849 [fever] [Part4b] Progress: 1525/6666 queries completed.
+2026-08-28 07:30:25,071 [fever] [Part4b] Progress: 1530/6666 queries completed.
+2026-08-28 07:31:21,247 [fever] [Part4b] Progress: 1535/6666 queries completed.
+2026-08-28 07:32:26,721 [fever] [Part4b] Progress: 1540/6666 queries completed.
+2026-08-28 07:33:20,901 [fever] [Part4b] Progress: 1545/6666 queries completed.
+2026-08-28 07:34:26,369 [fever] [Part4b] Progress: 1550/6666 queries completed.
+2026-08-28 07:35:29,578 [fever] [Part4b] Progress: 1555/6666 queries completed.
+2026-08-28 07:36:31,756 [fever] [Part4b] Progress: 1560/6666 queries completed.
+2026-08-28 07:37:34,715 [fever] [Part4b] Progress: 1565/6666 queries completed.
+2026-08-28 07:38:27,186 [fever] [Part4b] Progress: 1570/6666 queries completed.
+2026-08-28 07:39:11,284 [fever] [Part4b] Progress: 1575/6666 queries completed.
+2026-08-28 07:40:05,485 [fever] [Part4b] Progress: 1580/6666 queries completed.
+2026-08-28 07:40:56,313 [fever] [Part4b] Progress: 1585/6666 queries completed.
+2026-08-28 07:41:41,064 [fever] [Part4b] Progress: 1590/6666 queries completed.
+2026-08-28 07:42:42,172 [fever] [Part4b] Progress: 1595/6666 queries completed.
+2026-08-28 07:43:38,655 [fever] [Part4b] Progress: 1600/6666 queries completed.
+2026-08-28 07:44:36,259 [fever] [Part4b] Progress: 1605/6666 queries completed.
+2026-08-28 07:45:33,615 [fever] [Part4b] Progress: 1610/6666 queries completed.
+2026-08-28 07:46:24,362 [fever] [Part4b] Progress: 1615/6666 queries completed.
+2026-08-28 07:47:19,402 [fever] [Part4b] Progress: 1620/6666 queries completed.
+2026-08-28 07:48:22,050 [fever] [Part4b] Progress: 1625/6666 queries completed.
+2026-08-28 07:49:20,236 [fever] [Part4b] Progress: 1630/6666 queries completed.
+2026-08-28 07:50:11,409 [fever] [Part4b] Progress: 1635/6666 queries completed.
+2026-08-28 07:50:59,417 [fever] [Part4b] Progress: 1640/6666 queries completed.
+2026-08-28 07:52:09,479 [fever] [Part4b] Progress: 1645/6666 queries completed.
+2026-08-28 07:53:30,681 [fever] [Part4b] Progress: 1650/6666 queries completed.
+2026-08-28 07:54:44,494 [fever] [Part4b] Progress: 1655/6666 queries completed.
+2026-08-28 07:55:49,932 [fever] [Part4b] Progress: 1660/6666 queries completed.
+2026-08-28 07:56:44,917 [fever] [Part4b] Progress: 1665/6666 queries completed.
+2026-08-28 07:57:44,655 [fever] [Part4b] Progress: 1670/6666 queries completed.
+2026-08-28 07:58:42,025 [fever] [Part4b] Progress: 1675/6666 queries completed.
+2026-08-28 07:59:41,162 [fever] [Part4b] Progress: 1680/6666 queries completed.
+2026-08-28 08:00:43,705 [fever] [Part4b] Progress: 1685/6666 queries completed.
+2026-08-28 08:01:37,437 [fever] [Part4b] Progress: 1690/6666 queries completed.
+2026-08-28 08:02:23,140 [fever] [Part4b] Progress: 1695/6666 queries completed.
+2026-08-28 08:03:11,493 [fever] [Part4b] Progress: 1700/6666 queries completed.
+2026-08-28 08:04:06,196 [fever] [Part4b] Progress: 1705/6666 queries completed.
+2026-08-28 08:05:00,149 [fever] [Part4b] Progress: 1710/6666 queries completed.
+2026-08-28 08:05:43,006 [fever] [Part4b] Progress: 1715/6666 queries completed.
+2026-08-28 08:06:37,952 [fever] [Part4b] Progress: 1720/6666 queries completed.
+2026-08-28 08:07:23,122 [fever] [Part4b] Progress: 1725/6666 queries completed.
+2026-08-28 08:08:05,584 [fever] [Part4b] Progress: 1730/6666 queries completed.
+2026-08-28 08:08:58,967 [fever] [Part4b] Progress: 1735/6666 queries completed.
+2026-08-28 08:09:57,837 [fever] [Part4b] Progress: 1740/6666 queries completed.
+2026-08-28 08:11:00,877 [fever] [Part4b] Progress: 1745/6666 queries completed.
+2026-08-28 08:11:48,727 [fever] [Part4b] Progress: 1750/6666 queries completed.
+2026-08-28 08:12:41,663 [fever] [Part4b] Progress: 1755/6666 queries completed.
+2026-08-28 08:13:34,503 [fever] [Part4b] Progress: 1760/6666 queries completed.
+2026-08-28 08:14:21,170 [fever] [Part4b] Progress: 1765/6666 queries completed.
+2026-08-28 08:15:16,267 [fever] [Part4b] Progress: 1770/6666 queries completed.
+2026-08-28 08:16:04,775 [fever] [Part4b] Progress: 1775/6666 queries completed.
+2026-08-28 08:17:08,242 [fever] [Part4b] Progress: 1780/6666 queries completed.
+2026-08-28 08:18:09,248 [fever] [Part4b] Progress: 1785/6666 queries completed.
+2026-08-28 08:19:01,199 [fever] [Part4b] Progress: 1790/6666 queries completed.
+2026-08-28 08:20:10,070 [fever] [Part4b] Progress: 1795/6666 queries completed.
+2026-08-28 08:21:15,862 [fever] [Part4b] Progress: 1800/6666 queries completed.
+2026-08-28 08:22:07,028 [fever] [Part4b] Progress: 1805/6666 queries completed.
+2026-08-28 08:22:51,046 [fever] [Part4b] Progress: 1810/6666 queries completed.
+2026-08-28 08:23:41,439 [fever] [Part4b] Progress: 1815/6666 queries completed.
+2026-08-28 08:24:42,743 [fever] [Part4b] Progress: 1820/6666 queries completed.
+2026-08-28 08:25:41,592 [fever] [Part4b] Progress: 1825/6666 queries completed.
+2026-08-28 08:26:41,105 [fever] [Part4b] Progress: 1830/6666 queries completed.
+2026-08-28 08:27:40,345 [fever] [Part4b] Progress: 1835/6666 queries completed.
+2026-08-28 08:28:39,792 [fever] [Part4b] Progress: 1840/6666 queries completed.
+2026-08-28 08:29:35,168 [fever] [Part4b] Progress: 1845/6666 queries completed.
+2026-08-28 08:30:26,320 [fever] [Part4b] Progress: 1850/6666 queries completed.
+2026-08-28 08:31:17,397 [fever] [Part4b] Progress: 1855/6666 queries completed.
+2026-08-28 08:32:07,593 [fever] [Part4b] Progress: 1860/6666 queries completed.
+2026-08-28 08:32:59,283 [fever] [Part4b] Progress: 1865/6666 queries completed.
+2026-08-28 08:34:00,965 [fever] [Part4b] Progress: 1870/6666 queries completed.
+2026-08-28 08:34:49,112 [fever] [Part4b] Progress: 1875/6666 queries completed.
+2026-08-28 08:35:33,304 [fever] [Part4b] Progress: 1880/6666 queries completed.
+2026-08-28 08:36:35,647 [fever] [Part4b] Progress: 1885/6666 queries completed.
+2026-08-28 08:37:32,941 [fever] [Part4b] Progress: 1890/6666 queries completed.
+2026-08-28 08:38:27,966 [fever] [Part4b] Progress: 1895/6666 queries completed.
+2026-08-28 08:39:17,587 [fever] [Part4b] Progress: 1900/6666 queries completed.
+2026-08-28 08:40:17,102 [fever] [Part4b] Progress: 1905/6666 queries completed.
+2026-08-28 08:41:11,029 [fever] [Part4b] Progress: 1910/6666 queries completed.
+2026-08-28 08:42:14,187 [fever] [Part4b] Progress: 1915/6666 queries completed.
+2026-08-28 08:43:08,165 [fever] [Part4b] Progress: 1920/6666 queries completed.
+2026-08-28 08:44:04,044 [fever] [Part4b] Progress: 1925/6666 queries completed.
+2026-08-28 08:45:00,674 [fever] [Part4b] Progress: 1930/6666 queries completed.
+2026-08-28 08:46:00,631 [fever] [Part4b] Progress: 1935/6666 queries completed.
+2026-08-28 08:47:07,808 [fever] [Part4b] Progress: 1940/6666 queries completed.
+2026-08-28 08:47:59,122 [fever] [Part4b] Progress: 1945/6666 queries completed.
+2026-08-28 08:49:11,567 [fever] [Part4b] Progress: 1950/6666 queries completed.
+2026-08-28 08:50:07,154 [fever] [Part4b] Progress: 1955/6666 queries completed.
+2026-08-28 08:51:16,307 [fever] [Part4b] Progress: 1960/6666 queries completed.
+2026-08-28 08:52:15,437 [fever] [Part4b] Progress: 1965/6666 queries completed.
+2026-08-28 08:53:13,573 [fever] [Part4b] Progress: 1970/6666 queries completed.
+2026-08-28 08:54:12,904 [fever] [Part4b] Progress: 1975/6666 queries completed.
+2026-08-28 08:55:09,091 [fever] [Part4b] Progress: 1980/6666 queries completed.
+2026-08-28 08:56:08,473 [fever] [Part4b] Progress: 1985/6666 queries completed.
+2026-08-28 08:57:11,414 [fever] [Part4b] Progress: 1990/6666 queries completed.
+2026-08-28 08:58:12,598 [fever] [Part4b] Progress: 1995/6666 queries completed.
+2026-08-28 08:59:05,487 [fever] [Part4b] Progress: 2000/6666 queries completed.
+2026-08-28 09:00:04,455 [fever] [Part4b] Progress: 2005/6666 queries completed.
+2026-08-28 09:01:01,186 [fever] [Part4b] Progress: 2010/6666 queries completed.
+2026-08-28 09:02:23,583 [fever] [Part4b] Progress: 2015/6666 queries completed.
+2026-08-28 09:03:21,578 [fever] [Part4b] Progress: 2020/6666 queries completed.
+2026-08-28 09:04:26,800 [fever] [Part4b] Progress: 2025/6666 queries completed.
+2026-08-28 09:05:27,765 [fever] [Part4b] Progress: 2030/6666 queries completed.
+2026-08-28 09:06:20,402 [fever] [Part4b] Progress: 2035/6666 queries completed.
+2026-08-28 09:07:23,057 [fever] [Part4b] Progress: 2040/6666 queries completed.
+2026-08-28 09:08:15,567 [fever] [Part4b] Progress: 2045/6666 queries completed.
+2026-08-28 09:09:23,488 [fever] [Part4b] Progress: 2050/6666 queries completed.
+2026-08-28 09:10:11,168 [fever] [Part4b] Progress: 2055/6666 queries completed.
+2026-08-28 09:11:16,763 [fever] [Part4b] Progress: 2060/6666 queries completed.
+2026-08-28 09:12:17,580 [fever] [Part4b] Progress: 2065/6666 queries completed.
+2026-08-28 09:13:21,742 [fever] [Part4b] Progress: 2070/6666 queries completed.
+2026-08-28 09:14:35,260 [fever] [Part4b] Progress: 2075/6666 queries completed.
+2026-08-28 09:15:34,350 [fever] [Part4b] Progress: 2080/6666 queries completed.
+2026-08-28 09:16:47,292 [fever] [Part4b] Progress: 2085/6666 queries completed.
+2026-08-28 09:17:42,800 [fever] [Part4b] Progress: 2090/6666 queries completed.
+2026-08-28 09:18:48,224 [fever] [Part4b] Progress: 2095/6666 queries completed.
+2026-08-28 09:19:47,383 [fever] [Part4b] Progress: 2100/6666 queries completed.
+2026-08-28 09:20:45,119 [fever] [Part4b] Progress: 2105/6666 queries completed.
+2026-08-28 09:21:39,396 [fever] [Part4b] Progress: 2110/6666 queries completed.
+2026-08-28 09:22:45,515 [fever] [Part4b] Progress: 2115/6666 queries completed.
+2026-08-28 09:23:53,547 [fever] [Part4b] Progress: 2120/6666 queries completed.
+2026-08-28 09:24:53,685 [fever] [Part4b] Progress: 2125/6666 queries completed.
+2026-08-28 09:25:47,426 [fever] [Part4b] Progress: 2130/6666 queries completed.
+2026-08-28 09:26:52,957 [fever] [Part4b] Progress: 2135/6666 queries completed.
+2026-08-28 09:27:50,508 [fever] [Part4b] Progress: 2140/6666 queries completed.
+2026-08-28 09:29:00,155 [fever] [Part4b] Progress: 2145/6666 queries completed.
+2026-08-28 09:30:02,640 [fever] [Part4b] Progress: 2150/6666 queries completed.
+2026-08-28 09:31:09,140 [fever] [Part4b] Progress: 2155/6666 queries completed.
+2026-08-28 09:32:02,019 [fever] [Part4b] Progress: 2160/6666 queries completed.
+2026-08-28 09:33:08,467 [fever] [Part4b] Progress: 2165/6666 queries completed.
+2026-08-28 09:34:16,064 [fever] [Part4b] Progress: 2170/6666 queries completed.
+2026-08-28 09:35:29,746 [fever] [Part4b] Progress: 2175/6666 queries completed.
+2026-08-28 09:36:44,588 [fever] [Part4b] Progress: 2180/6666 queries completed.
+2026-08-28 09:37:53,254 [fever] [Part4b] Progress: 2185/6666 queries completed.
+2026-08-28 09:38:53,036 [fever] [Part4b] Progress: 2190/6666 queries completed.
+2026-08-28 09:40:04,415 [fever] [Part4b] Progress: 2195/6666 queries completed.
+2026-08-28 09:41:13,880 [fever] [Part4b] Progress: 2200/6666 queries completed.
+2026-08-28 09:42:07,305 [fever] [Part4b] Progress: 2205/6666 queries completed.
+2026-08-28 09:43:12,484 [fever] [Part4b] Progress: 2210/6666 queries completed.
+2026-08-28 09:44:08,508 [fever] [Part4b] Progress: 2215/6666 queries completed.
+2026-08-28 09:45:04,898 [fever] [Part4b] Progress: 2220/6666 queries completed.
+2026-08-28 09:45:58,026 [fever] [Part4b] Progress: 2225/6666 queries completed.
+2026-08-28 09:47:07,928 [fever] [Part4b] Progress: 2230/6666 queries completed.
+2026-08-28 09:48:13,149 [fever] [Part4b] Progress: 2235/6666 queries completed.
+2026-08-28 09:49:30,165 [fever] [Part4b] Progress: 2240/6666 queries completed.
+2026-08-28 09:50:30,949 [fever] [Part4b] Progress: 2245/6666 queries completed.
+2026-08-28 09:51:40,236 [fever] [Part4b] Progress: 2250/6666 queries completed.
+2026-08-28 09:52:50,419 [fever] [Part4b] Progress: 2255/6666 queries completed.
+2026-08-28 09:53:51,843 [fever] [Part4b] Progress: 2260/6666 queries completed.
+2026-08-28 09:55:01,066 [fever] [Part4b] Progress: 2265/6666 queries completed.
+2026-08-28 09:56:10,103 [fever] [Part4b] Progress: 2270/6666 queries completed.
+2026-08-28 09:57:24,903 [fever] [Part4b] Progress: 2275/6666 queries completed.
+2026-08-28 09:58:33,606 [fever] [Part4b] Progress: 2280/6666 queries completed.
+2026-08-28 09:59:42,958 [fever] [Part4b] Progress: 2285/6666 queries completed.
+2026-08-28 10:00:49,599 [fever] [Part4b] Progress: 2290/6666 queries completed.
+2026-08-28 10:01:53,605 [fever] [Part4b] Progress: 2295/6666 queries completed.
+2026-08-28 10:02:57,662 [fever] [Part4b] Progress: 2300/6666 queries completed.
+2026-08-28 10:03:54,615 [fever] [Part4b] Progress: 2305/6666 queries completed.
+2026-08-28 10:04:53,845 [fever] [Part4b] Progress: 2310/6666 queries completed.
+2026-08-28 10:05:48,964 [fever] [Part4b] Progress: 2315/6666 queries completed.
+2026-08-28 10:07:04,556 [fever] [Part4b] Progress: 2320/6666 queries completed.
+2026-08-28 10:08:02,854 [fever] [Part4b] Progress: 2325/6666 queries completed.
+2026-08-28 10:09:08,437 [fever] [Part4b] Progress: 2330/6666 queries completed.
+2026-08-28 10:10:12,934 [fever] [Part4b] Progress: 2335/6666 queries completed.
+2026-08-28 10:11:18,845 [fever] [Part4b] Progress: 2340/6666 queries completed.
+2026-08-28 10:12:26,336 [fever] [Part4b] Progress: 2345/6666 queries completed.
+2026-08-28 10:13:24,767 [fever] [Part4b] Progress: 2350/6666 queries completed.
+2026-08-28 10:14:31,145 [fever] [Part4b] Progress: 2355/6666 queries completed.
+2026-08-28 10:15:35,304 [fever] [Part4b] Progress: 2360/6666 queries completed.
+2026-08-28 10:16:38,696 [fever] [Part4b] Progress: 2365/6666 queries completed.
+2026-08-28 10:17:41,251 [fever] [Part4b] Progress: 2370/6666 queries completed.
+2026-08-28 10:18:41,662 [fever] [Part4b] Progress: 2375/6666 queries completed.
+2026-08-28 10:19:51,904 [fever] [Part4b] Progress: 2380/6666 queries completed.
+2026-08-28 10:20:55,272 [fever] [Part4b] Progress: 2385/6666 queries completed.
+2026-08-28 10:21:46,579 [fever] [Part4b] Progress: 2390/6666 queries completed.
+2026-08-28 10:22:56,310 [fever] [Part4b] Progress: 2395/6666 queries completed.
+2026-08-28 10:23:57,684 [fever] [Part4b] Progress: 2400/6666 queries completed.
+2026-08-28 10:24:47,742 [fever] [Part4b] Progress: 2405/6666 queries completed.
+2026-08-28 10:25:52,719 [fever] [Part4b] Progress: 2410/6666 queries completed.
+2026-08-28 10:27:01,015 [fever] [Part4b] Progress: 2415/6666 queries completed.
+2026-08-28 10:28:05,240 [fever] [Part4b] Progress: 2420/6666 queries completed.
+2026-08-28 10:29:11,560 [fever] [Part4b] Progress: 2425/6666 queries completed.
+2026-08-28 10:30:07,411 [fever] [Part4b] Progress: 2430/6666 queries completed.
+2026-08-28 10:31:10,054 [fever] [Part4b] Progress: 2435/6666 queries completed.
+2026-08-28 10:32:26,659 [fever] [Part4b] Progress: 2440/6666 queries completed.
+2026-08-28 10:33:44,202 [fever] [Part4b] Progress: 2445/6666 queries completed.
+2026-08-28 10:34:44,490 [fever] [Part4b] Progress: 2450/6666 queries completed.
+2026-08-28 10:35:48,877 [fever] [Part4b] Progress: 2455/6666 queries completed.
+2026-08-28 10:36:58,912 [fever] [Part4b] Progress: 2460/6666 queries completed.
+2026-08-28 10:38:03,912 [fever] [Part4b] Progress: 2465/6666 queries completed.
+2026-08-28 10:39:16,408 [fever] [Part4b] Progress: 2470/6666 queries completed.
+2026-08-28 10:40:10,142 [fever] [Part4b] Progress: 2475/6666 queries completed.
+2026-08-28 10:41:08,923 [fever] [Part4b] Progress: 2480/6666 queries completed.
+2026-08-28 10:42:21,517 [fever] [Part4b] Progress: 2485/6666 queries completed.
+2026-08-28 10:43:26,167 [fever] [Part4b] Progress: 2490/6666 queries completed.
+2026-08-28 10:44:21,585 [fever] [Part4b] Progress: 2495/6666 queries completed.
+2026-08-28 10:45:15,448 [fever] [Part4b] Progress: 2500/6666 queries completed.
+2026-08-28 10:46:23,887 [fever] [Part4b] Progress: 2505/6666 queries completed.
+2026-08-28 10:47:29,638 [fever] [Part4b] Progress: 2510/6666 queries completed.
+2026-08-28 10:48:27,947 [fever] [Part4b] Progress: 2515/6666 queries completed.
+2026-08-28 10:49:31,366 [fever] [Part4b] Progress: 2520/6666 queries completed.
+2026-08-28 10:50:25,987 [fever] [Part4b] Progress: 2525/6666 queries completed.
+2026-08-28 10:51:23,367 [fever] [Part4b] Progress: 2530/6666 queries completed.
+2026-08-28 10:52:20,308 [fever] [Part4b] Progress: 2535/6666 queries completed.
+2026-08-28 10:53:28,447 [fever] [Part4b] Progress: 2540/6666 queries completed.
+2026-08-28 10:54:32,222 [fever] [Part4b] Progress: 2545/6666 queries completed.
+2026-08-28 10:55:35,620 [fever] [Part4b] Progress: 2550/6666 queries completed.
+2026-08-28 10:56:37,527 [fever] [Part4b] Progress: 2555/6666 queries completed.
+2026-08-28 10:57:43,565 [fever] [Part4b] Progress: 2560/6666 queries completed.
+2026-08-28 10:58:56,378 [fever] [Part4b] Progress: 2565/6666 queries completed.
+2026-08-28 11:00:16,491 [fever] [Part4b] Progress: 2570/6666 queries completed.
+2026-08-28 11:01:33,619 [fever] [Part4b] Progress: 2575/6666 queries completed.
+2026-08-28 11:02:32,926 [fever] [Part4b] Progress: 2580/6666 queries completed.
+2026-08-28 11:03:36,402 [fever] [Part4b] Progress: 2585/6666 queries completed.
+2026-08-28 11:04:40,082 [fever] [Part4b] Progress: 2590/6666 queries completed.
+2026-08-28 11:05:45,483 [fever] [Part4b] Progress: 2595/6666 queries completed.
+2026-08-28 11:07:01,507 [fever] [Part4b] Progress: 2600/6666 queries completed.
+2026-08-28 11:08:00,363 [fever] [Part4b] Progress: 2605/6666 queries completed.
+2026-08-28 11:09:01,948 [fever] [Part4b] Progress: 2610/6666 queries completed.
+2026-08-28 11:10:08,351 [fever] [Part4b] Progress: 2615/6666 queries completed.
+2026-08-28 11:10:56,864 [fever] [Part4b] Progress: 2620/6666 queries completed.
+2026-08-28 11:11:55,455 [fever] [Part4b] Progress: 2625/6666 queries completed.
+2026-08-28 11:13:04,064 [fever] [Part4b] Progress: 2630/6666 queries completed.
+2026-08-28 11:14:00,663 [fever] [Part4b] Progress: 2635/6666 queries completed.
+2026-08-28 11:15:03,617 [fever] [Part4b] Progress: 2640/6666 queries completed.
+2026-08-28 11:15:57,666 [fever] [Part4b] Progress: 2645/6666 queries completed.
+2026-08-28 11:16:55,175 [fever] [Part4b] Progress: 2650/6666 queries completed.
+2026-08-28 11:17:49,141 [fever] [Part4b] Progress: 2655/6666 queries completed.
+2026-08-28 11:18:50,741 [fever] [Part4b] Progress: 2660/6666 queries completed.
+2026-08-28 11:19:41,256 [fever] [Part4b] Progress: 2665/6666 queries completed.
+2026-08-28 11:20:45,683 [fever] [Part4b] Progress: 2670/6666 queries completed.
+2026-08-28 11:21:46,446 [fever] [Part4b] Progress: 2675/6666 queries completed.
+2026-08-28 11:22:46,496 [fever] [Part4b] Progress: 2680/6666 queries completed.
+2026-08-28 11:23:44,298 [fever] [Part4b] Progress: 2685/6666 queries completed.
+2026-08-28 11:24:46,938 [fever] [Part4b] Progress: 2690/6666 queries completed.
+2026-08-28 11:25:38,497 [fever] [Part4b] Progress: 2695/6666 queries completed.
+2026-08-28 11:26:29,560 [fever] [Part4b] Progress: 2700/6666 queries completed.
+2026-08-28 11:27:26,460 [fever] [Part4b] Progress: 2705/6666 queries completed.
+2026-08-28 11:28:27,448 [fever] [Part4b] Progress: 2710/6666 queries completed.
+2026-08-28 11:29:28,619 [fever] [Part4b] Progress: 2715/6666 queries completed.
+2026-08-28 11:30:21,999 [fever] [Part4b] Progress: 2720/6666 queries completed.
+2026-08-28 11:31:22,703 [fever] [Part4b] Progress: 2725/6666 queries completed.
+2026-08-28 11:32:18,870 [fever] [Part4b] Progress: 2730/6666 queries completed.
+2026-08-28 11:33:18,722 [fever] [Part4b] Progress: 2735/6666 queries completed.
+2026-08-28 11:34:08,719 [fever] [Part4b] Progress: 2740/6666 queries completed.
+2026-08-28 11:35:00,293 [fever] [Part4b] Progress: 2745/6666 queries completed.
+2026-08-28 11:35:51,723 [fever] [Part4b] Progress: 2750/6666 queries completed.
+2026-08-28 11:36:50,338 [fever] [Part4b] Progress: 2755/6666 queries completed.
+2026-08-28 11:37:42,449 [fever] [Part4b] Progress: 2760/6666 queries completed.
+2026-08-28 11:38:34,414 [fever] [Part4b] Progress: 2765/6666 queries completed.
+2026-08-28 11:39:38,451 [fever] [Part4b] Progress: 2770/6666 queries completed.
+2026-08-28 11:40:38,786 [fever] [Part4b] Progress: 2775/6666 queries completed.
+2026-08-28 11:41:30,411 [fever] [Part4b] Progress: 2780/6666 queries completed.
+2026-08-28 11:42:28,376 [fever] [Part4b] Progress: 2785/6666 queries completed.
+2026-08-28 11:43:21,416 [fever] [Part4b] Progress: 2790/6666 queries completed.
+2026-08-28 11:44:14,996 [fever] [Part4b] Progress: 2795/6666 queries completed.
+2026-08-28 11:45:16,954 [fever] [Part4b] Progress: 2800/6666 queries completed.
+2026-08-28 11:46:19,912 [fever] [Part4b] Progress: 2805/6666 queries completed.
+2026-08-28 11:47:22,388 [fever] [Part4b] Progress: 2810/6666 queries completed.
+2026-08-28 11:48:32,705 [fever] [Part4b] Progress: 2815/6666 queries completed.
+2026-08-28 11:49:27,798 [fever] [Part4b] Progress: 2820/6666 queries completed.
+2026-08-28 11:50:27,335 [fever] [Part4b] Progress: 2825/6666 queries completed.
+2026-08-28 11:51:38,088 [fever] [Part4b] Progress: 2830/6666 queries completed.
+2026-08-28 11:52:37,757 [fever] [Part4b] Progress: 2835/6666 queries completed.
+2026-08-28 11:53:29,819 [fever] [Part4b] Progress: 2840/6666 queries completed.
+2026-08-28 11:54:21,634 [fever] [Part4b] Progress: 2845/6666 queries completed.
+2026-08-28 11:55:18,346 [fever] [Part4b] Progress: 2850/6666 queries completed.
+2026-08-28 11:56:09,277 [fever] [Part4b] Progress: 2855/6666 queries completed.
+2026-08-28 11:57:19,271 [fever] [Part4b] Progress: 2860/6666 queries completed.
+2026-08-28 11:58:17,716 [fever] [Part4b] Progress: 2865/6666 queries completed.
+2026-08-28 11:59:10,837 [fever] [Part4b] Progress: 2870/6666 queries completed.
+2026-08-28 12:00:14,408 [fever] [Part4b] Progress: 2875/6666 queries completed.
+2026-08-28 12:01:11,798 [fever] [Part4b] Progress: 2880/6666 queries completed.
+2026-08-28 12:02:10,940 [fever] [Part4b] Progress: 2885/6666 queries completed.
+2026-08-28 12:03:16,397 [fever] [Part4b] Progress: 2890/6666 queries completed.
+2026-08-28 12:04:22,725 [fever] [Part4b] Progress: 2895/6666 queries completed.
+2026-08-28 12:05:13,957 [fever] [Part4b] Progress: 2900/6666 queries completed.
+2026-08-28 12:06:07,211 [fever] [Part4b] Progress: 2905/6666 queries completed.
+2026-08-28 12:06:59,942 [fever] [Part4b] Progress: 2910/6666 queries completed.
+2026-08-28 12:08:02,269 [fever] [Part4b] Progress: 2915/6666 queries completed.
+2026-08-28 12:08:57,418 [fever] [Part4b] Progress: 2920/6666 queries completed.
+2026-08-28 12:10:01,122 [fever] [Part4b] Progress: 2925/6666 queries completed.
+2026-08-28 12:10:58,173 [fever] [Part4b] Progress: 2930/6666 queries completed.
+2026-08-28 12:12:03,732 [fever] [Part4b] Progress: 2935/6666 queries completed.
+2026-08-28 12:13:01,163 [fever] [Part4b] Progress: 2940/6666 queries completed.
+2026-08-28 12:14:12,833 [fever] [Part4b] Progress: 2945/6666 queries completed.
+2026-08-28 12:15:01,461 [fever] [Part4b] Progress: 2950/6666 queries completed.
+2026-08-28 12:15:52,718 [fever] [Part4b] Progress: 2955/6666 queries completed.
+2026-08-28 12:16:49,032 [fever] [Part4b] Progress: 2960/6666 queries completed.
+2026-08-28 12:17:46,220 [fever] [Part4b] Progress: 2965/6666 queries completed.
+2026-08-28 12:18:51,295 [fever] [Part4b] Progress: 2970/6666 queries completed.
+2026-08-28 12:19:44,631 [fever] [Part4b] Progress: 2975/6666 queries completed.
+2026-08-28 12:20:39,748 [fever] [Part4b] Progress: 2980/6666 queries completed.
+2026-08-28 12:21:30,487 [fever] [Part4b] Progress: 2985/6666 queries completed.
+2026-08-28 12:22:30,257 [fever] [Part4b] Progress: 2990/6666 queries completed.
+2026-08-28 12:23:30,030 [fever] [Part4b] Progress: 2995/6666 queries completed.
+2026-08-28 12:24:17,971 [fever] [Part4b] Progress: 3000/6666 queries completed.
+2026-08-28 12:25:17,485 [fever] [Part4b] Progress: 3005/6666 queries completed.
+2026-08-28 12:26:20,460 [fever] [Part4b] Progress: 3010/6666 queries completed.
+2026-08-28 12:27:15,440 [fever] [Part4b] Progress: 3015/6666 queries completed.
+2026-08-28 12:28:21,254 [fever] [Part4b] Progress: 3020/6666 queries completed.
+2026-08-28 12:29:22,122 [fever] [Part4b] Progress: 3025/6666 queries completed.
+2026-08-28 12:30:29,579 [fever] [Part4b] Progress: 3030/6666 queries completed.
+2026-08-28 12:31:42,215 [fever] [Part4b] Progress: 3035/6666 queries completed.
+2026-08-28 12:32:38,958 [fever] [Part4b] Progress: 3040/6666 queries completed.
+2026-08-28 12:33:37,202 [fever] [Part4b] Progress: 3045/6666 queries completed.
+2026-08-28 12:34:40,931 [fever] [Part4b] Progress: 3050/6666 queries completed.
+2026-08-28 12:35:34,190 [fever] [Part4b] Progress: 3055/6666 queries completed.
+2026-08-28 12:36:39,996 [fever] [Part4b] Progress: 3060/6666 queries completed.
+2026-08-28 12:37:24,389 [fever] [Part4b] Progress: 3065/6666 queries completed.
+2026-08-28 12:38:20,779 [fever] [Part4b] Progress: 3070/6666 queries completed.
+2026-08-28 12:39:24,039 [fever] [Part4b] Progress: 3075/6666 queries completed.
+2026-08-28 12:40:22,781 [fever] [Part4b] Progress: 3080/6666 queries completed.
+2026-08-28 12:41:18,159 [fever] [Part4b] Progress: 3085/6666 queries completed.
+2026-08-28 12:42:29,027 [fever] [Part4b] Progress: 3090/6666 queries completed.
+2026-08-28 12:43:28,099 [fever] [Part4b] Progress: 3095/6666 queries completed.
+2026-08-28 12:44:26,019 [fever] [Part4b] Progress: 3100/6666 queries completed.
+2026-08-28 12:45:30,713 [fever] [Part4b] Progress: 3105/6666 queries completed.
+2026-08-28 12:46:32,641 [fever] [Part4b] Progress: 3110/6666 queries completed.
+2026-08-28 12:47:39,359 [fever] [Part4b] Progress: 3115/6666 queries completed.
+2026-08-28 12:48:50,286 [fever] [Part4b] Progress: 3120/6666 queries completed.
+2026-08-28 12:49:47,689 [fever] [Part4b] Progress: 3125/6666 queries completed.
+2026-08-28 12:50:51,384 [fever] [Part4b] Progress: 3130/6666 queries completed.
+2026-08-28 12:51:46,665 [fever] [Part4b] Progress: 3135/6666 queries completed.
+2026-08-28 12:52:48,246 [fever] [Part4b] Progress: 3140/6666 queries completed.
+2026-08-28 12:53:50,667 [fever] [Part4b] Progress: 3145/6666 queries completed.
+2026-08-28 12:54:44,185 [fever] [Part4b] Progress: 3150/6666 queries completed.
+2026-08-28 12:55:47,762 [fever] [Part4b] Progress: 3155/6666 queries completed.
+2026-08-28 12:56:49,445 [fever] [Part4b] Progress: 3160/6666 queries completed.
+2026-08-28 12:57:59,103 [fever] [Part4b] Progress: 3165/6666 queries completed.
+2026-08-28 12:58:58,749 [fever] [Part4b] Progress: 3170/6666 queries completed.
+2026-08-28 12:59:50,016 [fever] [Part4b] Progress: 3175/6666 queries completed.
+2026-08-28 13:00:53,388 [fever] [Part4b] Progress: 3180/6666 queries completed.
+2026-08-28 13:02:00,952 [fever] [Part4b] Progress: 3185/6666 queries completed.
+2026-08-28 13:03:07,234 [fever] [Part4b] Progress: 3190/6666 queries completed.
+2026-08-28 13:04:01,467 [fever] [Part4b] Progress: 3195/6666 queries completed.
+2026-08-28 13:05:00,897 [fever] [Part4b] Progress: 3200/6666 queries completed.
+2026-08-28 13:06:02,128 [fever] [Part4b] Progress: 3205/6666 queries completed.
+2026-08-28 13:07:01,755 [fever] [Part4b] Progress: 3210/6666 queries completed.
+2026-08-28 13:08:01,813 [fever] [Part4b] Progress: 3215/6666 queries completed.
+2026-08-28 13:09:04,993 [fever] [Part4b] Progress: 3220/6666 queries completed.
+2026-08-28 13:10:03,410 [fever] [Part4b] Progress: 3225/6666 queries completed.
+2026-08-28 13:10:58,436 [fever] [Part4b] Progress: 3230/6666 queries completed.
+2026-08-28 13:11:52,588 [fever] [Part4b] Progress: 3235/6666 queries completed.
+2026-08-28 13:13:00,768 [fever] [Part4b] Progress: 3240/6666 queries completed.
+2026-08-28 13:13:49,745 [fever] [Part4b] Progress: 3245/6666 queries completed.
+2026-08-28 13:14:47,133 [fever] [Part4b] Progress: 3250/6666 queries completed.
+2026-08-28 13:15:39,840 [fever] [Part4b] Progress: 3255/6666 queries completed.
+2026-08-28 13:16:35,966 [fever] [Part4b] Progress: 3260/6666 queries completed.
+2026-08-28 13:17:39,463 [fever] [Part4b] Progress: 3265/6666 queries completed.
+2026-08-28 13:18:35,943 [fever] [Part4b] Progress: 3270/6666 queries completed.
+2026-08-28 13:19:42,556 [fever] [Part4b] Progress: 3275/6666 queries completed.
+2026-08-28 13:20:43,309 [fever] [Part4b] Progress: 3280/6666 queries completed.
+2026-08-28 13:21:32,898 [fever] [Part4b] Progress: 3285/6666 queries completed.
+2026-08-28 13:22:36,274 [fever] [Part4b] Progress: 3290/6666 queries completed.
+2026-08-28 13:23:36,729 [fever] [Part4b] Progress: 3295/6666 queries completed.
+2026-08-28 13:24:41,838 [fever] [Part4b] Progress: 3300/6666 queries completed.
+2026-08-28 13:25:38,994 [fever] [Part4b] Progress: 3305/6666 queries completed.
+2026-08-28 13:26:28,906 [fever] [Part4b] Progress: 3310/6666 queries completed.
+2026-08-28 13:27:38,431 [fever] [Part4b] Progress: 3315/6666 queries completed.
+2026-08-28 13:28:36,213 [fever] [Part4b] Progress: 3320/6666 queries completed.
+2026-08-28 13:29:32,582 [fever] [Part4b] Progress: 3325/6666 queries completed.
+2026-08-28 13:30:31,596 [fever] [Part4b] Progress: 3330/6666 queries completed.
+2026-08-28 13:31:33,145 [fever] [Part4b] Progress: 3335/6666 queries completed.
+2026-08-28 13:32:18,532 [fever] [Part4b] Progress: 3340/6666 queries completed.
+2026-08-28 13:33:22,311 [fever] [Part4b] Progress: 3345/6666 queries completed.
+2026-08-28 13:34:15,934 [fever] [Part4b] Progress: 3350/6666 queries completed.
+2026-08-28 13:35:08,135 [fever] [Part4b] Progress: 3355/6666 queries completed.
+2026-08-28 13:36:03,354 [fever] [Part4b] Progress: 3360/6666 queries completed.
+2026-08-28 13:36:56,822 [fever] [Part4b] Progress: 3365/6666 queries completed.
+2026-08-28 13:37:57,329 [fever] [Part4b] Progress: 3370/6666 queries completed.
+2026-08-28 13:38:52,815 [fever] [Part4b] Progress: 3375/6666 queries completed.
+2026-08-28 13:39:53,184 [fever] [Part4b] Progress: 3380/6666 queries completed.
+2026-08-28 13:40:47,626 [fever] [Part4b] Progress: 3385/6666 queries completed.
+2026-08-28 13:41:39,742 [fever] [Part4b] Progress: 3390/6666 queries completed.
+2026-08-28 13:42:29,669 [fever] [Part4b] Progress: 3395/6666 queries completed.
+2026-08-28 13:43:21,698 [fever] [Part4b] Progress: 3400/6666 queries completed.
+2026-08-28 13:44:13,388 [fever] [Part4b] Progress: 3405/6666 queries completed.
+2026-08-28 13:45:31,987 [fever] [Part4b] Progress: 3410/6666 queries completed.
+2026-08-28 13:46:32,287 [fever] [Part4b] Progress: 3415/6666 queries completed.
+2026-08-28 13:47:32,394 [fever] [Part4b] Progress: 3420/6666 queries completed.
+2026-08-28 13:48:27,683 [fever] [Part4b] Progress: 3425/6666 queries completed.
+2026-08-28 13:49:24,555 [fever] [Part4b] Progress: 3430/6666 queries completed.
+2026-08-28 13:50:20,105 [fever] [Part4b] Progress: 3435/6666 queries completed.
+2026-08-28 13:51:30,808 [fever] [Part4b] Progress: 3440/6666 queries completed.
+2026-08-28 13:52:29,149 [fever] [Part4b] Progress: 3445/6666 queries completed.
+2026-08-28 13:53:29,650 [fever] [Part4b] Progress: 3450/6666 queries completed.
+2026-08-28 13:54:24,492 [fever] [Part4b] Progress: 3455/6666 queries completed.
+2026-08-28 13:55:23,668 [fever] [Part4b] Progress: 3460/6666 queries completed.
+2026-08-28 13:56:32,958 [fever] [Part4b] Progress: 3465/6666 queries completed.
+2026-08-28 13:57:29,138 [fever] [Part4b] Progress: 3470/6666 queries completed.
+2026-08-28 13:58:21,642 [fever] [Part4b] Progress: 3475/6666 queries completed.
+2026-08-28 13:59:27,500 [fever] [Part4b] Progress: 3480/6666 queries completed.
+2026-08-28 14:00:26,025 [fever] [Part4b] Progress: 3485/6666 queries completed.
+2026-08-28 14:01:19,075 [fever] [Part4b] Progress: 3490/6666 queries completed.
+2026-08-28 14:02:17,235 [fever] [Part4b] Progress: 3495/6666 queries completed.
+2026-08-28 14:03:16,325 [fever] [Part4b] Progress: 3500/6666 queries completed.
+2026-08-28 14:04:16,855 [fever] [Part4b] Progress: 3505/6666 queries completed.
+2026-08-28 14:05:07,619 [fever] [Part4b] Progress: 3510/6666 queries completed.
+2026-08-28 14:06:06,706 [fever] [Part4b] Progress: 3515/6666 queries completed.
+2026-08-28 14:07:02,760 [fever] [Part4b] Progress: 3520/6666 queries completed.
+2026-08-28 14:08:07,541 [fever] [Part4b] Progress: 3525/6666 queries completed.
+2026-08-28 14:09:03,890 [fever] [Part4b] Progress: 3530/6666 queries completed.
+2026-08-28 14:09:45,887 [fever] [Part4b] Progress: 3535/6666 queries completed.
+2026-08-28 14:10:45,636 [fever] [Part4b] Progress: 3540/6666 queries completed.
+2026-08-28 14:11:41,995 [fever] [Part4b] Progress: 3545/6666 queries completed.
+2026-08-28 14:12:37,563 [fever] [Part4b] Progress: 3550/6666 queries completed.
+2026-08-28 14:13:50,087 [fever] [Part4b] Progress: 3555/6666 queries completed.
+2026-08-28 14:14:47,589 [fever] [Part4b] Progress: 3560/6666 queries completed.
+2026-08-28 14:21:34,716 [fever] [Part4b] Starting BATCHED generation with Qwen/Qwen2.5-7B-Instruct...
+2026-08-28 14:21:34,717 [fever] [Part4b] Batch size=32, samples/query=4
+2026-08-28 14:21:47,314 [fever] [Part4b] Generating for all 6666 queries in batches...
+2026-08-28 14:22:21,038 [fever] [Part4b] Progress: 32/6666 queries completed (batch_size=32)
+2026-08-28 14:22:51,776 [fever] [Part4b] Progress: 64/6666 queries completed (batch_size=32)
+2026-08-28 14:23:22,688 [fever] [Part4b] Progress: 96/6666 queries completed (batch_size=32)
+2026-08-28 14:23:54,123 [fever] [Part4b] Progress: 128/6666 queries completed (batch_size=32)
+2026-08-28 14:24:27,021 [fever] [Part4b] Progress: 160/6666 queries completed (batch_size=32)
+2026-08-28 14:24:56,694 [fever] [Part4b] Progress: 192/6666 queries completed (batch_size=32)
+2026-08-28 14:25:27,314 [fever] [Part4b] Progress: 224/6666 queries completed (batch_size=32)
+2026-08-28 14:25:57,809 [fever] [Part4b] Progress: 256/6666 queries completed (batch_size=32)
+2026-08-28 14:26:30,225 [fever] [Part4b] Progress: 288/6666 queries completed (batch_size=32)
+2026-08-28 14:27:01,543 [fever] [Part4b] Progress: 320/6666 queries completed (batch_size=32)
+2026-08-28 14:27:32,145 [fever] [Part4b] Progress: 352/6666 queries completed (batch_size=32)
+2026-08-28 14:28:04,804 [fever] [Part4b] Progress: 384/6666 queries completed (batch_size=32)
+2026-08-28 14:28:36,909 [fever] [Part4b] Progress: 416/6666 queries completed (batch_size=32)
+2026-08-28 14:29:09,371 [fever] [Part4b] Progress: 448/6666 queries completed (batch_size=32)
+2026-08-28 14:29:41,268 [fever] [Part4b] Progress: 480/6666 queries completed (batch_size=32)
+2026-08-28 14:30:11,757 [fever] [Part4b] Progress: 512/6666 queries completed (batch_size=32)
+2026-08-28 14:30:44,349 [fever] [Part4b] Progress: 544/6666 queries completed (batch_size=32)
+2026-08-28 14:31:16,564 [fever] [Part4b] Progress: 576/6666 queries completed (batch_size=32)
+2026-08-28 14:31:48,719 [fever] [Part4b] Progress: 608/6666 queries completed (batch_size=32)
+2026-08-28 14:32:20,985 [fever] [Part4b] Progress: 640/6666 queries completed (batch_size=32)
+2026-08-28 14:32:51,663 [fever] [Part4b] Progress: 672/6666 queries completed (batch_size=32)
+2026-08-28 14:33:23,605 [fever] [Part4b] Progress: 704/6666 queries completed (batch_size=32)
+2026-08-28 14:33:55,721 [fever] [Part4b] Progress: 736/6666 queries completed (batch_size=32)
+2026-08-28 14:34:29,131 [fever] [Part4b] Progress: 768/6666 queries completed (batch_size=32)
+2026-08-28 14:35:01,270 [fever] [Part4b] Progress: 800/6666 queries completed (batch_size=32)
+2026-08-28 14:35:32,396 [fever] [Part4b] Progress: 832/6666 queries completed (batch_size=32)
+2026-08-28 14:36:01,684 [fever] [Part4b] Progress: 864/6666 queries completed (batch_size=32)
+2026-08-28 14:36:31,712 [fever] [Part4b] Progress: 896/6666 queries completed (batch_size=32)
+2026-08-28 14:37:01,058 [fever] [Part4b] Progress: 928/6666 queries completed (batch_size=32)
+2026-08-28 14:37:31,005 [fever] [Part4b] Progress: 960/6666 queries completed (batch_size=32)
+2026-08-28 14:37:59,169 [fever] [Part4b] Progress: 992/6666 queries completed (batch_size=32)
+2026-08-28 14:38:30,385 [fever] [Part4b] Progress: 1024/6666 queries completed (batch_size=32)
+2026-08-28 14:39:00,391 [fever] [Part4b] Progress: 1056/6666 queries completed (batch_size=32)
+2026-08-28 14:39:30,482 [fever] [Part4b] Progress: 1088/6666 queries completed (batch_size=32)
+2026-08-28 14:40:00,542 [fever] [Part4b] Progress: 1120/6666 queries completed (batch_size=32)
+2026-08-28 14:40:31,284 [fever] [Part4b] Progress: 1152/6666 queries completed (batch_size=32)
+2026-08-28 14:41:01,724 [fever] [Part4b] Progress: 1184/6666 queries completed (batch_size=32)
+2026-08-28 14:41:31,905 [fever] [Part4b] Progress: 1216/6666 queries completed (batch_size=32)
+2026-08-28 14:42:02,323 [fever] [Part4b] Progress: 1248/6666 queries completed (batch_size=32)
+2026-08-28 14:42:33,753 [fever] [Part4b] Progress: 1280/6666 queries completed (batch_size=32)
+2026-08-28 14:43:04,713 [fever] [Part4b] Progress: 1312/6666 queries completed (batch_size=32)
+2026-08-28 14:43:36,533 [fever] [Part4b] Progress: 1344/6666 queries completed (batch_size=32)
+2026-08-28 14:44:07,108 [fever] [Part4b] Progress: 1376/6666 queries completed (batch_size=32)
+2026-08-28 14:44:39,807 [fever] [Part4b] Progress: 1408/6666 queries completed (batch_size=32)
+2026-08-28 14:45:11,382 [fever] [Part4b] Progress: 1440/6666 queries completed (batch_size=32)
+2026-08-28 14:45:42,785 [fever] [Part4b] Progress: 1472/6666 queries completed (batch_size=32)
+2026-08-28 14:46:14,127 [fever] [Part4b] Progress: 1504/6666 queries completed (batch_size=32)
+2026-08-28 14:46:45,012 [fever] [Part4b] Progress: 1536/6666 queries completed (batch_size=32)
+2026-08-28 14:47:14,944 [fever] [Part4b] Progress: 1568/6666 queries completed (batch_size=32)
+2026-08-28 14:47:45,184 [fever] [Part4b] Progress: 1600/6666 queries completed (batch_size=32)
+2026-08-28 14:48:14,910 [fever] [Part4b] Progress: 1632/6666 queries completed (batch_size=32)
+2026-08-28 14:48:45,677 [fever] [Part4b] Progress: 1664/6666 queries completed (batch_size=32)
+2026-08-28 14:49:16,554 [fever] [Part4b] Progress: 1696/6666 queries completed (batch_size=32)
+2026-08-28 14:49:48,259 [fever] [Part4b] Progress: 1728/6666 queries completed (batch_size=32)
+2026-08-28 14:50:20,021 [fever] [Part4b] Progress: 1760/6666 queries completed (batch_size=32)
+2026-08-28 14:50:51,548 [fever] [Part4b] Progress: 1792/6666 queries completed (batch_size=32)
+2026-08-28 14:51:23,037 [fever] [Part4b] Progress: 1824/6666 queries completed (batch_size=32)
+2026-08-28 14:51:55,376 [fever] [Part4b] Progress: 1856/6666 queries completed (batch_size=32)
+2026-08-28 14:52:26,221 [fever] [Part4b] Progress: 1888/6666 queries completed (batch_size=32)
+2026-08-28 14:52:57,670 [fever] [Part4b] Progress: 1920/6666 queries completed (batch_size=32)
+2026-08-28 14:53:29,029 [fever] [Part4b] Progress: 1952/6666 queries completed (batch_size=32)
+2026-08-28 14:54:00,260 [fever] [Part4b] Progress: 1984/6666 queries completed (batch_size=32)
+2026-08-28 14:54:32,110 [fever] [Part4b] Progress: 2016/6666 queries completed (batch_size=32)
+2026-08-28 14:55:04,269 [fever] [Part4b] Progress: 2048/6666 queries completed (batch_size=32)
+2026-08-28 14:55:35,274 [fever] [Part4b] Progress: 2080/6666 queries completed (batch_size=32)
+2026-08-28 14:56:07,168 [fever] [Part4b] Progress: 2112/6666 queries completed (batch_size=32)
+2026-08-28 14:56:38,803 [fever] [Part4b] Progress: 2144/6666 queries completed (batch_size=32)
+2026-08-28 14:57:11,066 [fever] [Part4b] Progress: 2176/6666 queries completed (batch_size=32)
+2026-08-28 14:57:43,990 [fever] [Part4b] Progress: 2208/6666 queries completed (batch_size=32)
+2026-08-28 14:58:15,520 [fever] [Part4b] Progress: 2240/6666 queries completed (batch_size=32)
+2026-08-28 14:58:46,854 [fever] [Part4b] Progress: 2272/6666 queries completed (batch_size=32)
+2026-08-28 14:59:19,092 [fever] [Part4b] Progress: 2304/6666 queries completed (batch_size=32)
+2026-08-28 14:59:52,308 [fever] [Part4b] Progress: 2336/6666 queries completed (batch_size=32)
+2026-08-28 15:00:25,171 [fever] [Part4b] Progress: 2368/6666 queries completed (batch_size=32)
+2026-08-28 15:00:57,107 [fever] [Part4b] Progress: 2400/6666 queries completed (batch_size=32)
+2026-08-28 15:01:29,143 [fever] [Part4b] Progress: 2432/6666 queries completed (batch_size=32)
+2026-08-28 15:02:00,224 [fever] [Part4b] Progress: 2464/6666 queries completed (batch_size=32)
+2026-08-28 15:02:32,116 [fever] [Part4b] Progress: 2496/6666 queries completed (batch_size=32)
+2026-08-28 15:03:04,677 [fever] [Part4b] Progress: 2528/6666 queries completed (batch_size=32)
+2026-08-28 15:03:36,953 [fever] [Part4b] Progress: 2560/6666 queries completed (batch_size=32)
+2026-08-28 15:04:08,958 [fever] [Part4b] Progress: 2592/6666 queries completed (batch_size=32)
+2026-08-28 15:04:41,813 [fever] [Part4b] Progress: 2624/6666 queries completed (batch_size=32)
+2026-08-28 15:05:12,351 [fever] [Part4b] Progress: 2656/6666 queries completed (batch_size=32)
+2026-08-28 15:05:43,409 [fever] [Part4b] Progress: 2688/6666 queries completed (batch_size=32)
+2026-08-28 15:06:13,964 [fever] [Part4b] Progress: 2720/6666 queries completed (batch_size=32)
+2026-08-28 15:06:44,027 [fever] [Part4b] Progress: 2752/6666 queries completed (batch_size=32)
+2026-08-28 15:07:13,960 [fever] [Part4b] Progress: 2784/6666 queries completed (batch_size=32)
+2026-08-28 15:07:44,291 [fever] [Part4b] Progress: 2816/6666 queries completed (batch_size=32)
+2026-08-28 15:08:13,877 [fever] [Part4b] Progress: 2848/6666 queries completed (batch_size=32)
+2026-08-28 15:08:44,245 [fever] [Part4b] Progress: 2880/6666 queries completed (batch_size=32)
+2026-08-28 15:09:14,476 [fever] [Part4b] Progress: 2912/6666 queries completed (batch_size=32)
+2026-08-28 15:09:43,083 [fever] [Part4b] Progress: 2944/6666 queries completed (batch_size=32)
+2026-08-28 15:10:13,041 [fever] [Part4b] Progress: 2976/6666 queries completed (batch_size=32)
+2026-08-28 15:10:41,943 [fever] [Part4b] Progress: 3008/6666 queries completed (batch_size=32)
+2026-08-28 15:11:11,683 [fever] [Part4b] Progress: 3040/6666 queries completed (batch_size=32)
+2026-08-28 15:11:41,138 [fever] [Part4b] Progress: 3072/6666 queries completed (batch_size=32)
+2026-08-28 15:12:11,181 [fever] [Part4b] Progress: 3104/6666 queries completed (batch_size=32)
+2026-08-28 15:12:41,780 [fever] [Part4b] Progress: 3136/6666 queries completed (batch_size=32)
+2026-08-28 15:13:12,181 [fever] [Part4b] Progress: 3168/6666 queries completed (batch_size=32)
+2026-08-28 15:13:42,645 [fever] [Part4b] Progress: 3200/6666 queries completed (batch_size=32)
+2026-08-28 15:14:13,690 [fever] [Part4b] Progress: 3232/6666 queries completed (batch_size=32)
+2026-08-28 15:14:43,726 [fever] [Part4b] Progress: 3264/6666 queries completed (batch_size=32)
+2026-08-28 15:15:14,420 [fever] [Part4b] Progress: 3296/6666 queries completed (batch_size=32)
+2026-08-28 15:15:44,268 [fever] [Part4b] Progress: 3328/6666 queries completed (batch_size=32)
+2026-08-28 15:16:15,197 [fever] [Part4b] Progress: 3360/6666 queries completed (batch_size=32)
+2026-08-28 15:16:46,601 [fever] [Part4b] Progress: 3392/6666 queries completed (batch_size=32)
+2026-08-28 15:17:17,789 [fever] [Part4b] Progress: 3424/6666 queries completed (batch_size=32)
+2026-08-28 15:17:49,406 [fever] [Part4b] Progress: 3456/6666 queries completed (batch_size=32)
+2026-08-28 15:18:19,892 [fever] [Part4b] Progress: 3488/6666 queries completed (batch_size=32)
+2026-08-28 15:18:52,035 [fever] [Part4b] Progress: 3520/6666 queries completed (batch_size=32)
+2026-08-28 15:19:23,398 [fever] [Part4b] Progress: 3552/6666 queries completed (batch_size=32)
+2026-08-28 15:19:54,104 [fever] [Part4b] Progress: 3584/6666 queries completed (batch_size=32)
+2026-08-28 15:20:24,074 [fever] [Part4b] Progress: 3616/6666 queries completed (batch_size=32)
+2026-08-28 15:20:52,978 [fever] [Part4b] Progress: 3648/6666 queries completed (batch_size=32)
+2026-08-28 15:21:23,628 [fever] [Part4b] Progress: 3680/6666 queries completed (batch_size=32)
+2026-08-28 15:21:53,760 [fever] [Part4b] Progress: 3712/6666 queries completed (batch_size=32)
+2026-08-28 15:22:24,202 [fever] [Part4b] Progress: 3744/6666 queries completed (batch_size=32)
+2026-08-28 15:22:53,850 [fever] [Part4b] Progress: 3776/6666 queries completed (batch_size=32)
+2026-08-28 15:23:23,813 [fever] [Part4b] Progress: 3808/6666 queries completed (batch_size=32)
+2026-08-28 15:23:54,311 [fever] [Part4b] Progress: 3840/6666 queries completed (batch_size=32)
+2026-08-28 15:24:25,705 [fever] [Part4b] Progress: 3872/6666 queries completed (batch_size=32)
+2026-08-28 15:24:56,942 [fever] [Part4b] Progress: 3904/6666 queries completed (batch_size=32)
+2026-08-28 15:25:28,247 [fever] [Part4b] Progress: 3936/6666 queries completed (batch_size=32)
+2026-08-28 15:25:58,544 [fever] [Part4b] Progress: 3968/6666 queries completed (batch_size=32)
+2026-08-28 15:26:29,278 [fever] [Part4b] Progress: 4000/6666 queries completed (batch_size=32)
+2026-08-28 15:27:00,685 [fever] [Part4b] Progress: 4032/6666 queries completed (batch_size=32)
+2026-08-28 15:27:31,976 [fever] [Part4b] Progress: 4064/6666 queries completed (batch_size=32)
+2026-08-28 15:28:03,253 [fever] [Part4b] Progress: 4096/6666 queries completed (batch_size=32)
+2026-08-28 15:28:34,493 [fever] [Part4b] Progress: 4128/6666 queries completed (batch_size=32)
+2026-08-28 15:29:06,273 [fever] [Part4b] Progress: 4160/6666 queries completed (batch_size=32)
+2026-08-28 15:29:37,815 [fever] [Part4b] Progress: 4192/6666 queries completed (batch_size=32)
+2026-08-28 15:30:08,260 [fever] [Part4b] Progress: 4224/6666 queries completed (batch_size=32)
+2026-08-28 15:30:40,303 [fever] [Part4b] Progress: 4256/6666 queries completed (batch_size=32)
+2026-08-28 15:31:12,466 [fever] [Part4b] Progress: 4288/6666 queries completed (batch_size=32)
+2026-08-28 15:31:43,663 [fever] [Part4b] Progress: 4320/6666 queries completed (batch_size=32)
+2026-08-28 15:32:15,384 [fever] [Part4b] Progress: 4352/6666 queries completed (batch_size=32)
+2026-08-28 15:32:46,606 [fever] [Part4b] Progress: 4384/6666 queries completed (batch_size=32)
+2026-08-28 15:33:18,010 [fever] [Part4b] Progress: 4416/6666 queries completed (batch_size=32)
+2026-08-28 15:33:48,827 [fever] [Part4b] Progress: 4448/6666 queries completed (batch_size=32)
+2026-08-28 15:34:20,065 [fever] [Part4b] Progress: 4480/6666 queries completed (batch_size=32)
+2026-08-28 15:34:51,306 [fever] [Part4b] Progress: 4512/6666 queries completed (batch_size=32)
+2026-08-28 15:35:21,611 [fever] [Part4b] Progress: 4544/6666 queries completed (batch_size=32)
+2026-08-28 15:35:51,342 [fever] [Part4b] Progress: 4576/6666 queries completed (batch_size=32)
+2026-08-28 15:36:21,831 [fever] [Part4b] Progress: 4608/6666 queries completed (batch_size=32)
+2026-08-28 15:36:52,494 [fever] [Part4b] Progress: 4640/6666 queries completed (batch_size=32)
+2026-08-28 15:37:22,500 [fever] [Part4b] Progress: 4672/6666 queries completed (batch_size=32)
+2026-08-28 15:37:51,923 [fever] [Part4b] Progress: 4704/6666 queries completed (batch_size=32)
+2026-08-28 15:38:21,906 [fever] [Part4b] Progress: 4736/6666 queries completed (batch_size=32)
+2026-08-28 15:38:50,608 [fever] [Part4b] Progress: 4768/6666 queries completed (batch_size=32)
+2026-08-28 15:39:20,065 [fever] [Part4b] Progress: 4800/6666 queries completed (batch_size=32)
+2026-08-28 15:39:49,733 [fever] [Part4b] Progress: 4832/6666 queries completed (batch_size=32)
+2026-08-28 15:40:19,693 [fever] [Part4b] Progress: 4864/6666 queries completed (batch_size=32)
+2026-08-28 15:40:50,737 [fever] [Part4b] Progress: 4896/6666 queries completed (batch_size=32)
+2026-08-28 15:41:20,749 [fever] [Part4b] Progress: 4928/6666 queries completed (batch_size=32)
+2026-08-28 15:41:52,244 [fever] [Part4b] Progress: 4960/6666 queries completed (batch_size=32)
+2026-08-28 15:42:22,168 [fever] [Part4b] Progress: 4992/6666 queries completed (batch_size=32)
+2026-08-28 15:42:52,074 [fever] [Part4b] Progress: 5024/6666 queries completed (batch_size=32)
+2026-08-28 15:43:22,905 [fever] [Part4b] Progress: 5056/6666 queries completed (batch_size=32)
+2026-08-28 15:43:52,816 [fever] [Part4b] Progress: 5088/6666 queries completed (batch_size=32)
+2026-08-28 15:44:22,057 [fever] [Part4b] Progress: 5120/6666 queries completed (batch_size=32)
+2026-08-28 15:44:52,197 [fever] [Part4b] Progress: 5152/6666 queries completed (batch_size=32)
+2026-08-28 15:45:22,265 [fever] [Part4b] Progress: 5184/6666 queries completed (batch_size=32)
+2026-08-28 15:45:52,949 [fever] [Part4b] Progress: 5216/6666 queries completed (batch_size=32)
+2026-08-28 15:46:24,205 [fever] [Part4b] Progress: 5248/6666 queries completed (batch_size=32)
+2026-08-28 15:46:53,503 [fever] [Part4b] Progress: 5280/6666 queries completed (batch_size=32)
+2026-08-28 15:47:23,345 [fever] [Part4b] Progress: 5312/6666 queries completed (batch_size=32)
+2026-08-28 15:47:53,417 [fever] [Part4b] Progress: 5344/6666 queries completed (batch_size=32)
+2026-08-28 15:48:24,422 [fever] [Part4b] Progress: 5376/6666 queries completed (batch_size=32)
+2026-08-28 15:48:55,678 [fever] [Part4b] Progress: 5408/6666 queries completed (batch_size=32)
+2026-08-28 15:49:27,024 [fever] [Part4b] Progress: 5440/6666 queries completed (batch_size=32)
+2026-08-28 15:49:58,037 [fever] [Part4b] Progress: 5472/6666 queries completed (batch_size=32)
+2026-08-28 15:50:28,246 [fever] [Part4b] Progress: 5504/6666 queries completed (batch_size=32)
+2026-08-28 15:50:59,180 [fever] [Part4b] Progress: 5536/6666 queries completed (batch_size=32)
+2026-08-28 15:51:29,840 [fever] [Part4b] Progress: 5568/6666 queries completed (batch_size=32)
+2026-08-28 15:52:00,345 [fever] [Part4b] Progress: 5600/6666 queries completed (batch_size=32)
+2026-08-28 15:52:31,046 [fever] [Part4b] Progress: 5632/6666 queries completed (batch_size=32)
+2026-08-28 15:53:01,790 [fever] [Part4b] Progress: 5664/6666 queries completed (batch_size=32)
+2026-08-28 15:53:32,656 [fever] [Part4b] Progress: 5696/6666 queries completed (batch_size=32)
+2026-08-28 15:54:04,233 [fever] [Part4b] Progress: 5728/6666 queries completed (batch_size=32)
+2026-08-28 15:54:35,304 [fever] [Part4b] Progress: 5760/6666 queries completed (batch_size=32)
+2026-08-28 15:55:06,867 [fever] [Part4b] Progress: 5792/6666 queries completed (batch_size=32)
+2026-08-28 15:55:36,451 [fever] [Part4b] Progress: 5824/6666 queries completed (batch_size=32)
+2026-08-28 15:56:06,973 [fever] [Part4b] Progress: 5856/6666 queries completed (batch_size=32)
+2026-08-28 15:56:38,468 [fever] [Part4b] Progress: 5888/6666 queries completed (batch_size=32)
+2026-08-28 15:57:08,467 [fever] [Part4b] Progress: 5920/6666 queries completed (batch_size=32)
+2026-08-28 15:57:40,206 [fever] [Part4b] Progress: 5952/6666 queries completed (batch_size=32)
+2026-08-28 15:58:11,428 [fever] [Part4b] Progress: 5984/6666 queries completed (batch_size=32)
+2026-08-28 15:58:43,341 [fever] [Part4b] Progress: 6016/6666 queries completed (batch_size=32)
+2026-08-28 15:59:14,842 [fever] [Part4b] Progress: 6048/6666 queries completed (batch_size=32)
+2026-08-28 15:59:46,279 [fever] [Part4b] Progress: 6080/6666 queries completed (batch_size=32)
+2026-08-28 16:00:16,694 [fever] [Part4b] Progress: 6112/6666 queries completed (batch_size=32)
+2026-08-28 16:00:47,924 [fever] [Part4b] Progress: 6144/6666 queries completed (batch_size=32)
+2026-08-28 16:01:19,160 [fever] [Part4b] Progress: 6176/6666 queries completed (batch_size=32)
+2026-08-28 16:01:50,102 [fever] [Part4b] Progress: 6208/6666 queries completed (batch_size=32)
+2026-08-28 16:02:21,161 [fever] [Part4b] Progress: 6240/6666 queries completed (batch_size=32)
+2026-08-28 16:02:53,462 [fever] [Part4b] Progress: 6272/6666 queries completed (batch_size=32)
+2026-08-28 16:03:25,375 [fever] [Part4b] Progress: 6304/6666 queries completed (batch_size=32)
+2026-08-28 16:03:57,568 [fever] [Part4b] Progress: 6336/6666 queries completed (batch_size=32)
+2026-08-28 16:04:30,334 [fever] [Part4b] Progress: 6368/6666 queries completed (batch_size=32)
+2026-08-28 16:05:02,050 [fever] [Part4b] Progress: 6400/6666 queries completed (batch_size=32)
+2026-08-28 16:05:32,866 [fever] [Part4b] Progress: 6432/6666 queries completed (batch_size=32)
+2026-08-28 16:06:03,123 [fever] [Part4b] Progress: 6464/6666 queries completed (batch_size=32)
+2026-08-28 16:06:32,058 [fever] [Part4b] Progress: 6496/6666 queries completed (batch_size=32)
+2026-08-28 16:07:02,327 [fever] [Part4b] Progress: 6528/6666 queries completed (batch_size=32)
+2026-08-28 16:07:32,034 [fever] [Part4b] Progress: 6560/6666 queries completed (batch_size=32)
+2026-08-28 16:08:01,676 [fever] [Part4b] Progress: 6592/6666 queries completed (batch_size=32)
+2026-08-28 16:08:30,670 [fever] [Part4b] Progress: 6624/6666 queries completed (batch_size=32)
+2026-08-28 16:08:59,909 [fever] [Part4b] Progress: 6656/6666 queries completed (batch_size=32)
+2026-08-28 16:09:20,653 [fever] [Part4b] Progress: 6666/6666 queries completed (batch_size=10)
+2026-08-28 16:09:20,655 [fever] [Part4b] complete! Wrote HyDE generations to /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/runs/fever/hyde_generations.jsonl
+2026-08-28 17:07:03,404 [fever] [Part4b] Evaluation complete for fever.
+2026-08-28 19:58:00,840 [fever] [Part5][shard 2/3] encoded 1805522 docs -> /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/fever/splade/shard_2.jsonl
+2026-08-28 22:06:20,231 [fever] [Part5][shard 0/3] encoded 1805523 docs -> /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/fever/splade/shard_0.jsonl
+2026-08-28 23:28:26,617 [fever] [Part5][shard 1/3] encoded 1805523 docs -> /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/fever/splade/shard_1.jsonl
+2026-08-28 23:28:56,912 [fever] [Part5] loading encoded corpus shards...
+2026-08-28 23:41:15,757 [fever] [Part5] loaded 5416568 doc vectors
+2026-08-29 00:57:31,283 [fever] [Part5] preparing Pyserini impact-index input from existing shards...
+2026-08-29 00:59:23,979 [fever] [Part5] prepared 500,000 SPLADE vectors for impact indexing...
+2026-08-29 01:01:16,561 [fever] [Part5] prepared 1,000,000 SPLADE vectors for impact indexing...
+2026-08-29 01:03:09,852 [fever] [Part5] prepared 1,500,000 SPLADE vectors for impact indexing...
+2026-08-29 02:09:06,965 [fever] [Part5] preparing Pyserini impact-index input from existing shards...
+2026-08-29 02:11:00,631 [fever] [Part5] prepared 500,000 SPLADE vectors for impact indexing...
+2026-08-29 02:12:53,941 [fever] [Part5] prepared 1,000,000 SPLADE vectors for impact indexing...
+2026-08-29 02:14:48,177 [fever] [Part5] prepared 1,500,000 SPLADE vectors for impact indexing...
+2026-08-29 02:16:41,804 [fever] [Part5] prepared 2,000,000 SPLADE vectors for impact indexing...
+2026-08-29 02:18:41,359 [fever] [Part5] prepared 2,500,000 SPLADE vectors for impact indexing...
+2026-08-29 02:20:37,523 [fever] [Part5] prepared 3,000,000 SPLADE vectors for impact indexing...
+2026-08-29 02:22:38,851 [fever] [Part5] prepared 3,500,000 SPLADE vectors for impact indexing...
+2026-08-29 02:24:31,198 [fever] [Part5] prepared 4,000,000 SPLADE vectors for impact indexing...
+2026-08-29 02:26:27,522 [fever] [Part5] prepared 4,500,000 SPLADE vectors for impact indexing...
+2026-08-29 02:28:20,504 [fever] [Part5] prepared 5,000,000 SPLADE vectors for impact indexing...
+2026-08-29 02:29:56,656 [fever] [Part5] impact input ready: 5,416,568 vectors in /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/fever/splade/impact_input
+2026-08-29 02:29:56,657 [fever] [Part5] building Lucene SPLADE impact index...
+2026-08-29 02:29:56,658 [fever] [Part5] running: python -m pyserini.index.lucene --collection JsonVectorCollection --input /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/fever/splade/impact_input --index /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/fever/splade/lucene_impact --generator DefaultLuceneDocumentGenerator --threads 16 --impact --pretokenized
+2026-08-29 02:37:08,171 [fever] [Part5] impact index built at /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/fever/splade/lucene_impact
+2026-08-29 02:37:08,952 [fever] [Part5] running Lucene impact retrieval for 6,666 queries, top_k=1000...
+2026-08-29 02:37:08,952 [fever] [Part5] running: python -m pyserini.search.lucene --index /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/fever/splade/lucene_impact --topics /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/runs/fever/splade_queries.tsv --output /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/runs/fever/splade.trec --hits 1000 --encoder naver/splade-v3 --remove-query --output-format trec --impact --threads 16
+2026-08-29 03:03:39,981 [fever] [Part5] encoding 6,666 queries in batches of 64 for expansion-term comparison...
+2026-08-29 03:03:43,216 [fever] [Part5] query encoding progress: 64/6,666
+2026-08-29 03:03:43,451 [fever] [Part5] query encoding progress: 128/6,666
+2026-08-29 03:03:43,565 [fever] [Part5] query encoding progress: 192/6,666
+2026-08-29 03:03:43,691 [fever] [Part5] query encoding progress: 256/6,666
+2026-08-29 03:03:43,935 [fever] [Part5] query encoding progress: 320/6,666
+2026-08-29 03:03:43,993 [fever] [Part5] query encoding progress: 384/6,666
+2026-08-29 03:03:44,049 [fever] [Part5] query encoding progress: 448/6,666
+2026-08-29 03:03:44,136 [fever] [Part5] query encoding progress: 512/6,666
+2026-08-29 03:03:44,359 [fever] [Part5] query encoding progress: 576/6,666
+2026-08-29 03:03:44,475 [fever] [Part5] query encoding progress: 640/6,666
+2026-08-29 03:03:44,601 [fever] [Part5] query encoding progress: 704/6,666
+2026-08-29 03:03:44,700 [fever] [Part5] query encoding progress: 768/6,666
+2026-08-29 03:03:44,805 [fever] [Part5] query encoding progress: 832/6,666
+2026-08-29 03:03:44,933 [fever] [Part5] query encoding progress: 896/6,666
+2026-08-29 03:03:45,130 [fever] [Part5] query encoding progress: 960/6,666
+2026-08-29 03:03:45,264 [fever] [Part5] query encoding progress: 1,024/6,666
+2026-08-29 03:03:45,349 [fever] [Part5] query encoding progress: 1,088/6,666
+2026-08-29 03:03:45,437 [fever] [Part5] query encoding progress: 1,152/6,666
+2026-08-29 03:03:45,570 [fever] [Part5] query encoding progress: 1,216/6,666
+2026-08-29 03:03:45,804 [fever] [Part5] query encoding progress: 1,280/6,666
+2026-08-29 03:03:45,893 [fever] [Part5] query encoding progress: 1,344/6,666
+2026-08-29 03:03:46,013 [fever] [Part5] query encoding progress: 1,408/6,666
+2026-08-29 03:03:46,164 [fever] [Part5] query encoding progress: 1,472/6,666
+2026-08-29 03:03:46,281 [fever] [Part5] query encoding progress: 1,536/6,666
+2026-08-29 03:03:46,499 [fever] [Part5] query encoding progress: 1,600/6,666
+2026-08-29 03:03:46,592 [fever] [Part5] query encoding progress: 1,664/6,666
+2026-08-29 03:03:46,703 [fever] [Part5] query encoding progress: 1,728/6,666
+2026-08-29 03:03:46,810 [fever] [Part5] query encoding progress: 1,792/6,666
+2026-08-29 03:03:47,025 [fever] [Part5] query encoding progress: 1,856/6,666
+2026-08-29 03:03:47,073 [fever] [Part5] query encoding progress: 1,920/6,666
+2026-08-29 03:03:47,180 [fever] [Part5] query encoding progress: 1,984/6,666
+2026-08-29 03:03:47,279 [fever] [Part5] query encoding progress: 2,048/6,666
+2026-08-29 03:03:47,383 [fever] [Part5] query encoding progress: 2,112/6,666
+2026-08-29 03:03:47,595 [fever] [Part5] query encoding progress: 2,176/6,666
+2026-08-29 03:03:47,727 [fever] [Part5] query encoding progress: 2,240/6,666
+2026-08-29 03:03:47,944 [fever] [Part5] query encoding progress: 2,304/6,666
+2026-08-29 03:03:48,011 [fever] [Part5] query encoding progress: 2,368/6,666
+2026-08-29 03:03:48,117 [fever] [Part5] query encoding progress: 2,432/6,666
+2026-08-29 03:03:48,230 [fever] [Part5] query encoding progress: 2,496/6,666
+2026-08-29 03:03:48,324 [fever] [Part5] query encoding progress: 2,560/6,666
+2026-08-29 03:03:48,394 [fever] [Part5] query encoding progress: 2,624/6,666
+2026-08-29 03:03:48,496 [fever] [Part5] query encoding progress: 2,688/6,666
+2026-08-29 03:03:48,602 [fever] [Part5] query encoding progress: 2,752/6,666
+2026-08-29 03:03:48,702 [fever] [Part5] query encoding progress: 2,816/6,666
+2026-08-29 03:03:48,915 [fever] [Part5] query encoding progress: 2,880/6,666
+2026-08-29 03:03:49,020 [fever] [Part5] query encoding progress: 2,944/6,666
+2026-08-29 03:03:49,105 [fever] [Part5] query encoding progress: 3,008/6,666
+2026-08-29 03:03:49,212 [fever] [Part5] query encoding progress: 3,072/6,666
+2026-08-29 03:03:49,410 [fever] [Part5] query encoding progress: 3,136/6,666
+2026-08-29 03:03:49,505 [fever] [Part5] query encoding progress: 3,200/6,666
+2026-08-29 03:03:49,618 [fever] [Part5] query encoding progress: 3,264/6,666
+2026-08-29 03:03:49,731 [fever] [Part5] query encoding progress: 3,328/6,666
+2026-08-29 03:03:49,834 [fever] [Part5] query encoding progress: 3,392/6,666
+2026-08-29 03:03:49,992 [fever] [Part5] query encoding progress: 3,456/6,666
+2026-08-29 03:03:50,253 [fever] [Part5] query encoding progress: 3,520/6,666
+2026-08-29 03:03:50,319 [fever] [Part5] query encoding progress: 3,584/6,666
+2026-08-29 03:03:50,440 [fever] [Part5] query encoding progress: 3,648/6,666
+2026-08-29 03:03:50,637 [fever] [Part5] query encoding progress: 3,712/6,666
+2026-08-29 03:03:50,723 [fever] [Part5] query encoding progress: 3,776/6,666
+2026-08-29 03:03:50,920 [fever] [Part5] query encoding progress: 3,840/6,666
+2026-08-29 03:03:51,041 [fever] [Part5] query encoding progress: 3,904/6,666
+2026-08-29 03:03:51,141 [fever] [Part5] query encoding progress: 3,968/6,666
+2026-08-29 03:03:51,435 [fever] [Part5] query encoding progress: 4,032/6,666
+2026-08-29 03:03:51,521 [fever] [Part5] query encoding progress: 4,096/6,666
+2026-08-29 03:03:51,622 [fever] [Part5] query encoding progress: 4,160/6,666
+2026-08-29 03:03:51,785 [fever] [Part5] query encoding progress: 4,224/6,666
+2026-08-29 03:03:51,910 [fever] [Part5] query encoding progress: 4,288/6,666
+2026-08-29 03:03:51,973 [fever] [Part5] query encoding progress: 4,352/6,666
+2026-08-29 03:03:52,091 [fever] [Part5] query encoding progress: 4,416/6,666
+2026-08-29 03:03:52,190 [fever] [Part5] query encoding progress: 4,480/6,666
+2026-08-29 03:03:52,279 [fever] [Part5] query encoding progress: 4,544/6,666
+2026-08-29 03:03:52,490 [fever] [Part5] query encoding progress: 4,608/6,666
+2026-08-29 03:03:52,542 [fever] [Part5] query encoding progress: 4,672/6,666
+2026-08-29 03:03:52,764 [fever] [Part5] query encoding progress: 4,736/6,666
+2026-08-29 03:03:52,863 [fever] [Part5] query encoding progress: 4,800/6,666
+2026-08-29 03:03:52,967 [fever] [Part5] query encoding progress: 4,864/6,666
+2026-08-29 03:03:53,076 [fever] [Part5] query encoding progress: 4,928/6,666
+2026-08-29 03:03:53,236 [fever] [Part5] query encoding progress: 4,992/6,666
+2026-08-29 03:03:53,346 [fever] [Part5] query encoding progress: 5,056/6,666
+2026-08-29 03:03:53,465 [fever] [Part5] query encoding progress: 5,120/6,666
+2026-08-29 03:03:53,577 [fever] [Part5] query encoding progress: 5,184/6,666
+2026-08-29 03:03:53,810 [fever] [Part5] query encoding progress: 5,248/6,666
+2026-08-29 03:03:53,883 [fever] [Part5] query encoding progress: 5,312/6,666
+2026-08-29 03:03:54,000 [fever] [Part5] query encoding progress: 5,376/6,666
+2026-08-29 03:03:54,098 [fever] [Part5] query encoding progress: 5,440/6,666
+2026-08-29 03:03:54,287 [fever] [Part5] query encoding progress: 5,504/6,666
+2026-08-29 03:03:54,419 [fever] [Part5] query encoding progress: 5,568/6,666
+2026-08-29 03:03:54,631 [fever] [Part5] query encoding progress: 5,632/6,666
+2026-08-29 03:03:54,744 [fever] [Part5] query encoding progress: 5,696/6,666
+2026-08-29 03:03:54,798 [fever] [Part5] query encoding progress: 5,760/6,666
+2026-08-29 03:03:55,020 [fever] [Part5] query encoding progress: 5,824/6,666
+2026-08-29 03:03:55,133 [fever] [Part5] query encoding progress: 5,888/6,666
+2026-08-29 03:03:55,237 [fever] [Part5] query encoding progress: 5,952/6,666
+2026-08-29 03:03:55,342 [fever] [Part5] query encoding progress: 6,016/6,666
+2026-08-29 03:03:55,462 [fever] [Part5] query encoding progress: 6,080/6,666
+2026-08-29 03:03:55,743 [fever] [Part5] query encoding progress: 6,144/6,666
+2026-08-29 03:03:55,810 [fever] [Part5] query encoding progress: 6,208/6,666
+2026-08-29 03:03:55,923 [fever] [Part5] query encoding progress: 6,272/6,666
+2026-08-29 03:03:56,137 [fever] [Part5] query encoding progress: 6,336/6,666
+2026-08-29 03:03:56,207 [fever] [Part5] query encoding progress: 6,400/6,666
+2026-08-29 03:03:56,317 [fever] [Part5] query encoding progress: 6,464/6,666
+2026-08-29 03:03:56,427 [fever] [Part5] query encoding progress: 6,528/6,666
+2026-08-29 03:03:56,743 [fever] [Part5] query encoding progress: 6,592/6,666
+2026-08-29 03:03:56,810 [fever] [Part5] query encoding progress: 6,656/6,666
+2026-08-29 03:03:56,875 [fever] [Part5] query encoding progress: 6,666/6,666
+2026-08-29 03:04:23,831 [fever] [Part5] retrieval done. nDCG@10=0.7565
+2026-08-29 03:04:59,581 [fever] [Part5] expansion-term comparison written for 10 queries. avg_overlap=0.60

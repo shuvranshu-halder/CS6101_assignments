@@ -1,0 +1,10 @@
+[CHECKPOINT 1] script started, before argparse
+[CHECKPOINT 2] args parsed: dataset=fever checkpoint=naver/splade-v3 stage=['encode'] shard_id=1 num_shards=3
+[CHECKPOINT 3] entering encode stage
+Loading weights:   0%|          | 0/204 [00:00<?, ?it/s]Loading weights: 100%|██████████| 204/204 [00:00<00:00, 22600.65it/s]
+[INFO] Opening /mnt/nas/shuvranshu/.ir_datasets/beir/fever/docs.pklz4/bin with direct file access
+2026-08-28 23:28:26,617 [fever] [Part5][shard 1/3] encoded 1805523 docs -> /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/fever/splade/shard_1.jsonl
+
+2026-08-28 23:28:26,617 - fever - INFO - [Part5][shard 1/3] encoded 1805523 docs -> /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/fever/splade/shard_1.jsonl
+[CHECKPOINT 4] encode stage finished
+[CHECKPOINT 9] all requested stages complete
