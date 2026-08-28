@@ -510,12 +510,15 @@ def part4a_rocchio_rm3(dataset: str, N_values=(10, 20), k_values=(10, 20)):
 # =============================================================================
 def part4b_generate_hyde_docs(dataset: str, n_samples: int = 4,
                                model_name: str = "Qwen/Qwen2.5-7B-Instruct",
-                               device: str = "cuda"):
-    """Generates HyDE hypothetical documents from scratch (fresh start)."""
+                               device: str = "cuda",
+                               batch_size: int = 8):
+    """Generates HyDE hypothetical documents in batches."""
     log = common.get_logger(dataset)
     p = common.get_paths(dataset)
 
-    log.info(f"[Part4b] Starting FRESH generation with {model_name}...")
+    log.info(f"[Part4b] Starting BATCHED generation with {model_name}...")
+    log.info(f"[Part4b] Batch size={batch_size}, samples/query={n_samples}")
+
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token_id = tokenizer.eos_token_id
@@ -535,27 +538,37 @@ def part4b_generate_hyde_docs(dataset: str, n_samples: int = 4,
                    "Write as if it is a factual excerpt from a document.\n\nQuestion: {q}\n\nPassage:")
 
     p.hyde_jsonl.parent.mkdir(parents=True, exist_ok=True)
-    log.info(f"[Part4b] Generating for all {total_queries} queries from scratch...")
+    log.info(f"[Part4b] Generating for all {total_queries} queries in batches...")
 
     with open(p.hyde_jsonl, "w") as f:
-        for idx, q in enumerate(queries_list, 1):
-            messages = [{"role": "user", "content": prompt_tmpl.format(q=q.text)}]
-            
+        for batch_start in range(0, total_queries, batch_size):
+            batch = queries_list[batch_start:batch_start + batch_size]
+
+            messages_batch = [
+                [{"role": "user", "content": prompt_tmpl.format(q=q.text)}]
+                for q in batch
+            ]
+
             inputs = tokenizer.apply_chat_template(
-                messages,
+                messages_batch,
                 add_generation_prompt=True,
-                return_tensors="pt"
+                return_tensors="pt",
+                padding=True
             )
 
-            # Safely extract input_ids tensor to prevent KeyError: 'shape'
             if isinstance(inputs, dict) or hasattr(inputs, "input_ids"):
                 input_ids = inputs["input_ids"].to(model.device)
+                attention_mask = inputs.get("attention_mask")
+                if attention_mask is not None:
+                    attention_mask = attention_mask.to(model.device)
             else:
                 input_ids = inputs.to(model.device)
+                attention_mask = None
 
             with torch.no_grad():
                 outputs = model.generate(
                     input_ids=input_ids,
+                    attention_mask=attention_mask,
                     max_new_tokens=200,
                     do_sample=True,
                     temperature=0.7,
@@ -563,19 +576,40 @@ def part4b_generate_hyde_docs(dataset: str, n_samples: int = 4,
                     pad_token_id=tokenizer.eos_token_id,
                 )
 
-            docs = [
-                tokenizer.decode(out[input_ids.shape[1]:], skip_special_tokens=True).strip()
-                for out in outputs
-            ]
-            
-            f.write(json.dumps({"query_id": q.query_id, "query": q.text, "hyde_docs": docs}) + "\n")
+            prompt_lengths = (
+                attention_mask.sum(dim=1).tolist()
+                if attention_mask is not None
+                else [input_ids.shape[1]] * len(batch)
+            )
+
+            for i, q in enumerate(batch):
+                start_i = i * n_samples
+                end_i = start_i + n_samples
+                prompt_len = int(prompt_lengths[i])
+
+                docs = [
+                    tokenizer.decode(
+                        out[prompt_len:],
+                        skip_special_tokens=True
+                    ).strip()
+                    for out in outputs[start_i:end_i]
+                ]
+
+                f.write(json.dumps({
+                    "query_id": q.query_id,
+                    "query": q.text,
+                    "hyde_docs": docs
+                }) + "\n")
+
             f.flush()
 
-            if idx % 5 == 0 or idx == total_queries:
-                log.info(f"[Part4b] Progress: {idx}/{total_queries} queries completed.")
+            completed = min(batch_start + len(batch), total_queries)
+            log.info(
+                f"[Part4b] Progress: {completed}/{total_queries} queries completed "
+                f"(batch_size={len(batch)})"
+            )
 
     log.info(f"[Part4b] complete! Wrote HyDE generations to {p.hyde_jsonl}")
-
 
 
 def _run_naive_hyde_concat(dataset: str, hyde_full_records: dict, run_path):
@@ -667,7 +701,12 @@ STAGES = {
     "part2": lambda ds, args: part2_bm25_baselines(ds),
     "part3": lambda ds, args: part3_vocab_mismatch(ds),
     "part4a": lambda ds, args: part4a_rocchio_rm3(ds, N_values=args.N, k_values=args.k),
-    "part4b_generate": lambda ds, args: part4b_generate_hyde_docs(ds, n_samples=args.hyde_samples, model_name=args.hyde_model),
+    "part4b_generate": lambda ds, args: part4b_generate_hyde_docs(
+        ds,
+        n_samples=args.hyde_samples,
+        model_name=args.hyde_model,
+        batch_size=args.hyde_batch_size
+    ),
     "part4b_run":  _part4b_run_with_best_rocchio,
 }
 DEFAULT_ORDER = ["part1", "part2", "part3", "part4a", "part4b_generate", "part4b_run"]
@@ -679,6 +718,7 @@ if __name__ == "__main__":
     parser.add_argument("--N", type=int, nargs="+", default=[10, 20], help="Part 4a: feedback doc counts")
     parser.add_argument("--k", type=int, nargs="+", default=[10, 20], help="Part 4a: expansion term counts")
     parser.add_argument("--hyde_samples", type=int, default=4, help="Part 4b: hypothetical docs per query")
+    parser.add_argument("--hyde_batch_size", type=int, default=8, help="Part 4b: number of queries generated simultaneously")
     parser.add_argument("--hyde_model", default="Qwen/Qwen2.5-7B-Instruct")
     args = parser.parse_args()
 
