@@ -1,0 +1,9 @@
+nohup: ignoring input
+=== [hotpotqa] Executing specified stage override with args: --stage part4b_run ===
+
+=== [hotpotqa] Running stage: part4b_run ===
+2026-08-29 20:17:32,505 [hotpotqa] [Part4b] Evaluation complete for hotpotqa.
+
+2026-08-29 20:17:32,505 - hotpotqa - INFO - [Part4b] Evaluation complete for hotpotqa.
+
+=== [hotpotqa] All requested stages completed ===

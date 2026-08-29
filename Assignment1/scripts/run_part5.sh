@@ -31,7 +31,7 @@ case "$DATASET" in
     BATCH_SIZE=128
     ;;
   fever|hotpotqa)
-    GPU_IDS=(2 3)
+    GPU_IDS=(2)
     BATCH_SIZE=64
     ;;
   msmarco)

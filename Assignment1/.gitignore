@@ -1,12 +1,3 @@
 __pycache__/
 indexes/
-runs/*
-!runs/scifact/part3_failures.json
-!runs/scifact/hyde_generations.jsonl
-!runs/scifact/fever_jaccard_overlap_distribution.png
-!runs/scifact/part5_expansion_term_comparison.json
-1
-!runs/fever/part3_failures.json
-!runs/fever/hyde_generations.jsonl
-!runs/fever/fever_jaccard_overlap_distribution.png
-!runs/fever/part5_expansion_term_comparison.json
+**/*.trec

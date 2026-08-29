@@ -13,7 +13,7 @@ if [ -z "$DATASET" ]; then
   exit 1
 fi
 
-export CUDA_VISIBLE_DEVICES="2,3"
+export CUDA_VISIBLE_DEVICES="0,2,3"
 cd "$(dirname "$0")/.."
 
 # Check if a custom --stage flag was passed in extra args

@@ -1,0 +1,361 @@
+[
+  {
+    "query_id": "5a8b57f25542995d1e6f1371",
+    "query": "Were Scott Derrickson and Ed Wood of the same nationality?",
+    "splade_terms": [
+      "actor",
+      "author",
+      "both",
+      "citizenship",
+      "derrick",
+      "family",
+      "father",
+      "he",
+      "his",
+      "nationality"
+    ],
+    "hyde_terms": [
+      "american",
+      "born",
+      "edward",
+      "film",
+      "filmmaker",
+      "his",
+      "known",
+      "nationality",
+      "states",
+      "united"
+    ],
+    "rocchio_terms": [
+      "american",
+      "direct",
+      "film",
+      "produc",
+      "star"
+    ],
+    "overlap": []
+  },
+  {
+    "query_id": "5a8c7595554299585d9e36b6",
+    "query": "What government position was held by the woman who portrayed Corliss Archer in the film Kiss and Tell?",
+    "splade_terms": [
+      "actor",
+      "ambassador",
+      "cabinet",
+      "co",
+      "commissioner",
+      "council",
+      "director",
+      "kissing",
+      "minister",
+      "parliament",
+      "positions",
+      "president",
+      "senator",
+      "she",
+      "tell"
+    ],
+    "hyde_terms": [
+      "acting",
+      "career",
+      "character",
+      "close",
+      "glenn",
+      "her",
+      "she",
+      "tell"
+    ],
+    "rocchio_terms": [],
+    "overlap": []
+  },
+  {
+    "query_id": "5a85ea095542994775f606a8",
+    "query": "What science fantasy young adult series, told in first person, has a set of companion books narrating the stories of enslaved worlds and alien species?",
+    "splade_terms": [
+      "aliens",
+      "book",
+      "companions",
+      "fiction",
+      "film",
+      "genre",
+      "narrated",
+      "novel",
+      "person",
+      "series",
+      "slave",
+      "slavery",
+      "slaves",
+      "species",
+      "story"
+    ],
+    "hyde_terms": [
+      "narrative",
+      "perspective",
+      "readers",
+      "series",
+      "species",
+      "volumes"
+    ],
+    "rocchio_terms": [],
+    "overlap": []
+  },
+  {
+    "query_id": "5adbf0a255429947ff17385a",
+    "query": "Are the Laleli Mosque and Esma Sultan Mansion located in the same neighborhood?",
+    "splade_terms": [
+      "both",
+      "dubai",
+      "es",
+      "hotel",
+      "house",
+      "islam",
+      "israel",
+      "lal",
+      "location",
+      "neighborhood",
+      "neighborhoods",
+      "palace",
+      "similar",
+      "street",
+      "temple"
+    ],
+    "hyde_terms": [
+      "architectural",
+      "both",
+      "cultural",
+      "heritage",
+      "historical",
+      "istanbul",
+      "neighborhood",
+      "rich",
+      "situated",
+      "turkey"
+    ],
+    "rocchio_terms": [
+      "locat",
+      "mosqu",
+      "ottoman"
+    ],
+    "overlap": []
+  },
+  {
+    "query_id": "5a8e3ea95542995a26add48d",
+    "query": "The director of the romantic comedy \"Big Stone Gap\" is based in what New York city?",
+    "splade_terms": [
+      "big",
+      "city",
+      "directed",
+      "directors",
+      "film",
+      "filmed",
+      "filming",
+      "gap",
+      "gaps",
+      "headquarters",
+      "location",
+      "manhattan",
+      "ny",
+      "romance",
+      "stones"
+    ],
+    "hyde_terms": [
+      "big",
+      "city",
+      "directed",
+      "film",
+      "gap",
+      "his",
+      "industry",
+      "ken"
+    ],
+    "rocchio_terms": [],
+    "overlap": []
+  },
+  {
+    "query_id": "5abd94525542992ac4f382d2",
+    "query": "2014 S/S is the debut album of a South Korean boy group that was formed by who?",
+    "splade_terms": [
+      "/",
+      "1997",
+      "albums",
+      "artist",
+      "band",
+      "date",
+      "formation",
+      "founded",
+      "groups",
+      "korea",
+      "rapper",
+      "release",
+      "s",
+      "song",
+      "ss"
+    ],
+    "hyde_terms": [
+      "entertainment",
+      "k-pop",
+      "released",
+      "s.m",
+      "shinee",
+      "showcased"
+    ],
+    "rocchio_terms": [],
+    "overlap": []
+  },
+  {
+    "query_id": "5a85b2d95542997b5ce40028",
+    "query": "Who was known by his stage name Aladin and helped organizations improve their performance as a consultant?",
+    "splade_terms": [
+      "activist",
+      "actor",
+      "ala",
+      "artist",
+      "author",
+      "celebrity",
+      "consultant",
+      "consultants",
+      "consulting",
+      "director",
+      "entrepreneur",
+      "he",
+      "organization",
+      "performers",
+      "singer"
+    ],
+    "hyde_terms": [
+      "ahmad",
+      "consultant",
+      "development",
+      "efficiency",
+      "improvement",
+      "management",
+      "organizational",
+      "real",
+      "renowned",
+      "whose"
+    ],
+    "rocchio_terms": [],
+    "overlap": []
+  },
+  {
+    "query_id": "5a87ab905542996e4f3088c1",
+    "query": "The arena where the Lewiston Maineiacs played their home games can seat how many people?",
+    "splade_terms": [
+      "arenas",
+      "capacity",
+      "center",
+      "college",
+      "crowd",
+      "indoor",
+      "lewis",
+      "maine",
+      "me",
+      "people",
+      "pitch",
+      "play",
+      "seats",
+      "stadium",
+      "team"
+    ],
+    "hyde_terms": [
+      "ample",
+      "androscoggin",
+      "bank",
+      "capacity",
+      "colis\u00e9e",
+      "fans",
+      "hockey",
+      "seating",
+      "spectators"
+    ],
+    "rocchio_terms": [
+      "game"
+    ],
+    "overlap": []
+  },
+  {
+    "query_id": "5a7bbb64554299042af8f7cc",
+    "query": "Who is older, Annie Morton or Terry Richardson?",
+    "splade_terms": [
+      "actor",
+      "age",
+      "brother",
+      "daughter",
+      "earlier",
+      "elder",
+      "family",
+      "older",
+      "oldest",
+      "richardson",
+      "she",
+      "sisters",
+      "younger"
+    ],
+    "hyde_terms": [
+      "15",
+      "according",
+      "approximately",
+      "based",
+      "born",
+      "city",
+      "dates",
+      "new",
+      "older",
+      "richardson",
+      "years",
+      "york"
+    ],
+    "rocchio_terms": [
+      "american",
+      "anni",
+      "british",
+      "film",
+      "plai",
+      "richardson",
+      "terri"
+    ],
+    "overlap": [
+      "richardson"
+    ]
+  },
+  {
+    "query_id": "5a8db19d5542994ba4e3dd00",
+    "query": "Are Local H and For Against both from the United States?",
+    "splade_terms": [
+      "ban",
+      "candidate",
+      "election",
+      "foreign",
+      "immigrants",
+      "immigration",
+      "jurisdiction",
+      "locally",
+      "municipal",
+      "nationality",
+      "overseas",
+      "protest",
+      "us",
+      "usa",
+      "visa"
+    ],
+    "hyde_terms": [
+      "american",
+      "california",
+      "formed",
+      "hand",
+      "music",
+      "originated",
+      "other",
+      "punk",
+      "rock",
+      "states"
+    ],
+    "rocchio_terms": [
+      "hous",
+      "repres",
+      "unit",
+      "william"
+    ],
+    "overlap": []
+  }
+]

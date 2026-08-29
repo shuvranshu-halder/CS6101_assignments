@@ -1,0 +1,11 @@
+WARNING: Using incubator modules: jdk.incubator.vector
+[CHECKPOINT 1] script started, before argparse
+[CHECKPOINT 2] args parsed: dataset=hotpotqa checkpoint=naver/splade-v3 stage=['encode'] shard_id=1 num_shards=3
+[CHECKPOINT 3] entering encode stage
+Loading weights:   0%|          | 0/204 [00:00<?, ?it/s]Loading weights: 100%|██████████| 204/204 [00:00<00:00, 35415.48it/s]
+[INFO] Opening /mnt/nas/shuvranshu/.ir_datasets/beir/hotpotqa/docs.pklz4/bin with direct file access
+2026-08-29 22:13:55,344 [hotpotqa] [Part5][shard 1/3] encoded 1744443 docs -> /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/hotpotqa/splade/shard_1.jsonl
+
+2026-08-29 22:13:55,344 - hotpotqa - INFO - [Part5][shard 1/3] encoded 1744443 docs -> /mnt/nas/shuvranshu/CS6101_assignments/Assignment1/indexes/hotpotqa/splade/shard_1.jsonl
+[CHECKPOINT 4] encode stage finished
+[CHECKPOINT 9] all requested stages complete

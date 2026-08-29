@@ -89,3 +89,29 @@ Query Drift Candidates (pick at least 2 concrete examples for report):
 | 3. Part 4a Corpus PRF (N=10, k=20) | 0.6262 | 0.7908 | 0.7963 | 0.5427 |
 
 Comparison across Naive Concatenation, Rocchio-Weighted HyDE, and Corpus PRF.
+
+## Part 5 — SPLADE
+
+| Method | nDCG@10 | Recall@100 | MRR@10 | MAP |
+|---|---|---|---|---|
+| SPLADE (naver/splade-v3) | 0.6466 | 0.7874 | 0.8260 | 0.5620 |
+
+## Part 5 — Expansion Term Comparison (SPLADE vs Rocchio/RM3 vs HyDE)
+
+
+Per-query term lists: `/mnt/nas/shuvranshu/CS6101_assignments/Assignment1/runs/hotpotqa/part5_expansion_term_comparison.json` | avg 3-way overlap: 0.10 terms/query
+
+| Query | SPLADE terms | HyDE terms | Rocchio terms | Overlap |
+|---|---|---|---|---|
+| Were Scott Derrickson and Ed Wood of the | actor, author, both, citizenship, derrick | american, born, edward, film, filmmaker | american, direct, film, produc, star |  |
+| What government position was held by the | actor, ambassador, cabinet, co, commissioner | acting, career, character, close, glenn |  |  |
+| What science fantasy young adult series, | aliens, book, companions, fiction, film | narrative, perspective, readers, series, species |  |  |
+| Are the Laleli Mosque and Esma Sultan Ma | both, dubai, es, hotel, house | architectural, both, cultural, heritage, historical | locat, mosqu, ottoman |  |
+| The director of the romantic comedy "Big | big, city, directed, directors, film | big, city, directed, film, gap |  |  |
+| 2014 S/S is the debut album of a South K | /, 1997, albums, artist, band | entertainment, k-pop, released, s.m, shinee |  |  |
+| Who was known by his stage name Aladin a | activist, actor, ala, artist, author | ahmad, consultant, development, efficiency, improvement |  |  |
+| The arena where the Lewiston Maineiacs p | arenas, capacity, center, college, crowd | ample, androscoggin, bank, capacity, colisée | game |  |
+| Who is older, Annie Morton or Terry Rich | actor, age, brother, daughter, earlier | 15, according, approximately, based, born | american, anni, british, film, plai | richardson |
+| Are Local H and For Against both from th | ban, candidate, election, foreign, immigrants | american, california, formed, hand, music | hous, repres, unit, william |  |
+
+TODO: discuss 2-3 disagreement cases where the three sources pick different expansion terms and why (e.g. SPLADE finding semantically related but lexically distant terms vs. Rocchio/RM3's corpus-cooccurrence terms vs. HyDE's LLM-hallucinated-but-plausible terms).
