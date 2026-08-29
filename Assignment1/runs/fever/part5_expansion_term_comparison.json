@@ -1,0 +1,463 @@
+[
+  {
+    "query_id": "163803",
+    "query": "Ukrainian Soviet Socialist Republic was a founding participant of the UN.",
+    "splade_terms": [
+      "communist",
+      "country",
+      "founded",
+      "founder",
+      "member",
+      "nationality",
+      "nations",
+      "participate",
+      "participation",
+      "russian",
+      "socialism",
+      "soviets",
+      "ukraine",
+      "un",
+      "yugoslavia"
+    ],
+    "hyde_terms": [
+      "given",
+      "international",
+      "member",
+      "nations",
+      "republics",
+      "ssr",
+      "ukrssr",
+      "un",
+      "union",
+      "united"
+    ],
+    "rocchio_terms": [
+      "republ",
+      "ssr",
+      "ukrain",
+      "union"
+    ],
+    "overlap": []
+  },
+  {
+    "query_id": "70041",
+    "query": "2 Hearts is a musical composition by Minogue.",
+    "splade_terms": [
+      "artist",
+      "composed",
+      "composer",
+      "drums",
+      "feet",
+      "heart",
+      "kylie",
+      "minogue",
+      "royce",
+      "singer",
+      "song",
+      "songs",
+      "souls",
+      "two",
+      "vanessa"
+    ],
+    "hyde_terms": [
+      "australian",
+      "her",
+      "kylie",
+      "language",
+      "large",
+      "minogue",
+      "minogue's",
+      "music",
+      "released",
+      "song",
+      "wen",
+      "ync"
+    ],
+    "rocchio_terms": [
+      "album",
+      "her",
+      "kyli",
+      "minogu",
+      "music",
+      "singl",
+      "song"
+    ],
+    "overlap": [
+      "song"
+    ]
+  },
+  {
+    "query_id": "202314",
+    "query": "The New Jersey Turnpike has zero shoulders.",
+    "splade_terms": [
+      "bridge",
+      "height",
+      "highway",
+      "interstate",
+      "lane",
+      "lanes",
+      "many",
+      "nj",
+      "pass",
+      "road",
+      "seven",
+      "shoulder",
+      "shoulders",
+      "terrain",
+      "toll"
+    ],
+    "hyde_terms": [
+      "absence",
+      "along",
+      "design",
+      "high-speed",
+      "jersey's",
+      "lanes",
+      "model",
+      "shoulder",
+      "shoulders",
+      "statement",
+      "traffic",
+      "travel"
+    ],
+    "rocchio_terms": [
+      "95",
+      "bridg",
+      "counti",
+      "i",
+      "jersei",
+      "road",
+      "rout",
+      "turnpik"
+    ],
+    "overlap": []
+  },
+  {
+    "query_id": "6032",
+    "query": "Aruba is the only ABC Island.",
+    "splade_terms": [
+      "11",
+      "ab",
+      "aba",
+      "ac",
+      "ai",
+      "alex",
+      "alphabet",
+      "anime",
+      "ar",
+      "bbc",
+      "country",
+      "geography",
+      "island",
+      "islands",
+      "nasa"
+    ],
+    "hyde_terms": [
+      "ar",
+      "bonaire",
+      "caribbean",
+      "geographical",
+      "historical",
+      "island",
+      "islands",
+      "part",
+      "region",
+      "statement",
+      "status",
+      "why",
+      "within"
+    ],
+    "rocchio_terms": [
+      "antil",
+      "bonair",
+      "caribbean",
+      "cura\u00e7ao",
+      "dutch",
+      "island",
+      "kingdom",
+      "netherland",
+      "venezuela"
+    ],
+    "overlap": [
+      "island"
+    ]
+  },
+  {
+    "query_id": "130048",
+    "query": "Burbank, California has always been completely void of industry.",
+    "splade_terms": [
+      "bu",
+      "ca",
+      "city",
+      "devoid",
+      "economic",
+      "economy",
+      "empty",
+      "headquarters",
+      "industries",
+      "industry",
+      "location",
+      "market",
+      "never",
+      "town",
+      "urban"
+    ],
+    "hyde_terms": [
+      "burbank",
+      "city",
+      "development",
+      "entertainment",
+      "history",
+      "industrial",
+      "industries",
+      "industry",
+      "language",
+      "model",
+      "paragraph",
+      "presence",
+      "significant",
+      "statement"
+    ],
+    "rocchio_terms": [
+      "art",
+      "burbank",
+      "high",
+      "luther",
+      "school",
+      "studio"
+    ],
+    "overlap": []
+  },
+  {
+    "query_id": "204575",
+    "query": "Commodore is ranked above a rear admiral.",
+    "splade_terms": [
+      "admiral",
+      "before",
+      "below",
+      "captain",
+      "category",
+      "commander",
+      "difference",
+      "naval",
+      "officer",
+      "over",
+      "position",
+      "promoted",
+      "rank",
+      "ranking",
+      "superior"
+    ],
+    "hyde_terms": [
+      "admiral",
+      "authority",
+      "below",
+      "hierarchical",
+      "hierarchy",
+      "naval",
+      "rank",
+      "ranks",
+      "states",
+      "structure",
+      "united",
+      "within"
+    ],
+    "rocchio_terms": [
+      "abov",
+      "admir",
+      "commodor",
+      "navi",
+      "offic",
+      "rank",
+      "royal",
+      "vice"
+    ],
+    "overlap": [
+      "rank"
+    ]
+  },
+  {
+    "query_id": "164883",
+    "query": "Hezbollah received a type of training from Iran.",
+    "splade_terms": [
+      "army",
+      "cia",
+      "iran",
+      "iranian",
+      "islam",
+      "israel",
+      "lebanese",
+      "lebanon",
+      "location",
+      "nationality",
+      "origin",
+      "receive",
+      "train",
+      "trained",
+      "weapon"
+    ],
+    "hyde_terms": [
+      "advanced",
+      "capabilities",
+      "enhancing",
+      "hezbollah's",
+      "includes",
+      "iran",
+      "military",
+      "significant",
+      "support",
+      "tactical",
+      "use",
+      "weaponry"
+    ],
+    "rocchio_terms": [
+      "al",
+      "forc",
+      "group",
+      "iran",
+      "isra",
+      "israel",
+      "lebanon"
+    ],
+    "overlap": [
+      "iran"
+    ]
+  },
+  {
+    "query_id": "54298",
+    "query": "In states still employing the electric chair to execute people, the prisoner is allowed the choice of lethal injection as an alternative method.",
+    "splade_terms": [
+      "alternatives",
+      "chairs",
+      "electrical",
+      "executed",
+      "execution",
+      "executions",
+      "method",
+      "methods",
+      "poison",
+      "prison",
+      "shot",
+      "state",
+      "suicide",
+      "torture",
+      "weapon"
+    ],
+    "hyde_terms": [
+      "availability",
+      "capital",
+      "execution",
+      "humane",
+      "method",
+      "more",
+      "option",
+      "provision",
+      "punishment",
+      "remains"
+    ],
+    "rocchio_terms": [],
+    "overlap": []
+  },
+  {
+    "query_id": "219675",
+    "query": "Corsica belongs to Italy.",
+    "splade_terms": [
+      "belong",
+      "country",
+      "france",
+      "geography",
+      "island",
+      "italian",
+      "italy",
+      "location",
+      "nationality",
+      "part",
+      "province",
+      "region",
+      "roman",
+      "town",
+      "villa"
+    ],
+    "hyde_terms": [
+      "belong",
+      "france",
+      "french",
+      "geographical",
+      "island",
+      "italy",
+      "located",
+      "mediterranean",
+      "part",
+      "region",
+      "sea",
+      "since",
+      "statement",
+      "text"
+    ],
+    "rocchio_terms": [
+      "corsican",
+      "di",
+      "ferri",
+      "franc",
+      "island",
+      "itali",
+      "italian",
+      "km",
+      "sardinia",
+      "sea",
+      "speci"
+    ],
+    "overlap": [
+      "island"
+    ]
+  },
+  {
+    "query_id": "134850",
+    "query": "Ice-T refused to ever make hip-hop music.",
+    "splade_terms": [
+      "artist",
+      "failed",
+      "he",
+      "hip",
+      "hop",
+      "ice",
+      "iced",
+      "music",
+      "never",
+      "rap",
+      "rapper",
+      "refusal",
+      "refuse",
+      "songs",
+      "t"
+    ],
+    "hyde_terms": [
+      "after",
+      "albums",
+      "career",
+      "genre",
+      "he",
+      "his",
+      "including",
+      "music",
+      "musical",
+      "renowned",
+      "significant",
+      "statement",
+      "various"
+    ],
+    "rocchio_terms": [
+      "artist",
+      "hip",
+      "hop",
+      "ic",
+      "music",
+      "rap",
+      "record",
+      "t"
+    ],
+    "overlap": [
+      "music"
+    ]
+  }
+]
