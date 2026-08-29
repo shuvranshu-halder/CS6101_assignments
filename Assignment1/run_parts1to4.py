@@ -26,6 +26,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
+import os
+import multiprocessing as mp
+
 DF_CUTOFF_FRACTION = 0.10  # Part 4a: drop terms appearing in >10% of corpus
 
 
@@ -508,64 +511,126 @@ def part4a_rocchio_rm3(dataset: str, N_values=(10, 20), k_values=(10, 20)):
 # =============================================================================
 # PART 4b — HyDE (reuses part4a's build_boosted_query unchanged)
 # =============================================================================
-def part4b_generate_hyde_docs(dataset: str, n_samples: int = 4,
-                               model_name: str = "Qwen/Qwen2.5-7B-Instruct",
-                               device: str = "cuda",
-                               batch_size: int = 8):
-    """Generates HyDE hypothetical documents in batches."""
-    log = common.get_logger(dataset)
-    p = common.get_paths(dataset)
+# =============================================================================
+# PART 4b — HyDE
+# =============================================================================
 
-    log.info(f"[Part4b] Starting BATCHED generation with {model_name}...")
-    log.info(f"[Part4b] Batch size={batch_size}, samples/query={n_samples}")
+def _hyde_worker(
+    gpu_id,
+    query_items,
+    model_name,
+    n_samples,
+    batch_size,
+    output_path,
+):
+    """
+    One complete model copy on one GPU.
 
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    batch_size = queries PER GPU.
+    """
+
+    # Each worker uses its own visible/logical GPU.
+    # gpu_id is the LOGICAL GPU index inside this process.
+    # CUDA_VISIBLE_DEVICES in the .sh file controls which physical GPU
+    # each logical index refers to.
+    torch.cuda.set_device(gpu_id)
+    device = torch.device(f"cuda:{gpu_id}")
+
+    print(
+        f"[Part4b][GPU {gpu_id}] "
+        f"Using logical cuda:{gpu_id} - "
+        f"{torch.cuda.get_device_name(gpu_id)}",
+        flush=True,
+    )
+
+    # -------------------------------------------------------------------------
+    # Tokenizer
+    # -------------------------------------------------------------------------
+    tokenizer = AutoTokenizer.from_pretrained(
+        model_name,
+        padding_side="left",
+    )
+
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token_id = tokenizer.eos_token_id
 
+    # -------------------------------------------------------------------------
+    # COMPLETE model copy on this GPU
+    # -------------------------------------------------------------------------
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
         torch_dtype="auto",
-        device_map="auto"
-    ).eval()
+        low_cpu_mem_usage=True,
+    )
 
-    entry = common.DATASETS[dataset]
-    ds = ir_datasets.load(entry["ir_datasets_id"])
-    queries_list = list(ds.queries_iter())
-    total_queries = len(queries_list)
+    model.to(device)
+    model.eval()
 
-    prompt_tmpl = ("Write a short passage that answers the following question. "
-                   "Write as if it is a factual excerpt from a document.\n\nQuestion: {q}\n\nPassage:")
+    print(
+        f"[Part4b][GPU {gpu_id}] Model loaded on cuda:{gpu_id}",
+        flush=True,
+    )
 
-    p.hyde_jsonl.parent.mkdir(parents=True, exist_ok=True)
-    log.info(f"[Part4b] Generating for all {total_queries} queries in batches...")
+    # -------------------------------------------------------------------------
+    # Prompt
+    # -------------------------------------------------------------------------
+    prompt_tmpl = (
+        "Write a short passage that answers the following question. "
+        "Write as if it is a factual excerpt from a document.\n\n"
+        "Question: {q}\n\n"
+        "Passage:"
+    )
 
-    with open(p.hyde_jsonl, "w") as f:
-        for batch_start in range(0, total_queries, batch_size):
-            batch = queries_list[batch_start:batch_start + batch_size]
+    # -------------------------------------------------------------------------
+    # Generate
+    # -------------------------------------------------------------------------
+    with open(output_path, "w") as f:
+
+        for local_start in range(0, len(query_items), batch_size):
+
+            batch_items = query_items[
+                local_start:local_start + batch_size
+            ]
+
+            batch = [item[1] for item in batch_items]
 
             messages_batch = [
-                [{"role": "user", "content": prompt_tmpl.format(q=q.text)}]
+                [
+                    {
+                        "role": "user",
+                        "content": prompt_tmpl.format(q=q.text),
+                    }
+                ]
                 for q in batch
             ]
 
+            # -------------------------------------------------------------
+            # LEFT-PADDED batch
+            # -------------------------------------------------------------
             inputs = tokenizer.apply_chat_template(
                 messages_batch,
                 add_generation_prompt=True,
                 return_tensors="pt",
-                padding=True
+                padding=True,
             )
 
-            if isinstance(inputs, dict) or hasattr(inputs, "input_ids"):
-                input_ids = inputs["input_ids"].to(model.device)
-                attention_mask = inputs.get("attention_mask")
-                if attention_mask is not None:
-                    attention_mask = attention_mask.to(model.device)
-            else:
-                input_ids = inputs.to(model.device)
-                attention_mask = None
+            input_ids = inputs["input_ids"].to(device)
 
-            with torch.no_grad():
+            attention_mask = inputs.get("attention_mask")
+
+            if attention_mask is not None:
+                attention_mask = attention_mask.to(device)
+
+            # IMPORTANT:
+            # With left padding, generated tokens begin after the full
+            # padded input width.
+            prompt_length = input_ids.shape[1]
+
+            # -------------------------------------------------------------
+            # Generate n_samples per query
+            # -------------------------------------------------------------
+            with torch.inference_mode():
+
                 outputs = model.generate(
                     input_ids=input_ids,
                     attention_mask=attention_mask,
@@ -573,59 +638,412 @@ def part4b_generate_hyde_docs(dataset: str, n_samples: int = 4,
                     do_sample=True,
                     temperature=0.7,
                     num_return_sequences=n_samples,
-                    pad_token_id=tokenizer.eos_token_id,
+                    pad_token_id=tokenizer.pad_token_id,
                 )
 
-            prompt_lengths = (
-                attention_mask.sum(dim=1).tolist()
-                if attention_mask is not None
-                else [input_ids.shape[1]] * len(batch)
-            )
-
+            # -------------------------------------------------------------
+            # Save results
+            # -------------------------------------------------------------
             for i, q in enumerate(batch):
+
                 start_i = i * n_samples
                 end_i = start_i + n_samples
-                prompt_len = int(prompt_lengths[i])
 
                 docs = [
                     tokenizer.decode(
-                        out[prompt_len:],
-                        skip_special_tokens=True
+                        out[prompt_length:],
+                        skip_special_tokens=True,
                     ).strip()
                     for out in outputs[start_i:end_i]
                 ]
 
-                f.write(json.dumps({
+                original_index = batch_items[i][0]
+
+                record = {
+                    "_index": original_index,
                     "query_id": q.query_id,
                     "query": q.text,
-                    "hyde_docs": docs
-                }) + "\n")
+                    "hyde_docs": docs,
+                }
+
+                f.write(
+                    json.dumps(record) + "\n"
+                )
 
             f.flush()
 
-            completed = min(batch_start + len(batch), total_queries)
-            log.info(
-                f"[Part4b] Progress: {completed}/{total_queries} queries completed "
-                f"(batch_size={len(batch)})"
+            completed = min(
+                local_start + len(batch),
+                len(query_items),
             )
 
-    log.info(f"[Part4b] complete! Wrote HyDE generations to {p.hyde_jsonl}")
+            print(
+                f"[Part4b][GPU {gpu_id}] "
+                f"Progress: {completed}/{len(query_items)} "
+                f"(batch_size={len(batch)})",
+                flush=True,
+            )
+
+    del model
+    torch.cuda.empty_cache()
+
+    print(
+        f"[Part4b][GPU {gpu_id}] Worker complete.",
+        flush=True,
+    )
 
 
-def _run_naive_hyde_concat(dataset: str, hyde_full_records: dict, run_path):
-    """Variant 1: query + concatenated HyDE doc text, searched as one long string query."""
+def part4b_generate_hyde_docs(
+    dataset: str,
+    n_samples: int = 4,
+    model_name: str = "Qwen/Qwen2.5-7B-Instruct",
+    device: str = "cuda",
+    batch_size: int = 8,
+    num_gpus: int = 0,
+):
+    """
+    Multi-GPU data-parallel HyDE generation.
+
+    batch_size means BATCH SIZE PER GPU.
+
+    Example:
+        3 GPUs + batch_size=64
+
+        GPU 0 -> 64 queries
+        GPU 1 -> 64 queries
+        GPU 2 -> 64 queries
+
+        Effective batch = 192 queries.
+    """
+
+    log = common.get_logger(dataset)
     p = common.get_paths(dataset)
+
+    # -------------------------------------------------------------------------
+    # Determine visible GPUs WITHOUT initializing CUDA.
+    #
+    # CUDA_VISIBLE_DEVICES is controlled by the .sh file.
+    # -------------------------------------------------------------------------
+    cuda_visible = os.environ.get("CUDA_VISIBLE_DEVICES")
+
+    if cuda_visible:
+        physical_gpu_ids = [
+            int(x.strip())
+            for x in cuda_visible.split(",")
+            if x.strip()
+        ]
+
+        # IMPORTANT:
+        # CUDA_VISIBLE_DEVICES renumbers these GPUs logically.
+        #
+        # Example:
+        # CUDA_VISIBLE_DEVICES=0,2,3
+        #
+        # becomes:
+        #   cuda:0 -> physical GPU 0
+        #   cuda:1 -> physical GPU 2
+        #   cuda:2 -> physical GPU 3
+        #
+        # Therefore workers must receive 0,1,2.
+        visible_gpu_ids = list(range(len(physical_gpu_ids)))
+
+    else:
+        visible_gpu_ids = list(range(torch.cuda.device_count()))
+
+    if not visible_gpu_ids:
+        raise RuntimeError(
+            "No GPUs available. Check CUDA_VISIBLE_DEVICES and CUDA setup."
+        )
+
+    # -------------------------------------------------------------------------
+    # Number of GPUs
+    # -------------------------------------------------------------------------
+    if num_gpus <= 0:
+        num_gpus = len(visible_gpu_ids)
+
+    if num_gpus > len(visible_gpu_ids):
+        raise ValueError(
+            f"Requested {num_gpus} GPUs, but only "
+            f"{len(visible_gpu_ids)} GPUs are visible: "
+            f"{visible_gpu_ids}"
+        )
+
+    # Use only the requested number.
+    gpu_ids = visible_gpu_ids[:num_gpus]
+
+    effective_batch_size = batch_size * num_gpus
+
+    log.info("[Part4b] Multi-GPU data-parallel generation")
+    log.info(f"[Part4b] Model={model_name}")
+    log.info(f"[Part4b] GPUs={gpu_ids}")
+    log.info(f"[Part4b] Batch size PER GPU={batch_size}")
+    log.info(
+        f"[Part4b] Effective global batch size={effective_batch_size}"
+    )
+    log.info(f"[Part4b] Samples/query={n_samples}")
+
+    # -------------------------------------------------------------------------
+    # Dataset
+    # -------------------------------------------------------------------------
+    entry = common.DATASETS[dataset]
+    ds = ir_datasets.load(entry["ir_datasets_id"])
+
+    queries_list = list(ds.queries_iter())
+    total_queries = len(queries_list)
+
+    log.info(
+        f"[Part4b] Total queries={total_queries}"
+    )
+
+    # -------------------------------------------------------------------------
+    # Preserve original query order
+    # -------------------------------------------------------------------------
+    indexed_queries = [
+        (idx, q)
+        for idx, q in enumerate(queries_list)
+    ]
+
+    # -------------------------------------------------------------------------
+    # Distribute queries across GPUs
+    # -------------------------------------------------------------------------
+    gpu_query_lists = [
+        indexed_queries[gpu_index::num_gpus]
+        for gpu_index in range(num_gpus)
+    ]
+
+    for gpu_id, gpu_queries in zip(gpu_ids, gpu_query_lists):
+
+        log.info(
+            f"[Part4b] GPU {gpu_id}: "
+            f"{len(gpu_queries)} queries"
+        )
+
+    # -------------------------------------------------------------------------
+    # Temporary files
+    # -------------------------------------------------------------------------
+    p.hyde_jsonl.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    temp_paths = []
+
+    for gpu_id in gpu_ids:
+
+        temp_path = (
+            p.hyde_jsonl.parent
+            / f"hyde_generations_gpu{gpu_id}.jsonl"
+        )
+
+        if temp_path.exists():
+            temp_path.unlink()
+
+        temp_paths.append(temp_path)
+
+    # -------------------------------------------------------------------------
+    # CUDA multiprocessing
+    # -------------------------------------------------------------------------
+    ctx = mp.get_context("spawn")
+
+    processes = []
+
+    for gpu_id, gpu_queries, temp_path in zip(
+        gpu_ids,
+        gpu_query_lists,
+        temp_paths,
+    ):
+
+        process = ctx.Process(
+            target=_hyde_worker,
+            args=(
+                gpu_id,
+                gpu_queries,
+                model_name,
+                n_samples,
+                batch_size,
+                str(temp_path),
+            ),
+        )
+
+        process.start()
+        processes.append(process)
+
+    # -------------------------------------------------------------------------
+    # Wait for workers
+    # -------------------------------------------------------------------------
+    failed = False
+
+    for gpu_id, process in zip(gpu_ids, processes):
+
+        process.join()
+
+        if process.exitcode != 0:
+
+            failed = True
+
+            log.error(
+                f"[Part4b] GPU {gpu_id} worker failed "
+                f"with exit code {process.exitcode}"
+            )
+
+    if failed:
+
+        raise RuntimeError(
+            "[Part4b] One or more GPU workers failed. "
+            "Check the worker logs above."
+        )
+
+    # -------------------------------------------------------------------------
+    # Merge outputs
+    # -------------------------------------------------------------------------
+    log.info(
+        "[Part4b] All GPU workers completed. "
+        "Merging results..."
+    )
+
+    all_records = []
+
+    for temp_path in temp_paths:
+
+        if not temp_path.exists():
+
+            raise RuntimeError(
+                f"[Part4b] Missing worker output: {temp_path}"
+            )
+
+        with open(temp_path) as f:
+
+            for line in f:
+
+                line = line.strip()
+
+                if not line:
+                    continue
+
+                all_records.append(
+                    json.loads(line)
+                )
+
+    # -------------------------------------------------------------------------
+    # Verify count
+    # -------------------------------------------------------------------------
+    if len(all_records) != total_queries:
+
+        raise RuntimeError(
+            f"[Part4b] Expected {total_queries} records, "
+            f"but found {len(all_records)}."
+        )
+
+    # -------------------------------------------------------------------------
+    # Restore original query order
+    # -------------------------------------------------------------------------
+    all_records.sort(
+        key=lambda x: x["_index"]
+    )
+
+    # -------------------------------------------------------------------------
+    # Write final output
+    # -------------------------------------------------------------------------
+    with open(p.hyde_jsonl, "w") as f:
+
+        for record in all_records:
+
+            record.pop("_index", None)
+
+            f.write(
+                json.dumps(record) + "\n"
+            )
+
+    # -------------------------------------------------------------------------
+    # Remove temporary files
+    # -------------------------------------------------------------------------
+    for temp_path in temp_paths:
+
+        try:
+            temp_path.unlink()
+        except FileNotFoundError:
+            pass
+
+    log.info(
+        f"[Part4b] COMPLETE: generated HyDE documents "
+        f"for {total_queries} queries."
+    )
+
+    log.info(
+        f"[Part4b] GPUs used={num_gpus}"
+    )
+
+    log.info(
+        f"[Part4b] Batch size per GPU={batch_size}"
+    )
+
+    log.info(
+        f"[Part4b] Effective batch size={effective_batch_size}"
+    )
+
+    log.info(
+        f"[Part4b] Output={p.hyde_jsonl}"
+    )
+
+def _run_naive_hyde_concat(
+    dataset: str,
+    hyde_full_records: dict,
+    run_path,
+):
+    """
+    Variant 1: Naive HyDE concatenation.
+
+    The original query and all generated HyDE documents are concatenated
+    into one long query string and submitted directly to Lucene/BM25.
+    """
+
+    p = common.get_paths(dataset)
+
+    # Load the same tuned BM25 parameters used elsewhere.
     tuned = common.load_tuned_bm25(dataset)
+
+    if tuned is None:
+        raise RuntimeError(
+            "BM25 parameters not found. Run Part 2 first."
+        )
+
+    # Open the existing Lucene index.
     searcher = LuceneSearcher(str(p.index_dir))
-    searcher.set_bm25(tuned["k1"], tuned["b"])
 
+    # Use the tuned BM25 parameters.
+    searcher.set_bm25(
+        tuned["k1"],
+        tuned["b"],
+    )
+
+    # Write TREC run.
     with open(run_path, "w") as f:
+
         for qid, rec in hyde_full_records.items():
-            expanded_text = rec["query"] + " " + " ".join(rec["hyde_docs"])
-            for rank, hit in enumerate(searcher.search(expanded_text, k=1000), start=1):
-                f.write(f"{qid} Q0 {hit.docid} {rank} {hit.score:.6f} hyde_naive\n")
+
+            # Original query + all generated HyDE documents.
+            expanded_text = (
+                rec["query"]
+                + " "
+                + " ".join(rec["hyde_docs"])
+            )
+
+            # Retrieve top 1000 documents.
+            hits = searcher.search(
+                expanded_text,
+                k=1000,
+            )
+
+            # Write standard TREC format.
+            for rank, hit in enumerate(hits, start=1):
+
+                f.write(
+                    f"{qid} Q0 {hit.docid} "
+                    f"{rank} {hit.score:.6f} hyde_naive\n"
+                )
 
 
+                
 def _run_rocchio_on_hyde(dataset: str, hyde_full_records: dict, run_path, N: int = 4, k: int = 10):
     """Variant 2: reuses Part 4a's build_boosted_query() unchanged — term weights come
     from HyDE doc word frequencies instead of an IndexReader lookup over corpus docs."""
@@ -705,7 +1123,8 @@ STAGES = {
         ds,
         n_samples=args.hyde_samples,
         model_name=args.hyde_model,
-        batch_size=args.hyde_batch_size
+        batch_size=args.hyde_batch_size,
+        num_gpus=args.hyde_num_gpus,
     ),
     "part4b_run":  _part4b_run_with_best_rocchio,
 }
@@ -713,14 +1132,80 @@ DEFAULT_ORDER = ["part1", "part2", "part3", "part4a", "part4b_generate", "part4b
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dataset", required=True, choices=list(common.DATASETS))
-    parser.add_argument("--stage", nargs="+", default=DEFAULT_ORDER, choices=list(STAGES))
-    parser.add_argument("--N", type=int, nargs="+", default=[10, 20], help="Part 4a: feedback doc counts")
-    parser.add_argument("--k", type=int, nargs="+", default=[10, 20], help="Part 4a: expansion term counts")
-    parser.add_argument("--hyde_samples", type=int, default=4, help="Part 4b: hypothetical docs per query")
-    parser.add_argument("--hyde_batch_size", type=int, default=8, help="Part 4b: number of queries generated simultaneously")
-    parser.add_argument("--hyde_model", default="Qwen/Qwen2.5-7B-Instruct")
+
+    parser.add_argument(
+        "--dataset",
+        required=True,
+        choices=list(common.DATASETS)
+    )
+
+    parser.add_argument(
+        "--stage",
+        nargs="+",
+        default=DEFAULT_ORDER,
+        choices=list(STAGES)
+    )
+
+    parser.add_argument(
+        "--N",
+        type=int,
+        nargs="+",
+        default=[10, 20],
+        help="Part 4a: feedback doc counts"
+    )
+
+    parser.add_argument(
+        "--k",
+        type=int,
+        nargs="+",
+        default=[10, 20],
+        help="Part 4a: expansion term counts"
+    )
+
+    parser.add_argument(
+        "--hyde_samples",
+        type=int,
+        default=4,
+        help="Part 4b: hypothetical docs per query"
+    )
+
+    parser.add_argument(
+        "--hyde_batch_size",
+        type=int,
+        default=8,
+        help="Part 4b: queries PER GPU"
+    )
+
+    parser.add_argument(
+        "--hyde_num_gpus",
+        type=int,
+        default=0,
+        help="Part 4b: number of GPUs; 0 = all visible GPUs"
+    )
+
+    parser.add_argument(
+        "--hyde_model",
+        default="Qwen/Qwen2.5-7B-Instruct"
+    )
+
+    # -------------------------------------------------------------------------
+    # Parse arguments
+    # -------------------------------------------------------------------------
     args = parser.parse_args()
 
+    # -------------------------------------------------------------------------
+    # Execute requested stages
+    # -------------------------------------------------------------------------
     for stage in args.stage:
+
+        print(
+            f"\n=== [{args.dataset}] Running stage: {stage} ===",
+            flush=True,
+        )
+
         STAGES[stage](args.dataset, args)
+
+    print(
+        f"\n=== [{args.dataset}] All requested stages completed ===",
+        flush=True,
+    )
